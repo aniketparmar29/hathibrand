@@ -1,12 +1,22 @@
 import React from 'react'
 import Navbar from '../Components/Navbar'
-import useDarkMode from '../hooks/useDarkMode';
+import {useSelector,useDispatch} from "react-redux"
+import {getProducts } from "../Redux/ProductReducer/action"
+import { useEffect } from 'react'
 function Home() {
-  const [isDarkMode,toggleDarkMode] = useDarkMode();
+  const dispatch=useDispatch();
+  const product= useSelector((state)=>state.ProductReducer.product)
+  const isLoding= useSelector((state)=>state.ProductReducer.isLoding)
+  useEffect(()=>{
+     dispatch(getProducts())
+  },[dispatch])
+  console.log(product)
   return (
-    <div className={`${isDarkMode ? 'darkmode' : 'lightmode'}`}>
-        <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode}/>
+    <div >
+        <Navbar />
         <h1 className='text-4xl'>hathibrand</h1>
+
+        {isLoding && <div></div>}
     </div>
   )
 }

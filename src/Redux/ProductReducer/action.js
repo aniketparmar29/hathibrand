@@ -18,7 +18,8 @@ export const getProducts = () => {
         dispatch(getProductRequestAction())
 
         axios.get(`https://hathibrand.onrender.com/products`).then((res)=>{
-            dispatch(getProductSuccesAction(res.data.data))
+            dispatch(getProductSuccesAction(res.data))
+           
         }).catch((err)=>{
             dispatch(getProductFailureAction())
         })

@@ -1,9 +1,15 @@
 import React from 'react'
+import img from '../assets/singup.jpg'
 
-function Singup() {
+function Signup() {
   return (
-    <div>Singup</div>
+    <div
+      className="h-screen w-full bg-cover bg-no-repeat bg-center"
+      style={{ backgroundImage: `url(${img})` }}
+    >
+      
+    </div>
   )
 }
 
-export default Singup
+export default Signup

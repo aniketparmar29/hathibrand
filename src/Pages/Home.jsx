@@ -1,10 +1,13 @@
-import {Box, Text} from 'react'
+import {Box, Text} from '@chakra-ui/react'
 import Navbar from '../Components/Navbar'
 import {useSelector,useDispatch} from "react-redux"
 import {getProducts } from "../Redux/ProductReducer/action"
 import { useEffect } from 'react'
 import {useNavigate} from "react-router-dom"
 import axios from 'axios'
+import "../Style/nav.css"
+import Offer from '../Components/Offer'
+
 function Home() {
   const dispatch=useDispatch();
   const product= useSelector((state)=>state.ProductReducer.product)
@@ -26,17 +29,24 @@ function Home() {
   return (
     < >
         <Navbar />
-        <p className='text-4xl'>hathibrand</p>
+        
+        <Box className='big_boxx3' mt={"-20"}>
+          <Box  pl={7}  pt={"350"} w={"46%"}><Text color={"#DFB4A2"} fontSize='3xl'> કરો તમારા દિવસની શરૂઆત એક મીઠી મહેકથી...</Text></Box>
+         
+        </Box>
+        <Box><Offer/></Box>
         {product && product.map((el,i)=>(
-          <div style={{width:"300px",margin:"auto",marginTop:"50px",border:"1px solid red"}} key={i}>
-            <div onClick={()=>redir(el.id)} >
-            <p>{el.name} </p>
+          <Box style={{width:"300px",margin:"auto",marginTop:"50px",border:"1px solid red"}} key={i}>
+            <Text onClick={()=>redir(el.id)} >
+            <Text>{el.name} </Text>
             <p>{el.description} </p> 
-            </div>
+            </Text>
             <button onClick={()=>doIt(el.id)} >Add</button>
-          </div>
+          </Box>
         ))}
         {isLoding && <div></div>}
+
+        
     </>
   )
 }

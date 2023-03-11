@@ -10,6 +10,7 @@ import Offer from '../Components/Offer'
 import {  FaFacebook,FaInstagram,FaWhatsapp
 } from "react-icons/fa";
 import{CgMail,}from "react-icons/cg"
+import Footer from '../Components/Footer'
 
 function Home() {
   const dispatch=useDispatch();
@@ -80,20 +81,7 @@ function Home() {
         ))}
         {isLoding && <div></div>}
         </SimpleGrid>
-        <Box className='big_boxx6'fontSize='4xl' >
-          <Box><Text color={"#DFB4A2"} border={"0px solid red"} w={["50%","30%","30%"]}  ml={["10","40","180"]} pt={["0","0","10"]} fontSize={"lg"}>Near the old bus stand. Next to New Nilkanth Soping Village.Lathidad Taluka-District.Botad Pin Code-364710, Botad, India, Gujarat</Text></Box>
-          <Box display={"flex"}  >
-            <Box ml={"20%"} border={"0px solid red"}  gap={"3"}display={"flex"} width={"40%"} mt={"-1"}>
-            <a href=' https://www.facebook.com/hathibrandagarbatti'><FaFacebook color='#DFB4A2' /></a>
-            <a href='https://www.instagram.com/afzal_makwana/'><FaInstagram color='#DFB4A2'/></a>
-            <a href='hathibrand001@gmail.com'><CgMail color='#DFB4A2'/></a>
-            <a href='https://wa.me/+919638857089'><FaWhatsapp color='#DFB4A2'/></a>
-            
-            
-            </Box>
-              
-          </Box>
-        </Box>
+        <Footer/>
         
     </>
   )

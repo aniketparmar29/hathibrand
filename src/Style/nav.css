@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 .big_boxx3{
-    background-image: url("../Enhance/img2.jpeg");
+    background-image: url("../Enhance/img2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
    
@@ -30,4 +30,39 @@
 .header-bg{
     background-color: rgba(0,0,0,0.30);
     transition: 0.5s;
+}
+.big_boxx4{
+    background-image: url("../Enhance/mandir.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+    height: 800px;
+   
+    z-index: 1;
+    background-position: center;
+    cursor: pointer;
+}
+.big_boxx5{
+
+    background-image: url("../Enhance/lastimg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+    height: 900px;
+   
+    z-index: 1;
+    background-position: center;
+    cursor: pointer;
+}
+.big_boxx6{
+
+    background-image: url("../Enhance/footer\ .jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+    height: 300px;
+   
+    z-index: 1;
+    background-position: center;
+    cursor: pointer;
 }

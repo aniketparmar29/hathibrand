@@ -8,9 +8,15 @@ import "swiper/css";
 import "swiper/css/pagination";
 import SwiperCore,{Autoplay} from "swiper"
 import "../Style/styles.css";
-
+import slider1 from "../Enhance/slider/slider1.jpg"
+import slider2 from "../Enhance/slider/slider2.jpg"
+import slider3 from "../Enhance/slider/slider3.jpg"
+import slider4 from "../Enhance/slider/slider4.jpg"
+import slider5 from "../Enhance/slider/slider5.jpeg"
+import slider6 from "../Enhance/slider/slider6.jpeg"
+import slider7 from "../Enhance/slider/slider7.jpeg"
 // import required modules
-import { Pagination } from "swiper";
+
 import{useMediaQuery} from "@chakra-ui/react"
 SwiperCore.use([Autoplay]);
 export default function Offer() {
@@ -21,24 +27,25 @@ export default function Offer() {
     <>
     
       <Swiper
+            
+
         slidesPerView={screenmid?3:1}
         spaceBetween={30}
         autoplay={{
-          delay: 2000,
+          delay: 3000,
           disableOnInteraction: false
         }}
         
-        
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+        <SwiperSlide><img src={slider1}/></SwiperSlide>
+        <SwiperSlide><img src={slider2}/></SwiperSlide>
+        <SwiperSlide><img src={slider3}/></SwiperSlide>
+        <SwiperSlide><img src={slider4}/></SwiperSlide>
+        <SwiperSlide><img src={slider5}/></SwiperSlide>
+        <SwiperSlide><img src={slider6}/></SwiperSlide>
+        <SwiperSlide><img src={slider7}/></SwiperSlide>
+        
+       
       </Swiper>
     </>
   );

@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {Box,Text,Image, useMediaQuery,IconButton} from "@chakra-ui/react"
 import logo from '../assets/logo.png';
 import "../Style/nav.css"
-import {  HamburgerIcon } from '@chakra-ui/icons'
+
 import {FaShoppingCart,FaUserPlus } from 'react-icons/fa'
 import {
   Menu,

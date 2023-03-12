@@ -10,6 +10,7 @@ import Offer from '../Components/Offer'
 import {  FaFacebook,FaInstagram,FaWhatsapp
 } from "react-icons/fa";
 import{CgMail,}from "react-icons/cg"
+import Footer from '../Components/Footer'
 
 function Home() {
   const dispatch=useDispatch();
@@ -81,6 +82,7 @@ function Home() {
         ))}
         {isLoding && <div></div>}
         </SimpleGrid>
+<<<<<<< HEAD
         <Box className='big_boxx6'fontSize='4xl'  >
           <Box><Text color={"#DFB4A2"} border={"0px solid red"} w={["50%","30%","40%"]}  ml={["10","40","180"]} pt={["0","0","10"]} fontSize={"lg"}>Near the old bus stand. Next to New Nilkanth Soping Village.Lathidad Taluka-District.Botad Pin Code-364710, Botad, India, Gujarat</Text></Box>
           <Box display={"flex"} mt="3%" >
@@ -95,6 +97,9 @@ function Home() {
               
           </Box>
         </Box>
+=======
+        <Footer/>
+>>>>>>> 3c00e72634a9a049d481b2d745101725de62cd33
         
     </>
   )

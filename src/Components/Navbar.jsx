@@ -52,8 +52,8 @@ function Navbar() {
     <Text fontSize='2xl' color={"white"}><Link to="/">Home</Link></Text>
       <Text fontSize='2xl' color={"white"}><Link to="/products">Categories</Link></Text>
       <Text display={"flex"} fontSize='2xl' color={"white"}><Link to="/cart">Cart</Link><Box pt={"10px"}><FaShoppingCart/></Box> </Text>
-      {isAuth?<Text display={"flex"} fontSize='2xl' onClick={()=>{dispatch(logoutUser())}} cursor="pointer"  >Logout<Box pt={"10px"}></Box></Text>:<Text display={"flex"} fontSize='2xl' color={"white"}><Link to="/login">Login</Link> <Box pt={"10px"}></Box></Text>}
-      {user.role==="admin" && isAuth===true && <Text fontSize='2xl' color={"white"}><Link to="/products">Admin</Link></Text> }
+      {isAuth?<Text display={"flex"} fontSize='2xl' color={"white"} onClick={()=>{dispatch(logoutUser())}} cursor="pointer" >Logout<Box pt={"10px"}></Box></Text>:<Text display={"flex"} fontSize='2xl' color={"white"}><Link to="/login">Login</Link> <Box pt={"10px"}></Box></Text>}
+      {user.role==="admin" && isAuth===true && <Text fontSize='2xl' color={"white"}><Link to="/admin">Admin</Link></Text> }
     </Box>
     
      

@@ -44,13 +44,13 @@ function Login() {
       style={{ backgroundImage: `url(${img})` }}
       >
         
-      <form onSubmit={handleSubmit} className="w-[70%] m-auto">
+      <form onSubmit={handleSubmit} className="w-[70%] m-auto " >
       <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
+        <label className="block text-white font-bold mb-2" htmlFor="email">
           Email
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none  border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="email"
           type="email"
           name='email'
@@ -60,7 +60,7 @@ function Login() {
           />
       </div>
       <div className="mb-6">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
+        <label className="block text-white font-bold mb-2" htmlFor="password">
           Password
         </label>
         <input

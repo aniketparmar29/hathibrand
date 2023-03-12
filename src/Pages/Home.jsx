@@ -11,6 +11,7 @@ import {  FaFacebook,FaInstagram,FaWhatsapp
 } from "react-icons/fa";
 import{CgMail,}from "react-icons/cg"
 import Footer from '../Components/Footer'
+import Navbar from '../Components/Navbar'
 
 function Home() {
   const dispatch=useDispatch();
@@ -32,7 +33,7 @@ function Home() {
   console.log(product)
   return (
     < >
-     
+     <Navbar/>
         
         <Box className='big_boxx3' mt={"-20"} mb="40px">
           <Box  pl={7}  pt={"350"} w={"57%"}><Text color={"white"} fontSize='3xl'> કરો તમારા દિવસની શરૂઆત એક મીઠી મહેકથી...</Text></Box>
@@ -51,9 +52,10 @@ function Home() {
 
           <Box style={{width:"300px",margin:"auto",marginTop:"50px",border:"3px solid #5E0E42" ,textAlign:"center"}} pt="5"  key={i}>
             <Text onClick={()=>redir(el.id)} >
-            <Image ml={"6"} src={el.image} />
+            <Image  src={el.image} />
             <Text>{el.name} </Text>
-            <p>{el.description} </p> 
+            <Text>{el.price}₹ </Text> 
+            <Text>{el.weight>=1000?el.weight/1000:el.weight}{el.weight==1000?"kg":"gm"}</Text>
             </Text>
             <Button borderRadius={0} width={"100%"} bgColor="#5E0E42 "colorScheme='#440430' color={"white"} onClick={()=>doIt(el.id)} >Add To Cart</Button>
           </Box>
@@ -72,9 +74,11 @@ function Home() {
 
           <Box style={{width:"300px",margin:"auto",marginTop:"50px",border:"3px solid #5E0E42",textAlign:"center"}} pt="5"  key={i}>
             <Text onClick={()=>redir(el.id)} >
-            <Image ml={"6"} src={el.image} />
+            <Image  src={el.image} />
             <Text>{el.name} </Text>
-            <p>{el.description} </p>
+            <Text>{el.price}₹ </Text>
+            <Text>{el.weight>=1000?el.weight/1000:el.weight}{el.weight==1000?"kg":"gm"}</Text>
+           
             </Text>
             <Box  w="100%" h={"40px"}><Button borderRadius={0}  width={"100%"} colorScheme='#440430' color={"white"}  bgColor={"#5E0E42"} onClick={()=>doIt(el.id)} >Add To Cart</Button></Box>
             
@@ -82,22 +86,8 @@ function Home() {
         ))}
         {isLoding && <div></div>}
         </SimpleGrid>
-        <Box className='big_boxx6'fontSize='4xl'  >
-          <Box><Text color={"#DFB4A2"} border={"0px solid red"} w={["50%","30%","40%"]}  ml={["10","40","180"]} pt={["0","0","10"]} fontSize={"lg"}>Near the old bus stand. Next to New Nilkanth Soping Village.Lathidad Taluka-District.Botad Pin Code-364710, Botad, India, Gujarat</Text></Box>
-          <Box display={"flex"} mt="3%" >
-            <Box ml={"20%"} border={"0px solid red"}  gap={"3"}display={"flex"} width={"50%"} mt={"-1"}>
-            <a href=' https://www.facebook.com/hathibrandagarbatti'><FaFacebook color='#DFB4A2' /></a>
-            <a href='https://www.instagram.com/afzal_makwana/'><FaInstagram color='#DFB4A2'/></a>
-            <a href='hathibrand001@gmail.com'><CgMail color='#DFB4A2'/></a>
-            <a href='https://wa.me/+919638857089'><FaWhatsapp color='#DFB4A2'/></a>
-            
-            
-            </Box>
-              
-          </Box>
-        </Box>
-        <Footer/>
         
+        <Footer/>
     </>
   )
 }

@@ -1,9 +1,10 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import {Box,Text,Input,Image, useMediaQuery, InputGroup,InputRightElement} from "@chakra-ui/react"
 import logo from '../assets/logo.png';
 import "../Style/nav.css"
 import { useDispatch,useSelector } from "react-redux";
 import { logoutUser } from "../Redux/AuthReducer/user.actions";
+import { getsearch } from '../Redux/ProductReducer/action';
 import {GrUserAdmin} from "react-icons/gr"
 import {SearchIcon} from "@chakra-ui/icons"
 import {FaShoppingCart } from 'react-icons/fa'
@@ -16,6 +17,9 @@ function Navbar() {
   const dispatch = useDispatch();
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
   const user= useSelector((state)=>state.userAuth.user)
+  const searchproducts= useSelector((state)=>state.ProductReducer.searchproducts)
+
+
   const changeColor=()=>{
     if(window.scrollY>=1){
 
@@ -30,8 +34,19 @@ function Navbar() {
 
 
   
-  
+  const[query ,setquery]=useState("")
   const [navMid] = useMediaQuery('(min-width: 800px)')
+   
+  function sugg(e){
+    setquery( e.target.value )
+    console.log(query)
+    dispatch(getsearch(query))
+  }
+  useEffect(()=>{
+  console.log(searchproducts)
+
+},[searchproducts])
+
   return (
     <>
     { navMid &&
@@ -39,12 +54,12 @@ function Navbar() {
       
     <Box> <Link to={"/"}><Image width={"340px"} src={logo}/></Link></Box>
     
-      <InputGroup mt={"20px"}>
+      <InputGroup   mt={"20px"}>
     <InputRightElement
       pointerEvents='none'
       children={<SearchIcon color='gray.300' />}
     />
-    <Input placeholder='Search...'  borderRadius={"20"} textColor="white"/>
+    <Input onChange={sugg} value={query} placeholder='Search...'  borderRadius={"20"} textColor="white"/>
   </InputGroup>
   
 
@@ -59,6 +74,9 @@ function Navbar() {
      
     </Box>
 }
+    {searchproducts && searchproducts.map((el)=>{
+      <Box className='text-2xl text-white border-2'>{el.name}</Box>
+    })}
 { 
             !navMid && 
             <Box pb={"5"}  display={"flex"}  gap="70px" className={color?"header header-bg":"header" }  position={"sticky"} top={"0"} >
@@ -124,7 +142,10 @@ function Navbar() {
   </div>
 </section>
           </Box>
+
             }   
+
+   
           
 
 

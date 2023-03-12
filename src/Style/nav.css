@@ -66,3 +66,15 @@
     background-position: center;
     cursor: pointer;
 }
+.big_boxxp{
+
+    background-image: url("../Enhance/pro.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+    height: 600px;
+    margin-top: -130px;
+    z-index: 1;
+    background-position: center;
+    cursor: pointer;
+}

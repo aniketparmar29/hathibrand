@@ -6,12 +6,12 @@ import {  FaFacebook,FaInstagram,FaWhatsapp
 import{CgMail,}from "react-icons/cg"
 function Footer() {
   return (
-    <div>
-    <Box className='big_boxx6 gap-3  lg:pr-96 md:pr-52 sm:pr-40 pr-40'fontSize='4xl' display={"flex"} flexDirection="column" justifyContent={"center"} alignItems="center"  >
+    
+    <Box mt={"20px"} className='big_boxx6 gap-3  lg:pr-96 md:pr-52 sm:pr-40 pr-40'fontSize='4xl' display={"flex"} flexDirection="column" justifyContent={"center"} alignItems="center"  >
     <Box>
-    <Text color={"#DFB4A2"} border={"0px solid red"}fontSize={["lg,2xl,3xl"]}>Hathibrand Agarbatti</Text></Box>
+    <Box><Text color={"#DFB4A2"} border={"0px solid red"} w={["50%","30%","40%"]}  ml={["10","40","180"]} pt={["0","0","10"]} fontSize={"lg"}>Near the old bus stand. Next to New Nilkanth Soping Village.Lathidad Taluka-District.Botad Pin Code-364710, Botad, India, Gujarat</Text></Box>
     <Box display={"flex"} >
-      <Box border={"0px solid red"}  gap={"3"}display={"flex"} >
+      <Box border={"0px solid red"}  gap={"3"}display={"flex"} ml={"20%"}>
       <a href=' https://www.facebook.com/hathibrandagarbatti' target={"_blank"} rel="noreferrer"><FaFacebook color='#DFB4A2' /></a>
       <a href='https://www.instagram.com/hathibrandagarbatti/' target={"_blank"} rel="noreferrer"><FaInstagram color='#DFB4A2'/></a>
       <a href='https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKjRMwtVxgDTJbPNTJVFMdSnTxkxfwSHDLZbhmtgGsNMHnxZHjpQsDnqVjTGnlhTgPDKmpg' target={"_blank"} rel="noreferrer"><CgMail color='#DFB4A2'/></a>
@@ -19,9 +19,9 @@ function Footer() {
       
       
       </Box>
-        
+      </Box>  
     </Box>
-  </Box></div>
+  </Box>
   )
 }
 

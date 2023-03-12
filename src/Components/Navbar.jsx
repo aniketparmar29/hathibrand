@@ -1,16 +1,17 @@
 import React,{useState} from 'react';
-import {Box,Text,Image, useMediaQuery} from "@chakra-ui/react"
+import {Box,Text,Input,Image, useMediaQuery, InputGroup,InputRightElement} from "@chakra-ui/react"
 import logo from '../assets/logo.png';
 import "../Style/nav.css"
 import { useDispatch,useSelector } from "react-redux";
 import { logoutUser } from "../Redux/AuthReducer/user.actions";
 import {GrUserAdmin} from "react-icons/gr"
-
+import {SearchIcon} from "@chakra-ui/icons"
 import {FaShoppingCart } from 'react-icons/fa'
 
 import { Link } from 'react-router-dom';
 
 function Navbar() {
+ 
   const [color,setColor]=useState(false);
   const dispatch = useDispatch();
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
@@ -26,6 +27,9 @@ function Navbar() {
 
   }
   window.addEventListener("scroll",changeColor)
+
+
+  
   
   const [navMid] = useMediaQuery('(min-width: 800px)')
   return (
@@ -33,13 +37,23 @@ function Navbar() {
     { navMid &&
     <Box  justifyContent={"space-between"} className={color?"header header-bg backdrop-blur-lg":"header backdrop-blur-lg"} display={"flex"}  gap="70px" position={"sticky"} top={"0"}>
       
-    <Box> <Link to={"/"}><Image width={"140px"} src={logo}/></Link></Box>
-    <Box mr={"10"} pt={"35px"} display={"flex"} gap="35" ml={"70"}>
-    <Text fontSize='2xl' color={"#DFB4A2"}><Link to="/">Home</Link></Text>
-      <Text fontSize='2xl' color={"#DFB4A2"}><Link to="/products">Categories</Link></Text>
-      <Text display={"flex"} fontSize='2xl' color={"#DFB4A2"}><Link to="/cart">Cart</Link><Box pt={"10px"}><FaShoppingCart/></Box> </Text>
-      {isAuth?<Text display={"flex"} fontSize='2xl' onClick={()=>{dispatch(logoutUser())}} cursor="pointer"  color={"#DFB4A2"}>Logout<Box pt={"10px"}></Box></Text>:<Text display={"flex"} fontSize='2xl' color={"#DFB4A2"}><Link to="/login">Login</Link> <Box pt={"10px"}></Box></Text>}
-      {user.role==="admin" && isAuth===true && <Text fontSize='2xl' color={"#DFB4A2"}><Link to="/products">Admin</Link></Text> }
+    <Box> <Link to={"/"}><Image width={"340px"} src={logo}/></Link></Box>
+    
+      <InputGroup mt={"20px"}>
+    <InputRightElement
+      pointerEvents='none'
+      children={<SearchIcon color='gray.300' />}
+    />
+    <Input placeholder='Search...'  borderRadius={"20"} textColor="white"/>
+  </InputGroup>
+  
+
+    <Box mr={"10"} pt={"25px"} display={"flex"} gap="35" ml={"70"}>
+    <Text fontSize='2xl' color={"white"}><Link to="/">Home</Link></Text>
+      <Text fontSize='2xl' color={"white"}><Link to="/products">Categories</Link></Text>
+      <Text display={"flex"} fontSize='2xl' color={"white"}><Link to="/cart">Cart</Link><Box pt={"10px"}><FaShoppingCart/></Box> </Text>
+      {isAuth?<Text display={"flex"} fontSize='2xl' onClick={()=>{dispatch(logoutUser())}} cursor="pointer"  >Logout<Box pt={"10px"}></Box></Text>:<Text display={"flex"} fontSize='2xl' color={"white"}><Link to="/login">Login</Link> <Box pt={"10px"}></Box></Text>}
+      {user.role==="admin" && isAuth===true && <Text fontSize='2xl' color={"white"}><Link to="/products">Admin</Link></Text> }
     </Box>
     
      
@@ -47,8 +61,16 @@ function Navbar() {
 }
 { 
             !navMid && 
-            <Box  display={"flex"}  gap="70px" className={color?"header header-bg":"header" }  position={"sticky"} top={"0"} >
-             <Box mr={"40"}><Image width={"140px"} src={logo}/></Box>
+            <Box pb={"5"}  display={"flex"}  gap="70px" className={color?"header header-bg":"header" }  position={"sticky"} top={"0"} >
+             <Box mr={"40"}><Image width={"440px"} src={logo}/></Box>
+             <InputGroup mt={"20px"}>
+    <InputRightElement
+      pointerEvents='none'
+      children={<SearchIcon color='gray.300' />}
+    />
+    <Input placeholder='Search...'  borderRadius={"20"} textColor="white"  />
+  </InputGroup>
+             
           
 <section
   className="block fixed bottom-0 inset-x-0 z-50 shadow-lg text-[#DFB4A2] bg-gray-700 dark:bg-dark backdrop-blur-lg bg-opacity-30 dark:bg-opacity-30 dark:text-gray-400 border-t-2 border-royal/20">
@@ -74,11 +96,7 @@ function Navbar() {
     <Link to="/cart"
       className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white"
       activeclassname="dark:text-gray-100 text-black">
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block mb-1" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
+      <FaShoppingCart className="h-6 w-6 inline-block mb-1"/>
       <span className="tab block text-xs">Cart</span>
     </Link>
     {isAuth?<Box onClick={()=>{dispatch(logoutUser())}}

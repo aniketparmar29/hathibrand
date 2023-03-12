@@ -1,9 +1,11 @@
 import React,{useState} from 'react';
-import {Box,Text,Image, useMediaQuery,IconButton} from "@chakra-ui/react"
+import {Box,Text,Image, useMediaQuery,InputRightElement,IconButton, Input,InputGroup} from "@chakra-ui/react"
 import logo from '../assets/logo.png';
 import "../Style/nav.css"
-
+import {SearchIcon} from "@chakra-ui/icons"
 import {FaShoppingCart,FaUserPlus } from 'react-icons/fa'
+import {BiSearchAlt } from 'react-icons/bi'
+
 import {
   Menu,
   MenuButton,
@@ -35,12 +37,22 @@ function Navbar() {
     { navMid &&
     <Box  justifyContent={"space-between"} className={color?"header header-bg backdrop-blur-lg":"header backdrop-blur-lg"} display={"flex"}  gap="70px" position={"sticky"} top={"0"}>
       
-    <Box><Image width={"140px"} src={logo}/></Box>
-    <Box mr={"10"} pt={"35px"} display={"flex"} gap="35" ml={"70"}>
-    <Text fontSize='2xl' color={"#DFB4A2"}>Home</Text>
-      <Text fontSize='2xl' color={"#DFB4A2"}>Product</Text>
-      <Text display={"flex"} fontSize='2xl' color={"#DFB4A2"}>Cart <Box pt={"10px"}><FaShoppingCart/></Box> </Text>
-      <Text display={"flex"} fontSize='2xl' color={"#DFB4A2"}>Login <Box pt={"10px"}><FaUserPlus/></Box></Text>
+    <Box><Image width={"340px"} src={logo}/></Box>
+    
+     <InputGroup mt={5}>
+    <InputRightElement
+      pointerEvents='none'
+      children={<SearchIcon color='gray.300' />}
+    />
+    <Input placeholder='Search...' borderRadius={"20"}  textColor="white"/>
+  </InputGroup>
+    
+    
+    <Box mr={"10"} pt={"25px"} display={"flex"} gap="35" ml={"70"}>
+    <Text fontSize='2xl' color={"white"}>Home</Text>
+      <Text fontSize='2xl' color={"white"}>Product</Text>
+      <Text display={"flex"} fontSize='2xl' color={"white"}>Cart <Box pt={"10px"}><FaShoppingCart/></Box> </Text>
+      <Text display={"flex"} fontSize='2xl' color={"white"}>Login <Box pt={"10px"}><FaUserPlus/></Box></Text>
     </Box>
     
      
@@ -48,8 +60,15 @@ function Navbar() {
 }
 { 
             !navMid && 
-            <Box  display={"flex"}  gap="70px" className={color?"header header-bg":"header" }  position={"sticky"} top={"0"} >
-             <Box mr={"40"}><Image width={"140px"} src={logo}/></Box>
+            <Box  display={"flex"}   className={color?"header header-bg":"header" }  position={"sticky"} top={"0"} >
+             <Box mr={"40"}><Image width={"400px"} src={logo}/></Box>
+             <InputGroup mt={5} mr="30" width={"80"}>
+    <InputRightElement
+      pointerEvents='none'
+      children={<SearchIcon color='gray.300' />}
+    />
+    <Input placeholder='Search...'  borderRadius={"20"} textColor="white"/>
+  </InputGroup>
           
 <section
   className="block fixed bottom-0 inset-x-0 z-50 shadow-lg text-[#DFB4A2] bg-gray-700 dark:bg-dark backdrop-blur-lg bg-opacity-30 dark:bg-opacity-30 dark:text-gray-400 border-t-2 border-royal/20">

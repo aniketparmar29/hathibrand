@@ -1,18 +1,15 @@
-import {Box, Text ,Image, Button,Grid as Gg, GridItem, SimpleGrid} from '@chakra-ui/react'
-
+import {Box, Text ,SimpleGrid} from '@chakra-ui/react'
 import {useSelector,useDispatch} from "react-redux"
 import {getProducts } from "../Redux/ProductReducer/action"
 import { useEffect } from 'react'
 import {useNavigate} from "react-router-dom"
 import axios from 'axios'
+import ProductCard from '../Components/ProductCard'
 import "../Style/nav.css"
 import Offer from '../Components/Offer'
-import {  FaFacebook,FaInstagram,FaWhatsapp
-} from "react-icons/fa";
-import{CgMail,}from "react-icons/cg"
 import Footer from '../Components/Footer'
+import ProductCardSkeleton from '../Components/ProductCardSkeleton'
 import Navbar from '../Components/Navbar'
-
 function Home() {
   const dispatch=useDispatch();
   const product= useSelector((state)=>state.ProductReducer.product)
@@ -34,7 +31,6 @@ function Home() {
   return (
     < >
      <Navbar/>
-        
         <Box className='big_boxx3' mt={"-20"} mb="40px">
           <Box  pl={7}  pt={"350"} w={"57%"}><Text color={"white"} fontSize='3xl'> કરો તમારા દિવસની શરૂઆત એક મીઠી મહેકથી...</Text></Box>
          
@@ -48,19 +44,16 @@ function Home() {
 
         <SimpleGrid columns={[1,1,4]}>
         {product && 
-         product.slice(0,4).map((el,i)=>(
-
-          <Box style={{width:"300px",margin:"auto",marginTop:"50px",border:"3px solid #5E0E42" ,textAlign:"center"}} pt="5"  key={i}>
-            <Text onClick={()=>redir(el.id)} >
-            <Image  src={el.image} />
-            <Text>{el.name} </Text>
-            <Text>{el.price}₹ </Text> 
-            <Text>{el.weight>=1000?el.weight/1000:el.weight}{el.weight==1000?"kg":"gm"}</Text>
-            </Text>
-            <Button borderRadius={0} width={"100%"} bgColor="#5E0E42 "colorScheme='#440430' color={"white"} onClick={()=>doIt(el.id)} >Add To Cart</Button>
+         product.slice(0,4).map((el)=>(
+          <ProductCard el={el} redir={redir} doIt={doIt}/>
+        ))}
+        {isLoding &&  <Box display="flex" flexWrap="wrap">
+        {[...Array(4)].map((_, index) => (
+          <Box key={index} p="2">
+            <ProductCardSkeleton />
           </Box>
         ))}
-        {isLoding && <div></div>}
+      </Box>}
         </SimpleGrid>
 
       
@@ -70,21 +63,17 @@ function Home() {
        
       <SimpleGrid columns={[1,1,4]}>
         {product && 
-         product.slice(5,9).map((el,i)=>(
+         product.slice(5,9).map((el)=>(
 
-          <Box style={{width:"300px",margin:"auto",marginTop:"50px",border:"3px solid #5E0E42",textAlign:"center"}} pt="5"  key={i}>
-            <Text onClick={()=>redir(el.id)} >
-            <Image  src={el.image} />
-            <Text>{el.name} </Text>
-            <Text>{el.price}₹ </Text>
-            <Text>{el.weight>=1000?el.weight/1000:el.weight}{el.weight==1000?"kg":"gm"}</Text>
-           
-            </Text>
-            <Box  w="100%" h={"40px"}><Button borderRadius={0}  width={"100%"} colorScheme='#440430' color={"white"}  bgColor={"#5E0E42"} onClick={()=>doIt(el.id)} >Add To Cart</Button></Box>
-            
+          <ProductCard el={el} redir={redir} doIt={doIt}/>
+        ))}
+        {isLoding &&  <Box display="flex" flexWrap="wrap">
+        {[...Array(4)].map((_, index) => (
+          <Box key={index} p="2">
+            <ProductCardSkeleton />
           </Box>
         ))}
-        {isLoding && <div></div>}
+      </Box>}
         </SimpleGrid>
         
         <Footer/>

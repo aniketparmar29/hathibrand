@@ -9,7 +9,7 @@ function Footer() {
     <div>
     <Box className='big_boxx6 gap-3  lg:pr-96 md:pr-52 sm:pr-40 pr-40'fontSize='4xl' display={"flex"} flexDirection="column" justifyContent={"center"} alignItems="center"  >
     <Box>
-    <Text color={"#DFB4A2"} border={"0px solid red"}fontSize={["lg,2xl,3xl"]}>Hathibrand Agarbatti</Text></Box>
+    <Text color={"#DFB4A2"} border={"0px solid red"} fontSize={["lg,2xl,3xl"]} ml={"8"}>Hathibrand Agarbatti</Text></Box>
     <Box display={"flex"} >
       <Box border={"0px solid red"}  gap={"3"}display={"flex"} >
       <a href=' https://www.facebook.com/hathibrandagarbatti' target={"_blank"} rel="noreferrer"><FaFacebook color='#DFB4A2' /></a>

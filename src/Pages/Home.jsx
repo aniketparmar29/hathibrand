@@ -35,7 +35,7 @@ function Home() {
         <Navbar />
         
         <Box className='big_boxx3' mt={"-20"} mb="40px">
-          <Box  pl={7}  pt={"350"} w={"46%"}><Text color={"#DFB4A2"} fontSize='3xl'> કરો તમારા દિવસની શરૂઆત એક મીઠી મહેકથી...</Text></Box>
+          <Box  pl={7} pt={"350"} w={"46%"}><Text color={"#DFB4A2"} fontSize='3xl'> કરો તમારા દિવસની શરૂઆત એક મીઠી મહેકથી...</Text></Box>
          
         </Box>
         <Box>

@@ -7,10 +7,6 @@ import axios from 'axios'
 import ProductCard from '../Components/ProductCard'
 import "../Style/nav.css"
 import Offer from '../Components/Offer'
-<<<<<<< HEAD
-
-=======
->>>>>>> 53fe353c852587ffe11deda300bd3ca7c75f081c
 import Footer from '../Components/Footer'
 import ProductCardSkeleton from '../Components/ProductCardSkeleton'
 import Navbar from '../Components/Navbar'
@@ -48,18 +44,6 @@ function Home() {
 
         <SimpleGrid columns={[1,1,4]}>
         {product && 
-<<<<<<< HEAD
-         product.slice(0,4).map((el,i)=>(
-
-          <Box style={{width:"300px",margin:"auto",marginTop:"50px",border:"3px solid #5E0E42" ,textAlign:"center"}} pt="5"  key={i}>
-            <Text onClick={()=>redir(el.id)} >
-            <Image  src={el.image} />
-            <Text>{el.name} </Text>
-            <Text>{el.price}₹ </Text>                                  
-            <Text>{el.weight>=1000?el.weight/1000:el.weight}{el.weight==1000?"kg":"gm"}</Text>
-            </Text>
-            <Button borderRadius={0} width={"100%"} bgColor="#5E0E42 "colorScheme='#440430' color={"white"} onClick={()=>doIt(el.id)} >Add To Cart</Button>
-=======
          product.slice(0,4).map((el)=>(
           <ProductCard el={el} redir={redir} doIt={doIt}/>
         ))}
@@ -67,7 +51,6 @@ function Home() {
         {[...Array(4)].map((_, index) => (
           <Box key={index} p="2">
             <ProductCardSkeleton />
->>>>>>> 53fe353c852587ffe11deda300bd3ca7c75f081c
           </Box>
         ))}
       </Box>}

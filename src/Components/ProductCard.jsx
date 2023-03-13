@@ -9,7 +9,7 @@ function ProductCard({el,redir,doIt}) {
     borderRadius="lg"
   overflow="hidden"
   p="3"
-  shadow="lg"
+  className='shadow-lg hover:scale-105 shadow-emerald-200'
   onClick={()=>redir(el.id)}
 >
   <Image src={el.image} alt={el.name} height="240px" width={"100%"}/>

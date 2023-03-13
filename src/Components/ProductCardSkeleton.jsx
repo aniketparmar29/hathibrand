@@ -2,8 +2,8 @@ import { Box, Skeleton } from '@chakra-ui/react';
 
  const ProductCardSkeleton = () => {
   return (
-    <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-      <Skeleton height="200px" />
+    <Box maxW="sm" borderWidth="1px" borderRadius="lg" p="3" overflow="hidden">
+      <Skeleton height="200px" width="200px"/>
 
       <Box p="6">
         <Skeleton height="20px" width="100%" my="2" />

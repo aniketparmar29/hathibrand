@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const registerUserApi = async(data)=>{
     try{    
-        const res = await axios.post(`https://real-cyan-swallow-boot.cyclic.app//register`,data)
+        const res = await axios.post(`https://real-cyan-swallow-boot.cyclic.app/register`,data)
         return res
     }catch(err){
         console.log(err)

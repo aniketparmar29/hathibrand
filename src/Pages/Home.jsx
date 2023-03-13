@@ -13,7 +13,7 @@ import Navbar from '../Components/Navbar'
 function Home() {
   const dispatch=useDispatch();
   const product= useSelector((state)=>state.ProductReducer.product)
-  const isLoding= useSelector((state)=>state.ProductReducer.isLoding)
+  const isLoading= useSelector((state)=>state.ProductReducer.isLoading)
   const navigate = useNavigate()
   const doIt = (id) => {
     console.log(id)
@@ -27,7 +27,6 @@ function Home() {
   useEffect(()=>{
      dispatch(getProducts())
   },[dispatch])
-  console.log(product)
   return (
     < >
      <Navbar/>
@@ -47,13 +46,12 @@ function Home() {
          product.slice(0,4).map((el)=>(
           <ProductCard el={el} redir={redir} doIt={doIt}/>
         ))}
-        {isLoding &&  <Box display="flex" flexWrap="wrap">
+        {isLoading &&  <div className='grid grid-cols-4 grid-wrap gap-3'>
         {[...Array(4)].map((_, index) => (
-          <Box key={index} p="2">
+            <div className='flex justify-center items-center p-5'>
             <ProductCardSkeleton />
-          </Box>
-        ))}
-      </Box>}
+            </div>
+        ))}</div>}
         </SimpleGrid>
 
       
@@ -67,13 +65,12 @@ function Home() {
 
           <ProductCard el={el} redir={redir} doIt={doIt}/>
         ))}
-        {isLoding &&  <Box display="flex" flexWrap="wrap">
+        {isLoading &&  <div className='grid grid-cols-4 grid-wrap gap-3'>
         {[...Array(4)].map((_, index) => (
-          <Box key={index} p="2">
+            <div className='flex justify-center items-center p-5'>
             <ProductCardSkeleton />
-          </Box>
-        ))}
-      </Box>}
+            </div>
+        ))}</div>}
         </SimpleGrid>
         
         <Footer/>

@@ -1,5 +1,6 @@
 import { Box, Button, Image,Text } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import { useDispatch ,useSelector} from 'react-redux'
 import {useParams} from "react-router-dom"
 import Footer from '../Components/Footer'

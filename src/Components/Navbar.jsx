@@ -8,7 +8,7 @@ import { getsearch } from '../Redux/ProductReducer/action';
 import {GrUserAdmin} from "react-icons/gr"
 import {SearchIcon} from "@chakra-ui/icons"
 import {FaShoppingCart } from 'react-icons/fa'
-
+import { getProducts } from '../Redux/ProductReducer/action';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
@@ -17,7 +17,7 @@ function Navbar() {
   const dispatch = useDispatch();
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
   const user= useSelector((state)=>state.userAuth.user)
-  const searchproducts= useSelector((state)=>state.ProductReducer.searchproducts)
+  const product= useSelector((state)=>state.ProductReducer.product)
 
 
   const changeColor=()=>{
@@ -35,22 +35,30 @@ function Navbar() {
 
   
   const[query ,setquery]=useState("")
+
+  
   const [navMid] = useMediaQuery('(min-width: 800px)')
-   
+  
+  const [serch,setserch]=useState(false)
+
   function sugg(e){
+    setserch(!serch)
     setquery( e.target.value )
     console.log(query)
     dispatch(getsearch(query))
   }
   useEffect(()=>{
-  console.log(searchproducts)
+     dispatch(getProducts())
 
-},[searchproducts])
+},[dispatch])
+
+
+
 
   return (
     <>
     { navMid &&
-    <Box  justifyContent={"space-between"} className={color?"header header-bg backdrop-blur-lg":"header backdrop-blur-lg"} display={"flex"}  gap="70px" position={"sticky"} top={"0"}>
+    <Box zIndex={"100"} justifyContent={"space-between"} className={color?"header header-bg backdrop-blur-lg":"header backdrop-blur-lg"} display={"flex"}  gap="70px" position={"sticky"} top={"0"}>
       
     <Box> <Link to={"/"}><Image width={"340px"} src={logo}/></Link></Box>
     
@@ -60,6 +68,13 @@ function Navbar() {
       children={<SearchIcon color='gray.300' />}
     />
     <Input onChange={sugg} value={query} placeholder='Search...'  borderRadius={"20"} textColor="white"/>
+
+      
+
+
+
+    
+
   </InputGroup>
   
 
@@ -74,19 +89,36 @@ function Navbar() {
      
     </Box>
 }
-    {searchproducts && searchproducts.map((el)=>{
-      <Box className='text-2xl text-white border-2'>{el.name}</Box>
-    })}
+
+{serch&&
+<Box className='shadow-lg shadow-slate-600' bgColor={"white"} width={["180px","430px"]} position={"absolute"} zIndex={"10"} left={["200","200"]} top={["65px","0"]}>
+        {
+          product.filter(product=>product.name.includes(query)
+          ).map((product)=>(
+            <Box width={"90%"} display={"flex"}  gap="3" p={"5"} borderBottom={"1px solid gray"}>  
+          <Image src={product.image} width="33%"/>
+          <Box>{product.name}</Box>
+          
+        </Box>
+
+          ))
+          
+
+        }
+        
+      
+</Box>
+}
 { 
             !navMid && 
-            <Box pb={"5"}  display={"flex"}  gap="70px" className={color?"header header-bg":"header" }  position={"sticky"} top={"0"} >
-             <Box mr={"40"}><Image width={"440px"} src={logo}/></Box>
-             <InputGroup mt={"20px"}>
+            <Box zIndex={"100"} pb={"5"}  display={"flex"}  gap="70px" className={color?"header header-bg":"header" }  position={"sticky"} top={"0"} >
+             <Box width={"40%"}><Image width={"100px"} src={logo}/></Box>
+             <InputGroup mt={"20px"}  width="60%" mr="2%">
     <InputRightElement
       pointerEvents='none'
       children={<SearchIcon color='gray.300' />}
     />
-    <Input placeholder='Search...'  borderRadius={"20"} textColor="white"  />
+    <Input onChange={sugg} value={query} placeholder='Search...'  borderRadius={"20"} textColor="white"  />
   </InputGroup>
              
           

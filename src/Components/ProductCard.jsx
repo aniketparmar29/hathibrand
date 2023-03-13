@@ -4,9 +4,9 @@ function ProductCard({el,redir,doIt}) {
   return (
     <Box
     key={el.id}
-  maxW="sm"
-  borderWidth="1px"
-  borderRadius="lg"
+    maxW="sm"
+    borderWidth="1px"
+    borderRadius="lg"
   overflow="hidden"
   p="3"
   shadow="lg"

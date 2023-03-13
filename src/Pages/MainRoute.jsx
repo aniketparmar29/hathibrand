@@ -19,6 +19,7 @@ function MainRoute() {
             <Route path='products/singlepage/:id' element={<Signle/>} ></Route>
             {/* <Route path='/admin' element={<Admin/>}></Route> */}
             <Route path='/products' element={<ProudctPage/>}></Route>
+            <Route path='/cart' element={<Cart/>}></Route>
             <Route path='*' element={<PageNotFound/>}></Route>
         </Routes>
     </div>

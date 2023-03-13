@@ -3,6 +3,9 @@ import { Box,Button,Image,Badge } from '@chakra-ui/react'
 function ProductCard({el,redir,doIt}) {
   return (
     <Box
+  my="2"
+  mx="auto"
+
   maxW="sm"
   borderWidth="1px"
   borderRadius="lg"

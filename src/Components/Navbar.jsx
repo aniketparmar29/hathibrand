@@ -4,7 +4,7 @@ import logo from '../assets/logo.png';
 import "../Style/nav.css"
 import { useDispatch,useSelector } from "react-redux";
 import { logoutUser } from "../Redux/AuthReducer/user.actions";
-import { getsearch } from '../Redux/ProductReducer/action';
+
 import {GrUserAdmin} from "react-icons/gr"
 import {SearchIcon} from "@chakra-ui/icons"
 import {FaShoppingCart } from 'react-icons/fa'
@@ -45,7 +45,7 @@ function Navbar() {
     setserch(!serch)
     setquery( e.target.value )
     console.log(query)
-    dispatch(getsearch(query))
+   
   }
   useEffect(()=>{
      dispatch(getProducts())

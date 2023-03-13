@@ -66,7 +66,7 @@ function ProductCard({el,redir,doIt}) {
         bgColor="#5E0E42"
         colorScheme="#440430"
         color={"white"}
-        onClick={() => doIt(el.id)}
+        onClick={() => doIt(el)}
       >
         Add to cart
       </Button>

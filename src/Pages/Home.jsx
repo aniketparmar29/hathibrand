@@ -3,21 +3,22 @@ import {useSelector,useDispatch} from "react-redux"
 import {getProducts } from "../Redux/ProductReducer/action"
 import { useEffect } from 'react'
 import {useNavigate} from "react-router-dom"
-import axios from 'axios'
+
 import ProductCard from '../Components/ProductCard'
 import "../Style/nav.css"
 import Offer from '../Components/Offer'
 import Footer from '../Components/Footer'
 import ProductCardSkeleton from '../Components/ProductCardSkeleton'
 import Navbar from '../Components/Navbar'
+import { postcart } from '../Redux/ProductReducer/action'
 function Home() {
   const dispatch=useDispatch();
   const product= useSelector((state)=>state.ProductReducer.product)
   const isLoading= useSelector((state)=>state.ProductReducer.isLoading)
   const navigate = useNavigate()
-  const doIt = (id) => {
-    console.log(id)
-    axios.post(`https://hathibrand.onrender.com/cart/${id}`).then((res)=>navigate("/cart")).catch((err)=>console.log(err))
+  const doIt = (el) => {
+     dispatch(postcart(postcart))
+   
   }
   const redir = (id) => {
     navigate(`singlepage/${id}`)
@@ -72,6 +73,12 @@ function Home() {
             </div>
         ))}</div>}
         </SimpleGrid>
+        <Box width={"80%"} height={["200px","500px"]} margin="auto" padding={"2"}>
+        <iframe width={"100%"} height={"100%"} src="https://www.youtube.com/embed/IUcoX-9BL3U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </Box>
+       
+        
+
         
         <Footer/>
     </>

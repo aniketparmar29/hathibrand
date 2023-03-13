@@ -7,15 +7,10 @@ import {
   GET_SINGLE_SUCCESS,
   GET_SINGLE_REQUEST,
 
-  GET_SEARCH_REQUEST,
-  GET_SEARCH_FAILURE,
-  GET_SEARCH_SUCCESS,
-  
-  
-  
-  GET_SUGG_FAILURE,
-  GET_SUGG_SUCCESS,
-  GET_SUGG_REQUEST,
+  POST_CART_FAILURE,
+  POST_CART_SUCCESS,
+  POST_CART_REQUEST,
+ 
 } from "./actionTypes";
 import axios from "axios";
 
@@ -34,45 +29,36 @@ const getProductFailureAction = () => {
 
 
 const getsingleRequestAction = () => {
-  return { type: GET_SINGLE_REQUEST };
+  return { type: POST_CART_REQUEST };
 };
 
 const getsingleSuccesAction = (payload) => {
-  return { type: GET_SINGLE_SUCCESS, payload };
+  return { type: POST_CART_SUCCESS, payload };
 };
 
 const getsingleFailureAction = () => {
+  return { type: POST_CART_FAILURE};
+};
+
+
+
+
+const postcartrequestAction = () => {
+  return { type: GET_SINGLE_REQUEST };
+};
+
+const postcartsuccessAction = (payload) => {
+  return { type: GET_SINGLE_SUCCESS, payload };
+};
+
+const postcartfailureAction = () => {
   return { type: GET_SINGLE_FAILURE };
 };
 
 
 
 
-const getsearchRequestAction = () => {
-  return { type: GET_SEARCH_REQUEST };
-};
 
-const getsearchSuccesAction = (payload) => {
-  return { type: GET_SEARCH_SUCCESS, payload };
-};
-
-const getsearchFailureAction = () => {
-  return { type: GET_SEARCH_FAILURE };
-};
-
-
-
-const getsuggRequestAction = () => {
-  return { type: GET_SUGG_REQUEST };
-};
-
-const getsuggSuccesAction = (payload) => {
-  return { type: GET_SUGG_SUCCESS, payload };
-};
-
-const getsuggFailureAction = () => {
-  return { type: GET_SUGG_FAILURE };
-};
 
 export const getProducts = () => {
   return (dispatch) => {
@@ -102,31 +88,18 @@ export const getsingle = (id) => {
       });
   };
 };
-export const getsearch = (query) => {
+export const postcart = (id,product) => {
   return (dispatch) => {
-    dispatch(getsearchRequestAction());
+    dispatch(postcartrequestAction());
 
     axios
-      .get(`https://real-cyan-swallow-boot.cyclic.app/search?query=${query}`)
+      .post(`https://real-cyan-swallow-boot.cyclic.app/user/${id}/cart`,product)
       .then((res) => {
-        dispatch(getsearchSuccesAction(res.data));
+        dispatch(postcartsuccessAction(res.data));
       })
       .catch((err) => {
-        dispatch(getsearchFailureAction());
+        dispatch(postcartfailureAction());
       });
   };
 };
-export const getsugg = (query) => {
-  return (dispatch) => {
-    dispatch(getsuggRequestAction());
 
-    axios
-      .get(`https://real-cyan-swallow-boot.cyclic.app/search?query=${query}`)
-      .then((res) => {
-        dispatch(getsuggSuccesAction(res.data));
-      })
-      .catch((err) => {
-        dispatch(getsuggFailureAction());
-      });
-  };
-};

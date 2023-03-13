@@ -73,7 +73,7 @@ function Home() {
             </div>
         ))}</div>}
         </SimpleGrid>
-        <Box width={"80%"} height={["200px","500px"]} margin="auto" padding={"2"}>
+        <Box width={"80%"} height={["200px","500px"]} margin="auto" padding={["2","10"]}>
         <iframe width={"100%"} height={"100%"} src="https://www.youtube.com/embed/IUcoX-9BL3U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </Box>
        

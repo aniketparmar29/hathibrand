@@ -7,9 +7,7 @@ import {useNavigate} from "react-router-dom"
 import axios from 'axios'
 import "../Style/nav.css"
 import Offer from '../Components/Offer'
-import {  FaFacebook,FaInstagram,FaWhatsapp
-} from "react-icons/fa";
-import{CgMail,}from "react-icons/cg"
+
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 
@@ -54,7 +52,7 @@ function Home() {
             <Text onClick={()=>redir(el.id)} >
             <Image  src={el.image} />
             <Text>{el.name} </Text>
-            <Text>{el.price}₹ </Text> 
+            <Text>{el.price}₹ </Text>                                  
             <Text>{el.weight>=1000?el.weight/1000:el.weight}{el.weight==1000?"kg":"gm"}</Text>
             </Text>
             <Button borderRadius={0} width={"100%"} bgColor="#5E0E42 "colorScheme='#440430' color={"white"} onClick={()=>doIt(el.id)} >Add To Cart</Button>

@@ -20,7 +20,7 @@ function Home() {
      dispatch(postcart(postcart))
    
   }
-  const redir = (id) => {
+  const  redir = (id) => {
     navigate(`singlepage/${id}`)
   }
 

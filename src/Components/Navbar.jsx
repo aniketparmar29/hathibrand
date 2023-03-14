@@ -10,7 +10,7 @@ import {SearchIcon} from "@chakra-ui/icons"
 import {FaShoppingCart } from 'react-icons/fa'
 import { getProducts } from '../Redux/ProductReducer/action';
 import { Link } from 'react-router-dom';
-
+import {useNavigate} from "react-router-dom"
 function Navbar() {
  
   const [color,setColor]=useState(false);
@@ -51,7 +51,10 @@ function Navbar() {
      dispatch(getProducts())
 
 },[dispatch])
-
+const navigate = useNavigate()
+const  redir = (id) => {
+  navigate(`singlepage/${id}`)
+}
 
 
 
@@ -91,11 +94,11 @@ function Navbar() {
 }
 
 {serch&&
-<Box className='shadow-lg shadow-slate-600' bgColor={"white"} width={["180px","430px"]} position={"absolute"} zIndex={"10"} left={["200","200"]} top={["65px","0"]}>
+<Box  className='shadow-lg shadow-slate-600' bgColor={"white"} width={["180px","430px"]} position={"absolute"} zIndex={"10"} left={["200","200"]} top={["65px","70px"]}>
         {
           product.filter(product=>product.name.includes(query)
           ).map((product)=>(
-            <Box width={"90%"} display={"flex"}  gap="3" p={"5"} borderBottom={"1px solid gray"}>  
+            <Box  onClick={()=>redir(product.id)} width={"90%"} display={"flex"}  gap="3" p={"5"} borderBottom={"1px solid gray"}>  
           <Image src={product.image} width="33%"/>
           <Box>{product.name}</Box>
           

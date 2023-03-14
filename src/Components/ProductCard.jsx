@@ -4,12 +4,14 @@ function ProductCard({el,redir,doIt}) {
   return (
     <Box
     key={el.id}
-    maxW="sm"
+    w="90%"
+    mx={"auto"}
+    my={"3"}
     borderWidth="1px"
     borderRadius="lg"
   overflow="hidden"
   p="3"
-  className='shadow-lg hover:scale-105 shadow-emerald-200'
+  className='shadow-lg hover:scale-105 shadow-[#5E0E42] transition-all-0.5'
   onClick={()=>redir(el.id)}
 >
   <Image src={el.image} alt={el.name} height="240px" width={"100%"}/>
@@ -66,8 +68,7 @@ function ProductCard({el,redir,doIt}) {
         bgColor="#5E0E42"
         colorScheme="#440430"
         color={"white"}
-        onClick={() => doIt(el)}
-      >
+             >
         Add to cart
       </Button>
     </Box>

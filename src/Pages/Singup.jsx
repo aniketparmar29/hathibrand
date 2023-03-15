@@ -2,13 +2,15 @@ import React from 'react'
 import img from '../assets/singup.jpg'
 import Navbar from '../Components/Navbar'
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import {usersignup} from  '../Redux/AuthReducer/user.actions'
 import { useNavigate } from "react-router-dom";
 import Alert from '../Components/Alert'
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const login_laoding= useSelector((state)=>state.userAuth.login_laoding)
+  const login_error= useSelector((state)=>state.userAuth.login_error)
   const [loginData, setLoginData] = useState({name:"",email:"",password:""})
   const [showAlert, setShowAlert] = useState(false);
   const handleOnchange = (e)=>{

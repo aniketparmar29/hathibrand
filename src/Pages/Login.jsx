@@ -16,36 +16,21 @@ function Login() {
   const login_error= useSelector((state)=>state.userAuth.login_error)
 
   const [loginData, setLoginData] = useState({email:"",password:""})
-  const [showAlert, setShowAlert] = useState(false);
-  const [showError, setShowError] = useState(false);
   const handleOnchange = (e)=>{
     setLoginData({...loginData,[e.target.name]:e.target.value})
   }
 
+  if(isAuth===true){
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+  }
   const handleSubmit = async (event) => {
     event.preventDefault()
     let user = {...loginData}
     dispatch(userLogin(user))
     setLoginData({name:"",email:"",password:""})
-    if(isAuth===true){
-        setShowAlert(true);
-        setTimeout(() => {
-          navigate("/");
-        }, 4000);
-    }
-    if(login_error===true){
-      setShowError(true)
-    }
-  };
-  const handleCloseAlert = () => {
-    if(isAuth===true){
-        setShowAlert(false);
-    }
-  };
-  const handleCloseError = () => {
-    if(isAuth===false){
-        setShowError(false);
-    }
+    
   };
   return (
     <>
@@ -59,11 +44,10 @@ function Login() {
           <Spinner />
         </div>
       )}
-         {showError && (
+         {login_error && (
         <Alert
-        message="Email Or Password Is Wrong"
-        color={false}
-        onClose={handleCloseError}
+        msg="Email Or Password Is Wrong"
+        bgColor="bg-red-500"
       />
       )}
       <form onSubmit={handleSubmit} className="w-[70%] m-auto " >
@@ -106,11 +90,10 @@ function Login() {
       <Link to="/singup" className='text-white text-2xl underline pt-10 z-20'>Create Account?</Link>
     </form>
 
-    {showAlert && (
+    {isAuth && (
         <Alert
-          message="Login Successfully!"
-          onClose={handleCloseAlert}
-          color={true}
+          msg="Login Successfully!"
+          bgColor="bg-green-500"
         />
       )}
     </div>

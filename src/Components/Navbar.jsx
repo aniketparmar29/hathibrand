@@ -104,23 +104,18 @@ const  redir = (id) => {
 }
 
 {serch&&
-<Box  className='shadow-lg shadow-slate-600' bgColor={"white"} width={["180px","430px"]} position={"absolute"} zIndex={"10"} left={["200","200"]} top={["65px","70px"]}>
-        {
-          product.filter(product=>product.name.includes(query)
-          ).map((product)=>(
-            <Box  onClick={()=>redir(product.id)} width={"90%"} display={"flex"}  gap="3" p={"5"} borderBottom={"1px solid gray"}>  
-          <Image src={product.image} width="33%"/>
-          <Box>{product.name}</Box>
-          
-        </Box>
-
-          ))
-          
-
-        }
-        
-      
+  <Box  className='shadow-lg shadow-slate-600' bgColor={"white"} width={["180px","430px"]} position={"absolute"} zIndex={"10"} left={["200","200"]} top={["65px","70px"]}>
+  {
+    product.filter(product => product.name.toLowerCase().includes(query.toLowerCase())
+    ).map((product)=>(
+      <Box  onClick={()=>redir(product.id)} width={"90%"} display={"flex"}  gap="3" p={"5"} borderBottom={"1px solid gray"}>  
+        <Image src={product.image} width="33%"/>
+        <Box>{product.name}</Box>
+      </Box>
+    ))
+  }
 </Box>
+
 }
 { 
             !navMid && 
@@ -189,11 +184,6 @@ const  redir = (id) => {
           </Box>
 
             }   
-
-   
-          
-
-
     </>
   );
 }

@@ -1,21 +1,36 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-export default function Alert({ message, onClose,color }) {
+function Alert({ msg, bgColor }) {
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      onClose();
+      setShow(false);
     }, 2000);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [onClose]);
+  }, []);
 
   return (
-    <div className={`mt-4 w-[50%] lg:w-[20%] m-auto ${color?"bg-green-500":"bg-red-500"} text-white rounded-md p-2 relative`}>
-    <div className="h-1 w-full bg-white absolute bottom-0 left-0" />
-    <div className="flex items-center justify-center">{message}</div>
-  </div>
+    <>
+      {show && (
+        <div
+          className={`p-4 ${bgColor} text-white flex justify-between mt-4 w-1/2 lg:w-1/5 m-auto rounded-md p-2 relative`}
+          role="alert"
+        >
+          <span>{msg}</span>
+          <button
+            onClick={() => setShow(false)}
+            className="text-white hover:text-gray-200 focus:outline-none focus:text-gray-200 ml-4"
+          >
+            X
+          </button>
+        </div>
+      )}
+    </>
   );
 }
+
+export default Alert;

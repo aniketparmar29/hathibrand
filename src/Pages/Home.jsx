@@ -8,13 +8,11 @@ import ProductCard from '../Components/ProductCard'
 import "../Style/nav.css"
 import Offer from '../Components/Offer'
 import Footer from '../Components/Footer'
-import ProductCardSkeleton from '../Components/ProductCardSkeleton'
 import Navbar from '../Components/Navbar'
-import { postcart } from '../Redux/ProductReducer/action'
+import { postcart } from '../Redux/CartReducer/action'
 function Home() {
   const dispatch=useDispatch();
   const product= useSelector((state)=>state.ProductReducer.product)
-  const isLoading= useSelector((state)=>state.ProductReducer.isLoading)
   const navigate = useNavigate()
   const doIt = (el) => {
      dispatch(postcart(postcart))
@@ -47,12 +45,7 @@ function Home() {
          product.slice(0,4).map((el)=>(
           <ProductCard el={el} redir={redir} doIt={doIt}/>
         ))}
-        {isLoading &&  <div className='grid grid-cols-4 grid-wrap gap-3'>
-        {[...Array(4)].map((_, index) => (
-            <div className='flex justify-center items-center p-5'>
-            <ProductCardSkeleton />
-            </div>
-        ))}</div>}
+        
         </SimpleGrid>
 
       
@@ -66,12 +59,6 @@ function Home() {
 
           <ProductCard el={el} redir={redir} doIt={doIt}/>
         ))}
-        {isLoading &&  <div className='grid grid-cols-4 grid-wrap gap-3'>
-        {[...Array(4)].map((_, index) => (
-            <div className='flex justify-center items-center p-5'>
-            <ProductCardSkeleton />
-            </div>
-        ))}</div>}
         </SimpleGrid>
         <Box width={"80%"} height={["200px","500px"]} margin="auto" padding={["2","10"]}>
         <iframe width={"100%"} height={"100%"} src="https://www.youtube.com/embed/IUcoX-9BL3U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

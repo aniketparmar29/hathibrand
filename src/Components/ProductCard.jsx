@@ -11,7 +11,7 @@ function ProductCard({el,redir,doIt}) {
     borderRadius="lg"
   overflow="hidden"
   p="3"
-  className='shadow-lg hover:scale-105 shadow-[#5E0E42] transition-all-0.5'
+  className='shadow-lg hover:scale-110 shadow-[#5E0E42]  duration-300'
   onClick={()=>redir(el.id)}
 >
   <Image src={el.image} alt={el.name} height="240px" width={"100%"}/>
@@ -69,7 +69,7 @@ function ProductCard({el,redir,doIt}) {
         colorScheme="#440430"
         color={"white"}
              >
-        Add to cart
+        View
       </Button>
     </Box>
   </Box>

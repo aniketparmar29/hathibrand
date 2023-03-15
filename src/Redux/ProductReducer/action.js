@@ -6,10 +6,6 @@ import {
   GET_SINGLE_FAILURE,
   GET_SINGLE_SUCCESS,
   GET_SINGLE_REQUEST,
-
-  POST_CART_FAILURE,
-  POST_CART_SUCCESS,
-  POST_CART_REQUEST,
  
 } from "./actionTypes";
 import axios from "axios";
@@ -29,31 +25,20 @@ const getProductFailureAction = () => {
 
 
 const getsingleRequestAction = () => {
-  return { type: POST_CART_REQUEST };
+  return { type: GET_SINGLE_REQUEST};
 };
 
 const getsingleSuccesAction = (payload) => {
-  return { type: POST_CART_SUCCESS, payload };
-};
-
-const getsingleFailureAction = () => {
-  return { type: POST_CART_FAILURE};
-};
-
-
-
-
-const postcartrequestAction = () => {
-  return { type: GET_SINGLE_REQUEST };
-};
-
-const postcartsuccessAction = (payload) => {
   return { type: GET_SINGLE_SUCCESS, payload };
 };
 
-const postcartfailureAction = () => {
-  return { type: GET_SINGLE_FAILURE };
+const getsingleFailureAction = () => {
+  return { type: GET_SINGLE_FAILURE};
 };
+
+
+
+
 
 
 
@@ -88,18 +73,3 @@ export const getsingle = (id) => {
       });
   };
 };
-export const postcart = (id,product) => {
-  return (dispatch) => {
-    dispatch(postcartrequestAction());
-
-    axios
-      .post(`https://real-cyan-swallow-boot.cyclic.app/user/${id}/cart`,product)
-      .then((res) => {
-        dispatch(postcartsuccessAction(res.data));
-      })
-      .catch((err) => {
-        dispatch(postcartfailureAction());
-      });
-  };
-};
-

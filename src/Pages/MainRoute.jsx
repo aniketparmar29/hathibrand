@@ -8,6 +8,7 @@ import Singup from './Singup'
 // import Admin from '../admin/Admin'
 import Login from './Login'
 import ProudctPage from './ProudctPage'
+// import Dashboard from '../../../Admin/Dashboard'
 function MainRoute() {
   return (
     <div>
@@ -17,7 +18,7 @@ function MainRoute() {
             <Route path="/login" element={<Login/>}></Route>
             <Route path='/singlepage/:id' element={<Signle/>} ></Route>
             <Route path='products/singlepage/:id' element={<Signle/>} ></Route>
-            {/* <Route path='/admin' element={<Admin/>}></Route> */}
+            {/* <Route path='/admin' element={<Dashboard/>}></Route> */}
             <Route path='/products' element={<ProudctPage/>}></Route>
             <Route path='/cart' element={<Cart/>}></Route>
             <Route path='*' element={<PageNotFound/>}></Route>

@@ -1,5 +1,6 @@
 import { Box, Button, Image,Text } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { FaPlus,FaMinus } from 'react-icons/fa'
+import React, { useEffect, useState } from 'react'
 import { useDispatch ,useSelector} from 'react-redux'
 import {useParams} from "react-router-dom"
 import Footer from '../Components/Footer'
@@ -8,17 +9,48 @@ import { getsingle } from '../Redux/ProductReducer/action'
 import "../Style/nav.css"
 
 const Signle = () => {
+
     const {id} = useParams()
     
     const dispatch=useDispatch();
 
     const single= useSelector((state)=>state.ProductReducer.single)
   
+    const [quantity, setQuantity] = useState(1);
+
+  const handleIncrease = () => {
+    setQuantity(quantity + 1);
+   
+  };
+
+  const handleDecrease = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+      
+    }
+  }
 
     useEffect(()=>{
       dispatch(getsingle(id))
      },[dispatch])
      console.log(single)
+
+
+     const cart={
+      pr_name:single.name, 
+      pr_price:single.price,
+       pr_que:quantity,
+        pr_id:single.id, 
+        pr_img:single.img,
+         user_id
+     }
+
+  const addcart=(pr_name, pr_price, pr_que, pr_id, pr_img, user_id)=>{
+
+
+  }
+
+
   return (
     <>
     <Navbar />
@@ -107,6 +139,24 @@ const Signle = () => {
           In stock
         </Box>
       </Box>
+      
+      <div className="flex items-center justify-center space-x-4">
+      <button
+        type="button"
+        onClick={handleDecrease}
+        className="bg-gray-100 text-gray-500 rounded-md p-2 hover:bg-gray-200 focus:outline-none"
+      >
+        <FaMinus/>
+      </button>
+      <span className="font-medium">{quantity}</span>
+      <button
+        type="button"
+        onClick={handleIncrease}
+        className="bg-gray-100 text-gray-500 rounded-md p-2 hover:bg-gray-200 focus:outline-none"
+      >
+       <FaPlus/>
+      </button>
+    </div>
 
       <Box d="flex" mt="5" alignItems="center">
         <Button
@@ -115,6 +165,7 @@ const Signle = () => {
           bgColor="#5E0E42"
           colorScheme="#440430"
           color={"white"}
+          onClick={addcart}
         >
           Add to cart
         </Button>

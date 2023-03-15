@@ -7,14 +7,17 @@ import {userLogin} from  '../Redux/AuthReducer/user.actions'
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import Alert from '../Components/Alert'
+import Spinner from '../Components/Spinner';
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
-  const authToken= useSelector((state)=>state.userAuth.authToken)
+  const login_laoding= useSelector((state)=>state.userAuth.login_laoding)
+  const login_error= useSelector((state)=>state.userAuth.login_error)
 
   const [loginData, setLoginData] = useState({email:"",password:""})
   const [showAlert, setShowAlert] = useState(false);
+  const [showError, setShowError] = useState(false);
   const handleOnchange = (e)=>{
     setLoginData({...loginData,[e.target.name]:e.target.value})
   }
@@ -24,16 +27,24 @@ function Login() {
     let user = {...loginData}
     dispatch(userLogin(user))
     setLoginData({name:"",email:"",password:""})
-    if(authToken){
+    if(isAuth===true){
         setShowAlert(true);
         setTimeout(() => {
           navigate("/");
-        }, 2000);
+        }, 4000);
+    }
+    if(login_error===true){
+      setShowError(true)
     }
   };
   const handleCloseAlert = () => {
     if(isAuth===true){
         setShowAlert(false);
+    }
+  };
+  const handleCloseError = () => {
+    if(isAuth===false){
+        setShowError(false);
     }
   };
   return (
@@ -43,7 +54,18 @@ function Login() {
       className="h-screen w-full bg-cover bg-no-repeat bg-center pt-32 -mt-20"
       style={{ backgroundImage: `url(${img})` }}
       >
-        
+        {login_laoding&& (
+        <div className="fixed z-50 inset-0 bg-gray-500 opacity-75 flex items-center justify-center">
+          <Spinner />
+        </div>
+      )}
+         {showError && (
+        <Alert
+        message="Email Or Password Is Wrong"
+        color={false}
+        onClose={handleCloseError}
+      />
+      )}
       <form onSubmit={handleSubmit} className="w-[70%] m-auto " >
       <div className="mb-4">
         <label className="block text-white font-bold mb-2" htmlFor="email">
@@ -88,6 +110,7 @@ function Login() {
         <Alert
           message="Login Successfully!"
           onClose={handleCloseAlert}
+          color={true}
         />
       )}
     </div>

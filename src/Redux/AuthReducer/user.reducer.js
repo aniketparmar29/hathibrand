@@ -10,7 +10,7 @@ import {
   LOGOUT_USER_SUCCESS,
 } from "./user.action.types";
 
-let token = localStorage.getItem("token");
+let token =window.localStorage.getItem("token");
 // const userData = JSON.parse(localStorage.getItem("user"))
 const initialState = {
   register_loading: false,
@@ -40,7 +40,8 @@ export const userAuth = (state = initialState, { type, payload }) => {
       return { ...state, login_laoding:false,login_error:true,isAuth:false };
     }
     case LOGIN_USER_SUCCESS: {
-        localStorage.setItem("token",payload.token)
+        window.localStorage.setItem("token",payload.token)
+        window.localStorage.setItem("user",JSON.stringify(payload.data))
       return { ...state, login_laoding:false,login_error:false,isAuth:true,authToken:payload.token,user:payload.data };
     }
     case LOGOUT_USER_LOADING:{
@@ -50,8 +51,8 @@ export const userAuth = (state = initialState, { type, payload }) => {
         return{...state, }
     }
     case LOGOUT_USER_SUCCESS:{
-        localStorage.removeItem("token")
-        localStorage.removeItem("user")
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("user")
         return{...state,isAuth:false}
     }
     default: {

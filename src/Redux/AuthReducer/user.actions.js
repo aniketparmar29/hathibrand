@@ -11,7 +11,7 @@ export const userLogin = (data)=>async(dispatch)=>{
     try{
         dispatch({type:LOGIN_USER_LOADING});
         let res = await loginUserApi(data)
-        console.log(res)
+        console.log(res.user)
         dispatch({type:LOGIN_USER_SUCCESS,payload:{token:res.token,data:res.user}})
     }catch(err){
         dispatch({type:LOGIN_USER_ERROR})

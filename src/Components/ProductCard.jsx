@@ -3,29 +3,33 @@ import { Box,Button,Image,Badge } from '@chakra-ui/react'
 function ProductCard({el,redir,doIt}) {
   return (
     <Box
-  maxW="sm"
-  borderWidth="1px"
-  borderRadius="lg"
+    key={el.id}
+    w="90%"
+    mx={"auto"}
+    my={"3"}
+    borderWidth="1px"
+    borderRadius="lg"
   overflow="hidden"
-  shadow="lg"
+  p="3"
+  className='shadow-lg hover:scale-110 shadow-[#5E0E42]  duration-300'
   onClick={()=>redir(el.id)}
 >
-  <Image src={el.image} alt={el.name} />
+  <Image src={el.image} alt={el.name} height="240px" width={"100%"}/>
 
   <Box p="6">
     <Box d="flex" alignItems="baseline">
-      <Badge borderRadius="full" px="2" colorScheme="teal">
+      <Badge borderRadius="full"  colorScheme="teal">
         New
       </Badge>
       <Box
         color="gray.500"
         fontWeight="semibold"
         letterSpacing="wide"
-        fontSize="xs"
+        fontSize="sm"
         textTransform="uppercase"
-        ml="2"
+        mt="2"
       >
-        {el.weight>=1000?el.weight/1000:el.weight}{el.weight===1000?"kg":"gm"}
+        {el.weight>=1000?el.weight/1000:el.weight}{el.weight>=1000?"kg":"gm"}
       </Box>
     </Box>
 
@@ -64,9 +68,8 @@ function ProductCard({el,redir,doIt}) {
         bgColor="#5E0E42"
         colorScheme="#440430"
         color={"white"}
-        onClick={() => doIt(el.id)}
-      >
-        Add to cart
+             >
+        View
       </Button>
     </Box>
   </Box>

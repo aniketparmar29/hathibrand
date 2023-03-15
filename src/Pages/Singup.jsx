@@ -6,11 +6,13 @@ import { useDispatch,useSelector } from "react-redux";
 import {usersignup} from  '../Redux/AuthReducer/user.actions'
 import { useNavigate } from "react-router-dom";
 import Alert from '../Components/Alert'
+import Spinner from '../Components/Spinner'
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const login_laoding= useSelector((state)=>state.userAuth.login_laoding)
-  const login_error= useSelector((state)=>state.userAuth.login_error)
+  const register_laoding= useSelector((state)=>state.userAuth.register_laoding)
+  const register_error= useSelector((state)=>state.userAuth.register_error)
+  const register_success= useSelector((state)=>state.userAuth.register_success)
   const [loginData, setLoginData] = useState({name:"",email:"",password:""})
   const [showAlert, setShowAlert] = useState(false);
   const handleOnchange = (e)=>{
@@ -38,7 +40,11 @@ function Signup() {
       className="h-screen w-full bg-cover bg-no-repeat bg-center pt-32 -mt-20"
       style={{ backgroundImage: `url(${img})` }}
       >
-        if()
+        {register_laoding && (
+        <div className="fixed z-50 inset-0 bg-gray-500 opacity-75 flex items-center justify-center">
+          <Spinner />
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="w-[70%] m-auto">
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
@@ -93,8 +99,8 @@ function Signup() {
     </form>
     {showAlert && (
         <Alert
-          message="Signup Successfully!"
-          onClose={handleCloseAlert}
+          msg="Signup Successfully!"
+          bgColor="bg-green-500"
         />
       )}
     </div>

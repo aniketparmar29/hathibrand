@@ -16,7 +16,15 @@ function Navbar() {
   const [color,setColor]=useState(false);
   const dispatch = useDispatch();
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
-  const user= useSelector((state)=>state.userAuth.user)
+  let user =window.localStorage.getItem("user")||[];
+  if (user) {
+    try {
+      user = JSON.parse(user);
+    } catch (error) {
+      console.error("Error parsing user from local storage", error);
+      user = null;
+    }
+  }
   const product= useSelector((state)=>state.ProductReducer.product)
 
 

@@ -2,36 +2,47 @@ import React, { useEffect } from 'react'
 import img from '../assets/singup.jpg'
 import Navbar from '../Components/Navbar'
 import { useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
-import {userLogin} from  '../Redux/AuthReducer/user.actions'
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from '../Redux/AuthReducer/user.actions'
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import Alert from '../Components/Alert'
 import Spinner from '../Components/Spinner';
+
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isAuth= useSelector((state)=>state.userAuth.isAuth)
-  const login_laoding= useSelector((state)=>state.userAuth.login_laoding)
-  const login_error= useSelector((state)=>state.userAuth.login_error)
+  const isAuth = useSelector((state) => state.userAuth.isAuth)
+  const login_laoding = useSelector((state) => state.userAuth.login_laoding)
+  const login_error = useSelector((state) => state.userAuth.login_error)
 
-  const [loginData, setLoginData] = useState({email:"",password:""})
-  const handleOnchange = (e)=>{
-    setLoginData({...loginData,[e.target.name]:e.target.value})
+  const [loginData, setLoginData] = useState({ email: "", password: "" })
+  const handleOnchange = (e) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value })
   }
 
-  if(isAuth===true){
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
+  if (isAuth === true) {
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
-    let user = {...loginData}
+    let user = { ...loginData }
     dispatch(userLogin(user))
-    setLoginData({name:"",email:"",password:""})
-    
+    setLoginData({ name: "", email: "", password: "" })
   };
+
+  // useEffect(() => {
+  //   const onUnload = () => {
+  //     window.location.reload(); // use window.location.reload to refresh the page
+  //   };
+  //   window.addEventListener('beforeunload', onUnload);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', onUnload);
+  //   };
+  // }, []);
   return (
     <>
     <Navbar/>

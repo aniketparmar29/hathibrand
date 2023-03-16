@@ -8,6 +8,9 @@ import Singup from './Singup'
 // import Admin from '../admin/Admin'
 import Login from './Login'
 import ProudctPage from './ProudctPage'
+import AboutUs from './AboutUs'
+import ContactUs from './ContactUs'
+import MoreWebsite from './MoreWebsite'
 // import Dashboard from '../../../Admin/Dashboard'
 function MainRoute() {
   return (
@@ -22,6 +25,10 @@ function MainRoute() {
             <Route path='/products' element={<ProudctPage/>}></Route>
             <Route path='/cart' element={<Cart/>}></Route>
             <Route path='*' element={<PageNotFound/>}></Route>
+            <Route path='/about' element={<AboutUs/>}></Route>
+            <Route path='/contact' element={<ContactUs/>}></Route>
+            <Route path='/website' element={<MoreWebsite/>}></Route>
+
         </Routes>
     </div>
   )

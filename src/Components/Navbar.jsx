@@ -55,7 +55,6 @@ if (user) {
   function sugg(e){
     setserch(!serch)
     setquery( e.target.value )
-    console.log(query)
    
   }
   useEffect(()=>{

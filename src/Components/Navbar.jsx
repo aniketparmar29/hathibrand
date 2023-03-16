@@ -16,17 +16,18 @@ function Navbar() {
   const [color,setColor]=useState(false);
   const dispatch = useDispatch();
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
-  let user =window.localStorage.getItem("user")||{};
-  if (user!=={}) {
-    try {
-      user = JSON.parse(user);
-    } catch (error) {
-      console.error("Error parsing user from local storage", error);
-      user = {role:"hello"};
-    }
-  }else{
-      user = {role:"hello"};
+  let user = window.localStorage.getItem("user");
+if (user) {
+  try {
+    user = JSON.parse(user);
+  } catch (error) {
+    console.error("Error parsing user from local storage", error);
+    user = { role: "hello" };
   }
+} else {
+  user = { role: "hello" };
+}
+
   const product= useSelector((state)=>state.ProductReducer.product)
 
 
@@ -71,7 +72,7 @@ const  redir = (id) => {
   return (
     <>
     { navMid &&
-    <Box zIndex={"100"} justifyContent={"space-between"} className={color?"header header-bg backdrop-blur-lg":"header backdrop-blur-lg"} display={"flex"}  gap="70px" position={"sticky"} top={"0"}>
+    <Box zIndex={"100"} justifyContent={"space-between"} className={color?"header header-bg backdrop-blur-lg ":"header backdrop-blur-lg "} display={"flex"}  gap="70px" position={"sticky"} top={"0"}>
       
     <Box> <Link to={"/"}><Image width={"340px"} src={logo}/></Link></Box>
     
@@ -92,11 +93,11 @@ const  redir = (id) => {
   
 
     <Box mr={"10"} pt={"25px"} display={"flex"} gap="35" ml={"70"}>
-    <Text fontSize='2xl' color={"white"}><Link to="/">Home</Link></Text>
-      <Text fontSize='2xl' color={"white"}><Link to="/products">Categories</Link></Text>
-      <Text display={"flex"} fontSize='2xl' color={"white"}><Link to="/cart">Cart</Link><Box pt={"10px"}><FaShoppingCart/></Box> </Text>
-      {isAuth?<Text display={"flex"} fontSize='2xl' color={"white"} onClick={()=>{dispatch(logoutUser())}} cursor="pointer" >Logout<Box pt={"10px"}></Box></Text>:<Text display={"flex"} fontSize='2xl' color={"white"}><Link to="/login">Login</Link> <Box pt={"10px"}></Box></Text>}
-      {user.role==="admin" && isAuth===true && <Text fontSize='2xl' color={"white"}><Link to="/admin">Admin</Link></Text> }
+    <Text fontSize='2xl' ><Link to="/">Home</Link></Text>
+      <Text fontSize='2xl' ><Link to="/products">Categories</Link></Text>
+      <Text display={"flex"} fontSize='2xl' ><Link to="/cart">Cart</Link><Box pt={"10px"}><FaShoppingCart/></Box> </Text>
+      {isAuth?<Text display={"flex"} fontSize='2xl'  onClick={()=>{dispatch(logoutUser())}} cursor="pointer" >Logout<Box pt={"10px"}></Box></Text>:<Text display={"flex"} fontSize='2xl' ><Link to="/login">Login</Link> <Box pt={"10px"}></Box></Text>}
+      {user.role==="admin" && isAuth===true && <Text fontSize='2xl' ><Link to="/admin">Admin</Link></Text> }
     </Box>
     
      
@@ -104,11 +105,11 @@ const  redir = (id) => {
 }
 
 {serch&&
-  <Box  className='shadow-lg shadow-slate-600' bgColor={"white"} width={["180px","430px"]} position={"absolute"} zIndex={"10"} left={["200","200"]} top={["65px","70px"]}>
+  <Box  className='shadow-lg shadow-slate-600' bgColor={"white"} width={["180px","430px"]} position={"fixed"} zIndex={"10"} left={["215","200"]} top={["80px","70px"]}>
   {
     product.filter(product => product.name.toLowerCase().includes(query.toLowerCase())
     ).map((product)=>(
-      <Box  onClick={()=>redir(product.id)} width={"90%"} display={"flex"}  gap="3" p={"5"} borderBottom={"1px solid gray"}>  
+      <Box key={product.id} onClick={()=>redir(product.id)} width={"90%"} display={"flex"}  gap="3" p={"5"} borderBottom={"1px solid gray"}>  
         <Image src={product.image} width="33%"/>
         <Box>{product.name}</Box>
       </Box>
@@ -120,13 +121,13 @@ const  redir = (id) => {
 { 
             !navMid && 
             <Box zIndex={"100"} pb={"5"}  display={"flex"}  gap="70px" className={color?"header header-bg":"header" }  position={"sticky"} top={"0"} >
-             <Box width={"40%"}><Image width={"100px"} src={logo}/></Box>
+             <Box width={"40%"}><Link to="/"><Image width={"100px"} src={logo}/></Link></Box>
              <InputGroup mt={"20px"}  width="60%" mr="2%">
     <InputRightElement
       pointerEvents='none'
       children={<SearchIcon color='gray.300' />}
     />
-    <Input onChange={sugg} value={query} placeholder='Search...'  borderRadius={"20"} textColor="white"  />
+    <Input onChange={sugg} value={query} placeholder='Search...'  borderRadius={"20"} className={color?"text-white":"text-black"}  />
   </InputGroup>
              
           

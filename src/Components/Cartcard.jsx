@@ -5,7 +5,7 @@ import { Box ,Image,Button, Flex} from '@chakra-ui/react';
 import { removecart,editcart } from '../Redux/CartReducer/action';
 
 
-export const Cartcard = ( {el,userid,dispatch}) => {
+export const Cartcard = ( {el,userid,dispatch,key}) => {
     
     const [quantity, setQuantity] = useState(el.pr_que);
 
@@ -40,7 +40,7 @@ export const Cartcard = ( {el,userid,dispatch}) => {
   return (
     <>
 
-<Box border={"0px solid gray"} py="1%" px="3%" mt={"3%"}>
+<Box key={el.id} border={"0px solid gray"} py="1%" px="3%" mt={"3%"}>
         <Box border={"1px solid gray"} >
         <Flex gap={"5%"} >
         <Image w={"15%"} src={el.pr_img}/>

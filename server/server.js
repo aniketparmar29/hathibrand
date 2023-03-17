@@ -397,24 +397,51 @@ app.get('/users', (req, res) => {
 });
 
 //cart 
-
 app.post('/add-to-cart', (req, res) => {
+  console.log(req.body)
   const { pr_name, pr_price, pr_que, pr_id, pr_img, user_id } = req.body;
 
-  // insert or update the item in the cart table
+  // check if a row already exists for the given pr_id and user_id combination
   pool.query(
-    'INSERT INTO cart (pr_name, pr_price, pr_que, pr_id, pr_img, user_id) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE pr_que = CASE WHEN pr_id = VALUES(pr_id) AND user_id = VALUES(user_id) THEN pr_que + VALUES(pr_que) ELSE pr_que END',
-    [pr_name, pr_price, pr_que, pr_id, pr_img, user_id],
+    'SELECT * FROM cart WHERE pr_id = ? AND user_id = ?',
+    [pr_id, user_id],
     (error, results, fields) => {
       if (error) {
         console.error(error);
-        res.status(500).send('Error adding item to cart');
+        res.status(500).send('Error checking if item exists in cart');
+      } else if (results.length > 0) {
+        // update the existing row with the new quantity
+        pool.query(
+          'UPDATE cart SET pr_que = pr_que + ? WHERE pr_id = ? AND user_id = ?',
+          [pr_que, pr_id, user_id],
+          (error, results, fields) => {
+            if (error) {
+              console.error(error);
+              res.status(500).send('Error updating item in cart');
+            } else {
+              res.status(200).send('Item updated in cart');
+            }
+          }
+        );
       } else {
-        res.status(200).send('Item added to cart');
+        // insert a new row for the product in the cart table
+        pool.query(
+          'INSERT INTO cart (pr_name, pr_price, pr_que, pr_id, pr_img, user_id) VALUES (?, ?, ?, ?, ?, ?)',
+          [pr_name, pr_price, pr_que, pr_id, pr_img, user_id],
+          (error, results, fields) => {
+            if (error) {
+              console.error(error);
+              res.status(500).send('Error adding item to cart');
+            } else {
+              res.status(200).send('Item added to cart');
+            }
+          }
+        );
       }
     }
   );
 });
+
 
 
 
@@ -562,6 +589,65 @@ app.put('/reviews/:userId/:prId', (req, res) => {
 });
 
 
+
+//create coupons
+app.post('/coupons', (req, res) => {
+  const coupon = {
+    cuponcode: req.body.cuponcode,
+    value: req.body.value,
+    price: req.body.price
+  };
+
+  // Insert the coupon into the database
+  pool.query('INSERT INTO cupon SET ?', coupon, (error, results, fields) => {
+    if (error) throw error;
+    res.send('Coupon created successfully.');
+  });
+});
+
+// Get all coupon codes
+app.get('/coupons', (req, res) => {
+  pool.query('SELECT * FROM cupon', (error, results, fields) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
+
+// Get a specific coupon code by ID
+app.get('/coupons/:id', (req, res) => {
+  const id = req.params.id;
+  pool.query('SELECT * FROM cupon WHERE id = ?', id, (error, results, fields) => {
+    if (error) throw error;
+    res.send(results[0]);
+  });
+});
+
+// Update a coupon code
+app.put('/coupons/:id', (req, res) => {
+  const id = req.params.id;
+  const coupon = {
+    cuponcode: req.body.cuponcode,
+    value: req.body.value,
+    price: req.body.price
+  };
+
+  // Update the coupon in the database
+  pool.query('UPDATE cupon SET ? WHERE id = ?', [coupon, id], (error, results, fields) => {
+    if (error) throw error;
+    res.send('Coupon updated successfully.');
+  });
+});
+
+// Delete a coupon code
+app.delete('/coupons/:id', (req, res) => {
+  const id = req.params.id;
+
+  // Delete the coupon from the database
+  pool.query('DELETE FROM cupon WHERE id = ?', id, (error, results, fields) => {
+    if (error) throw error;
+    res.send('Coupon deleted successfully.');
+  });
+});
 
 
 

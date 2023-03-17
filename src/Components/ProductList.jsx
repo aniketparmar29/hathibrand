@@ -5,7 +5,8 @@ import ProductCard from './ProductCard';
 import {useNavigate} from "react-router-dom"
 import {getProducts } from "../Redux/ProductReducer/action"
 import ProductCardSkeleton from './ProductCardSkeleton';
-function ProductList() {
+import Alert from '../Components/Alert'
+function ProductList({setshowalert,showalert}) {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const product= useSelector((state)=>state.ProductReducer.product)
@@ -29,10 +30,13 @@ function ProductList() {
                 <SimpleGrid columns={[1,2,4]} gap="3">
         {product && 
         product.map((el)=>(
-         <ProductCard el={el} key={el.id} redir={redir} />
+         <ProductCard el={el} setshowalert={setshowalert} key={el.id} redir={redir} />
        ))}
         </SimpleGrid>
        </div>
+       {
+  showalert&&<Alert  msg="Item Add To Cart" bgColor="bg-green-500"/>
+}
     </>
   )
 }

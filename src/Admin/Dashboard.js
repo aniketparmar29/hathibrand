@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useRef,useState} from "react";
 import Sidebar from "./Sidebar.js";
 import "./dashboard.css";
-import { Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { Doughnut, Line,Chart  } from "react-chartjs-2";
+import Chart from "chart.js/auto";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../Redux/AdminReducer/actions";
 // import { getAllOrders } from "../Redux/AdminReducer/actions";
@@ -12,24 +11,23 @@ import MetaData from "./MetaData";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-
-  const products= useSelector((state)=>state.AdminReducer.products)
-  const users= useSelector((state)=>state.AdminReducer.users)
-  // const orders= useSelector((state)=>state.AdminReducer.orders)
-  const isAuth= useSelector((state)=>state.userAuth.isAuth)
+  const products = useSelector((state) => state.AdminReducer.products);
+  const users = useSelector((state) => state.AdminReducer.users);
+  const isAuth = useSelector((state) => state.userAuth.isAuth);
+  let totalAmount=0;
   let user = window.localStorage.getItem("user");
-if (user) {
-  try {
-    user = JSON.parse(user);
-  } catch (error) {
-    console.error("Error parsing user from local storage", error);
+  if (user) {
+    try {
+      user = JSON.parse(user);
+    } catch (error) {
+      console.error("Error parsing user from local storage", error);
+      user = { role: "hello" };
+    }
+  } else {
     user = { role: "hello" };
   }
-} else {
-  user = { role: "hello" };
-}
-  let outOfStock = 0;
 
+  let outOfStock = 0;
   products &&
     products.forEach((item) => {
       if (item.stock === 0) {
@@ -39,93 +37,98 @@ if (user) {
 
   useEffect(() => {
     dispatch(getProducts());
-    // dispatch(getAllOrders());
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  let totalAmount = 0;
-  // orders &&
-  //   orders.forEach((item) => {
-  //     totalAmount += item.totalPrice;
-  //   });
+  const chartRef = useRef(null);
+  const [chartInstance, setChartInstance] = useState(null);
 
-  const lineState = {
-    labels: ["Initial Amount", "Amount Earned"],
-    datasets: [
-      {
-        label: "TOTAL AMOUNT",
-        backgroundColor: ["tomato"],
-        hoverBackgroundColor: ["rgb(197, 72, 49)"],
-        data: [0, totalAmount],
-      },
-    ],
-  };
+  useEffect(() => {
+    if (chartRef.current && products) {
+      const myChartRef = chartRef.current.getContext("2d");
+      let newChartInstance = null;
 
-  const doughnutState = {
-    labels: ["Out of Stock", "InStock"],
-    datasets: [
-      {
-        backgroundColor: ["#00A6B4", "#6800B4"],
-        hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [outOfStock, products.length - outOfStock],
-      },
-    ],
-  };
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
+      newChartInstance = new Chart(myChartRef, {
+        type: "doughnut",
+        data: {
+          labels: ["Out of Stock", "InStock"],
+          datasets: [
+            {
+              label: "# of Products",
+              data: [outOfStock, products.length - outOfStock],
+              backgroundColor: ["red", "blue"],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+            title: {
+              display: true,
+              text: "Doughnut Chart",
+            },
+          },
+        },
+      });
+
+      setChartInstance(newChartInstance);
+    }
+  }, [chartRef, outOfStock, products]);
 
   return (
     <>
-    {isAuth && user.role==="admin" && 
-    <div className="dashboard">
-      <MetaData title="Dashboard - Admin Panel" />
-      <Sidebar />
+      {isAuth && user.role === "admin" && (
+        <div className="dashboard">
+          <MetaData title="Dashboard - Admin Panel" />
+          <Sidebar />
 
-      <div className="dashboardContainer">
-        <h1 className="text-xl text-center">Dashboard</h1>
+          <div className="dashboardContainer">
+            <h1 className="text-xl text-center">Dashboard</h1>
 
-        <div className="dashboardSummary">
-          <div>
-            <p>
-              Total Amount <br /> ₹{totalAmount}
-            </p>
-          </div>
-          <div className="dashboardSummaryBox2">
-            <Link to="/admin/products">
-              <p>Product</p>
-              <p>{products && products.length}</p>
-            </Link>
-            <Link to="/admin/orders">
-              <p>Orders</p>
-              {/* <p>{orders && orders.length}</p> */}
-            </Link>
-            <Link to="/admin/users">
-              <p>Users</p>
-              <p>{users && users.length}</p>
-            </Link>
+            <div className="dashboardSummary">
+              <div>
+                <p>
+                  Total Amount <br /> ₹{totalAmount}
+                </p>
+              </div>
+              <div className="dashboardSummaryBox2">
+                <Link to="/admin/products">
+                  <p>Product</p>
+                  <p>{products && products.length}</p>
+                </Link>
+                <Link to="/admin/orders">
+                  <p>Orders</p>
+                  {/* <p>{orders && orders.length}</p> */}
+                </Link>
+                <Link to="/admin/users">
+                  <p>Users</p>
+                  <p>{users && users.length}</p>
+                </Link>
+              </div>
+            </div>
+          <canvas ref={chartRef} className="w-[50%]" />
           </div>
         </div>
-
-        {/* <div className="lineChart">
-          <Line data={lineState} />
-        </div> */}
-
-        {/* <div className="doughnutChart">
-  <Doughnut
-    data={doughnutState}
-    options={{ maintainAspectRatio: false }}
-    chart={Chart}
-  />
-</div> */}
-      </div>
-    </div>
-}
-{
-  isAuth && user.role==="user" && 
-  <h1 className="text-center text-2xl font-bold ">Login With Admin Account </h1>
-}
-{  !isAuth && 
-  <h1 className="text-center text-2xl font-bold ">Login With Admin Account </h1>
-}
-</>
+      )}
+      {isAuth && user.role === "user" && (
+        <h1 className="text-center text-2xl font-bold ">
+          Login With Admin Account{" "}
+        </h1>
+      )}
+      {!isAuth && (
+        <h1 className="text-center text-2xl font-bold ">
+          Login With Admin Account{" "}
+        </h1>
+      )}
+    </>
   );
 };
 

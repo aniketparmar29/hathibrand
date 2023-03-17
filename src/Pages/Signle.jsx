@@ -8,7 +8,7 @@ import Navbar from '../Components/Navbar'
 import { getsingle } from '../Redux/ProductReducer/action'
 import {postcart} from "../Redux/CartReducer/action"
 import "../Style/nav.css"
-
+import Alert from '../Components/Alert'
 
 const Signle = () => {
 
@@ -19,6 +19,7 @@ const Signle = () => {
     const single= useSelector((state)=>state.ProductReducer.single)
   
     const [quantity, setQuantity] = useState(1);
+      const [showalert,setshowalert]=useState(false)
 
   const handleIncrease = () => {
     setQuantity(quantity + 1);
@@ -55,6 +56,7 @@ const Signle = () => {
        pr_que:quantity,
         pr_id:single.id, 
         pr_img:single.image,
+        pr_weight:single.weight,
          user_id:user.id
 
 
@@ -63,7 +65,7 @@ const Signle = () => {
 
   const addcart=()=>{
      dispatch(postcart(cart))
-     
+     setshowalert(true)
 
 
   }
@@ -159,7 +161,7 @@ const Signle = () => {
           {single.weight >= 1000
             ? single.weight / 1000
             : single.weight}
-          {single.weight === 1000 ? "kg" : "gm"}
+          {single.weight >= 1000 ? "kg" : "gm"}
         </Text>
       </Box>
 
@@ -195,6 +197,7 @@ const Signle = () => {
           colorScheme="#440430"
           color={"white"}
           onClick={addcart}
+          
         >
           Add to cart
         </Button>
@@ -202,7 +205,9 @@ const Signle = () => {
     </Box>
   </Box>
 )}
-
+{
+  showalert&&<Alert  msg="Item Add To Cart" bgColor="bg-green-500"/>
+}
 <Footer />
     </>
   )

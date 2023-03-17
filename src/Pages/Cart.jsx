@@ -1,6 +1,7 @@
-import { Box } from '@chakra-ui/react';
+import {Box} from "@chakra-ui/react"
 import axios from 'axios'
-import React, { useEffect } from 'react';
+import { Cartcard } from '../Components/Cartcard';
+import React, { useEffect,useState } from 'react';
 import { useSelector } from 'react-redux';
 import {getcart} from "../Redux/CartReducer/action"
 import { useDispatch } from 'react-redux'
@@ -8,7 +9,7 @@ import { useDispatch } from 'react-redux'
 
 const Cart = () => {
 
-
+  const [quantity, setQuantity] = useState(1);
 
     const dispatch=useDispatch();
     const cart= useSelector((state)=>state.cartReducer.cart)
@@ -27,23 +28,30 @@ const Cart = () => {
   
   useEffect(()=>{
     dispatch(getcart(user.id))
-   },[dispatch])
+   },[dispatch,cart])
    console.log(cart)
+
+
+  
   
   
   return (
     <>
+     <Box border={"1px solid gray"} w={["100%","70%"]}>
     {
+
       cart.map((el)=>(
-        <Box>{el.pr_name}</Box>
-        
+        <>
+         <Cartcard el={el} userid={user.id} dispatch={dispatch}/>
+     
+        </>
 
       ))
 
 
     }
      
-    
+     </Box>
        
 
      

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import Alert from '../Components/Alert'
 import Spinner from '../Components/Spinner';
-
+import { useLocation } from 'react-router-dom';
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,16 +33,6 @@ function Login() {
     dispatch(userLogin(user))
     setLoginData({ name: "", email: "", password: "" })
   };
-
-  // useEffect(() => {
-  //   const onUnload = () => {
-  //     window.location.reload(); // use window.location.reload to refresh the page
-  //   };
-  //   window.addEventListener('beforeunload', onUnload);
-  //   return () => {
-  //     window.removeEventListener('beforeunload', onUnload);
-  //   };
-  // }, []);
   return (
     <>
     <Navbar/>

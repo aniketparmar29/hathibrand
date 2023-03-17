@@ -6,7 +6,9 @@ import {useParams} from "react-router-dom"
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import { getsingle } from '../Redux/ProductReducer/action'
+import {postcart} from "../Redux/CartReducer/action"
 import "../Style/nav.css"
+
 
 const Signle = () => {
 
@@ -35,6 +37,38 @@ const Signle = () => {
       dispatch(getsingle(id))
      },[dispatch])
      console.log(single)
+
+     let user =window.localStorage.getItem("user")||{};
+     if (user!=={}) {
+       try {
+         user = JSON.parse(user);
+       } catch (error) {
+         console.error("Error parsing user from local storage", error);
+         user = {role:"hello"};
+       }
+     }else{
+         user = {role:"hello"};
+     }
+     const cart={
+      pr_name:single.name, 
+      pr_price:single.price,
+       pr_que:quantity,
+        pr_id:single.id, 
+        pr_img:single.image,
+         user_id:user.id
+
+
+
+     }
+
+  const addcart=()=>{
+     dispatch(postcart(cart))
+     
+
+
+  }
+
+
   return (
     <>
     <Navbar />
@@ -160,6 +194,7 @@ const Signle = () => {
           bgColor="#5E0E42"
           colorScheme="#440430"
           color={"white"}
+          onClick={addcart}
         >
           Add to cart
         </Button>

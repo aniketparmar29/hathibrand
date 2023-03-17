@@ -7,7 +7,7 @@ import logo from '../assets/logo.png'
 function Footer() {
   return (
     
-<footer class="bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-200 pb-20 lg:pb-0 md-pb-0 text-center">
+<footer class="bg-gradient-to-r from-[#5E0E42] via-amber-500 to-[#D8A072] pb-20 lg:pb-0 md-pb-0 text-center">
     <div class="mx-auto w-full container p-4 sm:p-6">
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0 mr-5 flex justify-center">

@@ -14,6 +14,7 @@ let token =window.localStorage.getItem("token");
 // const userData = JSON.parse(localStorage.getItem("user"))
 const initialState = {
   register_loading: false,
+  reg_msg:"",
   register_error: false,
   login_laoding: false,
   login_error: false,
@@ -28,7 +29,7 @@ export const userAuth = (state = initialState, { type, payload }) => {
       return { ...state, register_loading:true,register_error:false, isAuth:false};
     }
     case REGISTER_USER_ERROR: {
-      return { ...state, register_loading:false,register_error:true, isAuth:false };
+      return { ...state, register_loading:false,register_error:true, isAuth:false,register_success:false };
     }
     case REGISTER_USER_SUCCESS: {
       return { ...state, register_loading:false,register_error:false,register_success:true};

@@ -19,20 +19,19 @@ function ProductList() {
      },[dispatch])
   return (
     <>
-    <h1>PRODUCTS</h1>
     <div>
-    <SimpleGrid columns={[1,2,4]} gap="3">
+      {isLoading &&  <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 grid-wrap gap-3'>
+          {[...Array(12)].map((_, index) => (
+            <div key={index}  className='flex justify-center items-center p-5'>
+              <ProductCardSkeleton key={index} />
+              </div>
+          ))}</div>}
+                <SimpleGrid columns={[1,2,4]} gap="3">
         {product && 
         product.map((el)=>(
          <ProductCard el={el} key={el.id} redir={redir} />
        ))}
         </SimpleGrid>
-    {isLoading &&  <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 grid-wrap gap-3'>
-        {[...Array(12)].map((_, index) => (
-            <div className='flex justify-center items-center p-5'>
-            <ProductCardSkeleton />
-            </div>
-        ))}</div>}
        </div>
     </>
   )

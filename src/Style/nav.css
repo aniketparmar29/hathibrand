@@ -21,13 +21,11 @@
     cursor: pointer;
 }
 .header{
-    
     z-index: 10;
-
-
-
+    color: rgb(224, 73, 46);
 }
 .header-bg{
+    color: white;
     background-color: rgba(0,0,0,0.30);
     transition: 0.5s;
 }

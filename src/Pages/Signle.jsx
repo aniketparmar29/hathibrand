@@ -31,7 +31,8 @@ const Signle = () => {
       
     }
   }
-
+  let mrp=single.price+100;
+  const discount=Math.floor(((mrp-single.price)/mrp)*100);
     useEffect(()=>{
       dispatch(getsingle(id))
      },[dispatch])
@@ -71,7 +72,6 @@ const Signle = () => {
   return (
     <>
     <Navbar />
-
 {single && (
   <Box
     display={["block", "block", "flex"]}
@@ -134,14 +134,26 @@ const Signle = () => {
         </Box>
       </Box>
 
+      <Box mt={"5"}>
+        <Box as="span" color="green.500" fontSize="lg">
+          Discount:
+        </Box>
+        <Box
+          as="span"
+          color="green.500"
+          fontSize="lg"
+          className=" ml-2 text-xl"
+        >
+          {discount}%
+        </Box>
+      </Box>
+
       <Box d="flex" mt="5" alignItems="baseline">
         <Text
-          color="green"
+          color="yellow.800"
           fontWeight="semibold"
           letterSpacing="wide"
           fontSize="lg"
-          textTransform="uppercase"
-          
         >
           Weight:-
           {single.weight >= 1000

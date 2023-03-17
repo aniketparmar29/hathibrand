@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
             return { ...state,isLoading: true}
         }
         case GET_PRODUCT_SUCCESS: {
-            return {...state,product: payload,isLoading: false}
+            return {...state,isLoading:false,product: payload}
         }
         case GET_PRODUCT_FAILURE: {
             return {...state,isError: true,isLoading: false}

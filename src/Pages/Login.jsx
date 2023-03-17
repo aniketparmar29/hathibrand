@@ -2,51 +2,47 @@ import React, { useEffect } from 'react'
 import img from '../assets/singup.jpg'
 import Navbar from '../Components/Navbar'
 import { useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
-import {userLogin} from  '../Redux/AuthReducer/user.actions'
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from '../Redux/AuthReducer/user.actions'
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import Alert from '../Components/Alert'
 import Spinner from '../Components/Spinner';
+
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isAuth= useSelector((state)=>state.userAuth.isAuth)
-  const login_laoding= useSelector((state)=>state.userAuth.login_laoding)
-  const login_error= useSelector((state)=>state.userAuth.login_error)
+  const isAuth = useSelector((state) => state.userAuth.isAuth)
+  const login_laoding = useSelector((state) => state.userAuth.login_laoding)
+  const login_error = useSelector((state) => state.userAuth.login_error)
 
-  const [loginData, setLoginData] = useState({email:"",password:""})
-  const [showAlert, setShowAlert] = useState(false);
-  const [showError, setShowError] = useState(false);
-  const handleOnchange = (e)=>{
-    setLoginData({...loginData,[e.target.name]:e.target.value})
+  const [loginData, setLoginData] = useState({ email: "", password: "" })
+  const handleOnchange = (e) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value })
+  }
+
+  if (isAuth === true) {
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    let user = {...loginData}
+    let user = { ...loginData }
     dispatch(userLogin(user))
-    setLoginData({name:"",email:"",password:""})
-    if(isAuth===true){
-        setShowAlert(true);
-        setTimeout(() => {
-          navigate("/");
-        }, 4000);
-    }
-    if(login_error===true){
-      setShowError(true)
-    }
+    setLoginData({ name: "", email: "", password: "" })
   };
-  const handleCloseAlert = () => {
-    if(isAuth===true){
-        setShowAlert(false);
-    }
-  };
-  const handleCloseError = () => {
-    if(isAuth===false){
-        setShowError(false);
-    }
-  };
+
+  // useEffect(() => {
+  //   const onUnload = () => {
+  //     window.location.reload(); // use window.location.reload to refresh the page
+  //   };
+  //   window.addEventListener('beforeunload', onUnload);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', onUnload);
+  //   };
+  // }, []);
   return (
     <>
     <Navbar/>
@@ -59,11 +55,10 @@ function Login() {
           <Spinner />
         </div>
       )}
-         {showError && (
+         {login_error && (
         <Alert
-        message="Email Or Password Is Wrong"
-        color={false}
-        onClose={handleCloseError}
+        msg="Email Or Password Is Wrong"
+        bgColor="bg-red-500"
       />
       )}
       <form onSubmit={handleSubmit} className="w-[70%] m-auto " >
@@ -106,11 +101,10 @@ function Login() {
       <Link to="/singup" className='text-white text-2xl underline pt-10 z-20'>Create Account?</Link>
     </form>
 
-    {showAlert && (
+    {isAuth && (
         <Alert
-          message="Login Successfully!"
-          onClose={handleCloseAlert}
-          color={true}
+          msg="Login Successfully!"
+          bgColor="bg-green-500"
         />
       )}
     </div>

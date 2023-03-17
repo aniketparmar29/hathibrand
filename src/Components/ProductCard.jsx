@@ -1,9 +1,41 @@
 import React from 'react'
 import { Box,Button,Image,Badge } from '@chakra-ui/react'
-function ProductCard({el,redir,doIt}) {
+import { useDispatch } from 'react-redux'
+import {postcart} from "../Redux/CartReducer/action"
+function ProductCard({el,redir,setshowalert}) {
   let mrp=el.price+100;
+  const dispatch=useDispatch();
+
   const discount=Math.floor(((mrp-el.price)/mrp)*100);
+
+  let user =window.localStorage.getItem("user")||{};
+  if (user!=={}) {
+    try {
+      user = JSON.parse(user);
+    } catch (error) {
+      console.error("Error parsing user from local storage", error);
+      user = {role:"hello"};
+    }
+  }else{
+      user = {role:"hello"};
+  }
+
+  const cart={
+    pr_name:el.name, 
+    pr_price:el.price,
+     pr_que:1,
+      pr_id:el.id, 
+      pr_img:el.image,
+      pr_weight:el.weight,
+       user_id:user.id
+   }
+  const addcart=()=>{
+    dispatch(postcart(cart))
+    setshowalert(true)
+ }
   return (
+    <>
+    {el.stock>0 && 
     <Box
     w="90%"
     mx={"auto"}
@@ -13,11 +45,10 @@ function ProductCard({el,redir,doIt}) {
   overflow="hidden"
   p="3"
   className='shadow-lg hover:scale-105 shadow-[#5E0E42]  duration-300'
-  onClick={()=>redir(el.id)}
 >
-  <Image src={el.image} alt={el.name} height="240px" width={"100%"}/>
+  <Image src={el.image} alt={el.name} height="240px" onClick={()=>redir(el.id)} width={"100%"}/>
 
-  <Box p="6">
+  <Box p="6" onClick={()=>redir(el.id)}>
     <Box d="flex" alignItems="baseline">
       <Badge borderRadius="full"  colorScheme="teal">
         New
@@ -29,7 +60,7 @@ function ProductCard({el,redir,doIt}) {
         fontSize="sm"
         textTransform="uppercase"
         mt="2"
-      >
+        >
         {el.weight>=1000?el.weight/1000:el.weight}{el.weight>=1000?"kg":"gm"}
       </Box>
     </Box>
@@ -49,7 +80,7 @@ function ProductCard({el,redir,doIt}) {
       as="h4"
       lineHeight="tight"
       isTruncated
-    >
+      >
       <Box as="span" pr={"2"} color="gray.600" fontSize="sm">
         Discount: 
       </Box>
@@ -73,7 +104,7 @@ function ProductCard({el,redir,doIt}) {
         In stock
       </Box>
     </Box>
-
+      </Box>
     <Box d="flex" mt="2" alignItems="center">
       <Button
         borderRadius={0}
@@ -81,13 +112,14 @@ function ProductCard({el,redir,doIt}) {
         bgColor="#5E0E42"
         colorScheme="#440430"
         color={"white"}
-             >
-        View
+        onClick={addcart}
+        >
+        Add To Cart
       </Button>
     </Box>
-  </Box>
 </Box>
-
+}
+               </>
   )
 }
 

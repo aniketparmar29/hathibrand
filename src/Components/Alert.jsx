@@ -17,7 +17,7 @@ function Alert({ msg, bgColor }) {
     <>
       {show && (
         <div
-          className={`p-4 ${bgColor} text-white flex justify-between mt-4 w-1/2 lg:w-1/5 m-auto rounded-md p-2 relative`}
+          className={`p-4 ${bgColor} text-white flex justify-between mt-4 w-1/2 lg:w-1/5 m-auto top-[70%] left-[43%] rounded-md p-2 fixed`}
           role="alert"
         >
           <span>{msg}</span>

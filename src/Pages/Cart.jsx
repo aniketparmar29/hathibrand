@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux'
 
 const Cart = () => {
 
-  const [quantity, setQuantity] = useState(1);
 
     const dispatch=useDispatch();
     const cart= useSelector((state)=>state.cartReducer.cart)
@@ -29,7 +28,6 @@ const Cart = () => {
   useEffect(()=>{
     dispatch(getcart(user.id))
    },[dispatch,cart])
-   console.log(cart)
 
 
   
@@ -42,7 +40,7 @@ const Cart = () => {
 
       cart.map((el)=>(
         <>
-         <Cartcard el={el} userid={user.id} dispatch={dispatch}/>
+         <Cartcard el={el} key={el.id} userid={user.id} dispatch={dispatch}/>
      
         </>
 

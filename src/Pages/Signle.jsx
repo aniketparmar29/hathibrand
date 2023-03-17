@@ -2,22 +2,48 @@ import { Box, Button, Image,Text } from '@chakra-ui/react'
 import { FaPlus,FaMinus } from 'react-icons/fa'
 import React, { useEffect, useState } from 'react'
 import { useDispatch ,useSelector} from 'react-redux'
-import {useParams} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import { getsingle } from '../Redux/ProductReducer/action'
+import {getcart} from "../Redux/CartReducer/action"
 import {postcart} from "../Redux/CartReducer/action"
 import "../Style/nav.css"
 import Alert from '../Components/Alert'
 
 const Signle = () => {
+  const [goto, setgoto] = useState(false)
 
     const {id} = useParams()
-    
+    let user =window.localStorage.getItem("user")||{};
+     if (user!=={}) {
+       try {
+         user = JSON.parse(user);
+       } catch (error) {
+         console.error("Error parsing user from local storage", error);
+         user = {role:"hello"};
+       }
+     }else{
+         user = {role:"hello"};
+     }
+
     const dispatch=useDispatch();
 
     const single= useSelector((state)=>state.ProductReducer.single)
-  
+
+    const cart= useSelector((state)=>state.cartReducer.cart)
+
+  const check = async ()=>{
+    if(user ==={role:"hello"}){
+      setgoto(false)
+    }else{
+      for(let i=0;i<cart.length;i++){
+        if(cart[i].pr_id===single.id){
+          setgoto(true);
+        }
+      }
+    }
+  }
     const [quantity, setQuantity] = useState(1);
       const [showalert,setshowalert]=useState(false)
 
@@ -35,22 +61,13 @@ const Signle = () => {
   let mrp=single.price+100;
   const discount=Math.floor(((mrp-single.price)/mrp)*100);
     useEffect(()=>{
+      dispatch(getcart(user.id))
       dispatch(getsingle(id))
+      check();
      },[dispatch])
-     console.log(single)
 
-     let user =window.localStorage.getItem("user")||{};
-     if (user!=={}) {
-       try {
-         user = JSON.parse(user);
-       } catch (error) {
-         console.error("Error parsing user from local storage", error);
-         user = {role:"hello"};
-       }
-     }else{
-         user = {role:"hello"};
-     }
-     const cart={
+     
+     const cartp={
       pr_name:single.name, 
       pr_price:single.price,
        pr_que:quantity,
@@ -64,7 +81,7 @@ const Signle = () => {
      }
 
   const addcart=()=>{
-     dispatch(postcart(cart))
+     dispatch(postcart(cartp))
      setshowalert(true)
 
 
@@ -76,11 +93,13 @@ const Signle = () => {
     <Navbar />
 {single && (
   <Box
-    display={["block", "block", "flex"]}
-    mx={["20px", "40px", "100px"]}
+    display={"flex"}
+    flexDirection={["column","column","row"]}
+    mx={["0","0","10%"]}
     my="5%"
     pt={["130px"]}
-    
+    justifyContent="center"
+    alignItems="center"
   >
     <Box
       width={["100%", "50%", "60%"]}
@@ -188,8 +207,7 @@ const Signle = () => {
        <FaPlus/>
       </button>
     </div>
-
-      <Box d="flex" mt="5" alignItems="center">
+      {!goto &&  <Box d="flex" mt="5" alignItems="center">
         <Button
           borderRadius={0}
           width={"100%"}
@@ -197,11 +215,23 @@ const Signle = () => {
           colorScheme="#440430"
           color={"white"}
           onClick={addcart}
-          
         >
           Add to cart
         </Button>
-      </Box>
+      </Box>}
+      {goto &&  <Box d="flex" mt="5" alignItems="center">
+        <Button
+          borderRadius={0}
+          width={"100%"}
+          bgColor="#5E0E42"
+          colorScheme="#440430"
+          color={"white"}
+        >
+         <Link to={"/cart"}>Go To Cart</Link>
+        </Button>
+      </Box>}
+
+     
     </Box>
   </Box>
 )}

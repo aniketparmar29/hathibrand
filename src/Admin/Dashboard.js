@@ -1,5 +1,5 @@
 import React, { useEffect,useRef,useState} from "react";
-import Sidebar from "./Sidebar.js";
+import Sidebar from "./components/Sidebar";
 import "./dashboard.css";
 import { Link } from "react-router-dom";
 import Chart from "chart.js/auto";
@@ -8,7 +8,6 @@ import { getProducts } from "../Redux/AdminReducer/actions";
 // import { getAllOrders } from "../Redux/AdminReducer/actions";
 import { getAllUsers } from "../Redux/AdminReducer/actions";
 import MetaData from "./MetaData";
-
 const Dashboard = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.AdminReducer.products);
@@ -34,6 +33,16 @@ const Dashboard = () => {
         outOfStock += 1;
       }
     });
+let aggarbati=0;
+let cosmetic=0;
+
+for(let i=0;i<products.length;i++){
+  if(products[i].Category==="Agarbatti"){
+    aggarbati++;
+  }else{
+    cosmetic++;
+  }
+}
 
   useEffect(() => {
     dispatch(getProducts());
@@ -73,7 +82,7 @@ const Dashboard = () => {
             },
             title: {
               display: true,
-              text: "Doughnut Chart",
+              text: "Product Stock Chart",
             },
           },
         },
@@ -83,16 +92,56 @@ const Dashboard = () => {
     }
   }, [chartRef, outOfStock, products]);
 
+  const chartRef2 = useRef(null);
+  const [chartInstance2, setChartInstance2] = useState(null);
+
+  useEffect(() => {
+    if (chartRef2.current && products) {
+      const myChartRef2 = chartRef2.current.getContext("2d");
+      let newChartInstance = null;
+
+      if (chartInstance2) {
+        chartInstance2.destroy();
+      }
+
+      newChartInstance = new Chart(myChartRef2, {
+        type: "doughnut",
+        data: {
+          labels: ["Agarbatti", "cosmetics"],
+          datasets: [
+            {
+              label: "# of Products",
+              data: [aggarbati,cosmetic],
+              backgroundColor: ["pink", "yellow"],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+            title: {
+              display: true,
+              text: "Product Category Chart",
+            },
+          },
+        },
+      });
+
+      setChartInstance2(newChartInstance);
+    }
+  }, [chartRef2,aggarbati,cosmetic,products]);
+
   return (
     <>
       {isAuth && user.role === "admin" && (
         <div className="dashboard">
+          <Sidebar title="Dashboard"/>
           <MetaData title="Dashboard - Admin Panel" />
-          <Sidebar />
-
           <div className="dashboardContainer">
-            <h1 className="text-xl text-center">Dashboard</h1>
-
             <div className="dashboardSummary">
               <div>
                 <p>
@@ -114,7 +163,19 @@ const Dashboard = () => {
                 </Link>
               </div>
             </div>
-          <canvas ref={chartRef} className="w-[50%]" />
+          <div>
+        <div>
+          <h1 className="text-3xl text-center font-bold">Charts</h1>
+          <div className="lg:flex md:flex  flex-col justify-center items-center w-full m-auto">
+            <div className="lg:w-[50%] w-[70%]">
+              <canvas ref={chartRef} />
+            </div>
+            <div className="lg:w-[50%] w-[70%]">
+              <canvas ref={chartRef2} />
+            </div>
+          </div>
+            </div>
+            </div>
           </div>
         </div>
       )}

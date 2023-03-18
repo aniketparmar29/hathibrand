@@ -15,12 +15,18 @@ function Signup() {
   const register_success= useSelector((state)=>state.userAuth.register_success)
   const [loginData, setLoginData] = useState({name:"",email:"",password:""})
   const [showAlert, setShowAlert] = useState(false);
+  const [pass, setPass] = useState(false);
   const handleOnchange = (e)=>{
     setLoginData({...loginData,[e.target.name]:e.target.value})
   }
 
   const handleSubmit = async (event) => {
+    setPass(!pass)
     event.preventDefault()
+    if(loginData.password.length<8){
+      setPass(!pass);
+      return;
+    }
     let user = {...loginData}
     dispatch(usersignup(user))
     setLoginData({name:"",email:"",password:""})
@@ -30,12 +36,17 @@ function Signup() {
     }, 2000);
   };
 
-  const handleCloseAlert = () => {
-    setShowAlert(false);
-  };
+
   return (
+
     <>
     <Navbar/>
+    {pass && (
+        <Alert
+          msg="Password Should Be More Than 8 Charater"
+          bgColor="bg-red-500"
+        />
+      )}
     <div
       className="h-screen w-full bg-cover bg-no-repeat bg-center pt-32 -mt-20"
       style={{ backgroundImage: `url(${img})` }}
@@ -45,7 +56,7 @@ function Signup() {
           <Spinner />
         </div>
       )}
-      <form onSubmit={handleSubmit} className="w-[70%] m-auto">
+      <form onSubmit={handleSubmit} className="w-[70%] lg:w-[30%] md:w-[40%] sm:w-[50%] m-auto">
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
           Name

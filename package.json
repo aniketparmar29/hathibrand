@@ -24,6 +24,7 @@
     "react-use-cart": "^1.13.0",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
+    "styled-components": "^5.3.9",
     "swiper": "^9.1.0",
     "three": "^0.150.1",
     "web-vitals": "^2.1.4"

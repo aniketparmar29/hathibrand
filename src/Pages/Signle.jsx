@@ -156,12 +156,12 @@ const Signle = () => {
       </Box>
 
       <Box mt={"5"}>
-        <Box as="span" color="green.500" fontSize="lg">
+        <Box as="span" color="red.500" fontSize="lg">
           Discount:
         </Box>
         <Box
           as="span"
-          color="green.500"
+          color="red.500"
           fontSize="lg"
           className=" ml-2 text-xl"
         >

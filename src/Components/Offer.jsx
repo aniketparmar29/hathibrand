@@ -1,7 +1,9 @@
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState ,useEffect} from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import Aos from "aos"
+ import "aos/dist/aos.css"
 
 // Import Swiper styles
 import "swiper/css";
@@ -26,12 +28,16 @@ export default function Offer() {
   const  redir = (id) => {
     navigate(`singlepage/${id}`)
   }
- 
+  useEffect(() => {
+    Aos.init({ duration: 1000});
+  }, []);
+
   return (
       
     <>
     
       <Swiper
+      data-aos="fade-up"
             
 
         slidesPerView={screenmid?3:1}

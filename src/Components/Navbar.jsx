@@ -131,7 +131,7 @@ const  redir = (id) => {
              
           
 <section
-  className="block fixed bottom-0 inset-x-0 z-50 shadow-lg text-[#DFB4A2] bg-gray-700 dark:bg-dark backdrop-blur-lg bg-opacity-30 dark:bg-opacity-30 dark:text-gray-400 border-t-2 border-royal/20">
+  className="block fixed bottom-0 inset-x-0 z-50  shadow-lg text-[#DFB4A2] bg-gray-700 dark:bg-dark backdrop-blur-lg bg-opacity-30 dark:bg-opacity-30 dark:text-gray-400 border-t-2 border-royal/20">
   <div id="tabs" className="flex justify-between">
     <Link to="/"
       className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white"

@@ -16,13 +16,13 @@ function Footer() {
 <footer class="bg-gradient-to-r from-[#5E0E42] via-amber-500 to-[#D8A072] pb-20 lg:pb-0 md-pb-0 text-center">
     <div class="mx-auto w-full container p-4 sm:p-6">
         <div class="md:flex md:justify-between">
-          <div class="mb-6 md:mb-0 mr-5 flex justify-center" data-aos="fade-left">
+          <div class="mb-6 md:mb-0 mr-5 flex justify-center" data-aos="fade-up">
               <a href="https://flowbite.com/" class="flex items-center">
                   <img src={logo} class="h-8 mr-3" alt="FlowBite Logo" />
                   <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Hathibrand</span>
               </a>
           </div>
-          <div class="grid grid-cols-3 gap-8 sm:gap-6 sm:grid-cols-3" data-aos="fade-right">
+          <div class="grid grid-cols-3 gap-8 sm:gap-6 sm:grid-cols-3" data-aos="fade-up">
               <div>
                   <Link to="/about" class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">About</Link>
                   
@@ -57,7 +57,7 @@ function Footer() {
                   <FaWhatsapp class="w-5 h-5"/>
                   <span class="sr-only">Whatsapp</span>
               </a>
-              <a href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKjRMwtVxgDTJbPNTJVFMdSnTxkxfwSHDLZbhmtgGsNMHnxZHjpQsDnqVjTGnlhTgPDKmpg" class="text-gray-500 hover:text-gray-900 dark:hover:text-white" target="_blank"
+              <a href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKjRMwtVxgDTJbPNTJVFMdSnTxkxfwSHDLZbhmtgGsNMHnxZHjpQsDnqVjTGnlhTgPDKmpg" class="hover:text-gray-900 dark:hover:text-white" target="_blank"
             rel="noreferrer">
                   <CgMail class="w-5 h-5"/>
                   <span class="sr-only">Email</span>

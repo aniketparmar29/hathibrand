@@ -12,6 +12,7 @@ import AboutUs from './AboutUs'
 import ContactUs from './ContactUs'
 import MoreWebsite from './MoreWebsite'
 import Dashboard from '../Admin/Dashboard'
+import Products from '../Admin/Products'
 function MainRoute() {
   return (
     <div>
@@ -28,7 +29,7 @@ function MainRoute() {
             <Route path='/about' element={<AboutUs/>}></Route>
             <Route path='/contact' element={<ContactUs/>}></Route>
             <Route path='/website' element={<MoreWebsite/>}></Route>
-
+            <Route path="/admin/products" element={<Products/>}></Route>
         </Routes>
     </div>
   )

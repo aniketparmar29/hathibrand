@@ -1,140 +1,122 @@
-import React, { Fragment, useEffect } from "react";
-import { SimpleGrid,Button } from "@chakra-ui/react";
-import "./productList.css";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  clearErrors,
-  getAdminProduct,
-  deleteProduct,
-} from "../../actions/productAction";
-import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
-import MetaData from "../layout/MetaData";
-import {FaEdit} from "react-icons/fa"
-import {MdDelete} from 'react-icons/md'
-import SideBar from "./Sidebar";
-import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
-
-const ProductList = ({ history }) => {
+import React ,{useEffect}from "react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getProducts } from "../Redux/AdminReducer/actions";
+import ProductCardSkeleton from "./ProductCardSkeleton";
+import Alert from "../Components/Alert";
+import Aos from "aos"
+ import "aos/dist/aos.css"
+function ProductList({ setshowalert, showalert }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const products = useSelector((state) => state.AdminReducer.products);
+  const isLoading = useSelector((state) => state.ProductReducer.isLoading);
 
-  const alert = useAlert();
-
-  const { error, products } = useSelector((state) => state.products);
-
-  const { error: deleteError, isDeleted } = useSelector(
-    (state) => state.product
-  );
-
-  const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
+  const redir = (id) => {
+    navigate(`singlepage/${id}`);
   };
-
+  React.useEffect(() => {
+    dispatch(getProducts());
+    console.log(products)
+  }, [dispatch,products]);
+  
   useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
+    Aos.init({ duration: 1000});
+  }, []);
 
-    if (deleteError) {
-      alert.error(deleteError);
-      dispatch(clearErrors());
-    }
-
-    if (isDeleted) {
-      alert.success("Product Deleted Successfully");
-      history.push("/admin/dashboard");
-      dispatch({ type: DELETE_PRODUCT_RESET });
-    }
-
-    dispatch(getAdminProduct());
-  }, [dispatch, alert, error, deleteError, history, isDeleted]);
-
-  const columns = [
-    { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
-
-    {
-      field: "name",
-      headerName: "Name",
-      minWidth: 350,
-      flex: 1,
-    },
-    {
-      field: "stock",
-      headerName: "Stock",
-      type: "number",
-      minWidth: 150,
-      flex: 0.3,
-    },
-
-    {
-      field: "price",
-      headerName: "Price",
-      type: "number",
-      minWidth: 270,
-      flex: 0.5,
-    },
-
-    {
-      field: "actions",
-      flex: 0.3,
-      headerName: "Actions",
-      minWidth: 150,
-      type: "number",
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <Fragment>
-            <Link to={`/admin/product/${params.getValue(params.id, "id")}`}>
-              <FaEdit />
-            </Link>
-
-            <Button
-              onClick={() =>
-                deleteProductHandler(params.getValue(params.id, "id"))
-              }
-            >
-              <MdDelete />
-            </Button>
-          </Fragment>
-        );
-      },
-    },
-  ];
-
-  const rows = [];
-
-  products &&
-    products.forEach((item) => {
-      rows.push({
-        id: item._id,
-        stock: item.Stock,
-        price: item.price,
-        name: item.name,
-      });
-    });
 
   return (
-    <Fragment>
-      <MetaData title={`ALL PRODUCTS - Admin`} />
+    <>
+      <table className="min-w-full divide-y divide-gray-200">
+  <thead className="bg-gray-50">
+    <tr>
+      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        Image
+      </th>
+      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        Name
+      </th>
+      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        Price
+      </th>
+      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        Stock
+      </th>
+      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        Weight
+      </th>
+      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        Category
+      </th>
+      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        Edit/Delete
+      </th>
+    </tr>
+  </thead>
+  <tbody className="bg-white divide-y divide-gray-200">
+    {products && products.map((el) => (
+      <tr key={el.id}>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="flex items-center">
+            <div className="flex-shrink-0 h-10 w-10">
+              <img className="h-10 w-10 rounded-full" src={el.image} alt="" />
+            </div>
+          </div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm font-medium text-gray-900">{el.name}</div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm text-gray-900">₹{el.price.toFixed(2)}</div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${el.stock > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+            {el.stock > 0 ? 'In Stock' : 'Out of Stock'}
+          </span>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {el.Category === "Agarbatti" ? (
+                <Box
+                  color="gray.500"
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="sm"
+                  textTransform="uppercase"
+                  mt="2"
+                >
+                  {el.weight >= 1000 ? el.weight / 1000 : el.weight}
+                  {el.weight >= 1000 ? "kg" : "gm"}
+                </Box>
+              ) : (
+                <Box
+                  color="gray.500"
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="sm"
+                  textTransform="uppercase"
+                  mt="2"
+                >
+                  {el.weight >= 1000 ? el.weight / 1000 : el.weight}
+                  {el.weight >= 1000 ? "l" : "ml"}
+                </Box>
+              )}
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          {el.Category}
+        </td>
+        <td className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+          <button className="text-indigo-600 hover:text-indigo-900">Edit</button>
+          <button className="ml-2 text-red-600 hover:text-red-900">Delete</button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
 
-      <div className="dashboard">
-        <SideBar />
-        <div className="productListContainer">
-          <h1 id="productListHeading">ALL PRODUCTS</h1>
-
-          <SimpleGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            className="productListTable"
-            autoHeight
-          />
-        </div>
-      </div>
-    </Fragment>
+    </>
   );
-};
+}
 
 export default ProductList;
+

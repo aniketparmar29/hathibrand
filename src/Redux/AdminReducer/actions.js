@@ -129,6 +129,7 @@ import {
         })
         .catch((err) => {
           dispatch(newProductFailureAction(err));
+          console.log(err)
         });
     };
   };

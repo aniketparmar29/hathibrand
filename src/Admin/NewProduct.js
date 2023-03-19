@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import {createProduct } from "../Redux/AdminReducer/actions";
 import { useAlert } from "react-alert";
@@ -22,7 +21,7 @@ const NewProduct = () => {
   const [btnop, setbtnop] = useState(false)
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState("");
+  const [Category, setCategory] = useState("");
   const [stock, setStock] = useState(0);
   const [weight, setWeight] = useState(0);
   const [image, setImage] = useState("");
@@ -46,7 +45,7 @@ console.log(isLoading,success,isError)
     const product={
       name,
       price,
-      category,
+      Category,
       image,
       stock,
       weight
@@ -83,88 +82,100 @@ console.log(isLoading,success,isError)
 
   return (
     <Fragment>
-      <MetaData title="Create Product" />
-      <div className="dashboard">
-        <SideBar />
-        <div className="newProductContainer">
-          <form
-            className="createProductForm "
-            encType="multipart/form-data"
-            onSubmit={createProductSubmitHandler}
-          >
-            <h1>Create Product</h1>
-
-            <div>
-              <FiCheckCircle />
-              <input
-                type="text"
-                placeholder="Product Name"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <BiMoney />
-              <input
-                type="number"
-                placeholder="Price"
-                required
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <FaTree />
-              <select onChange={(e) => setCategory(e.target.value)}>
-                <option value="">Choose Category</option>
-                {categories.map((cate) => (
-                  <option key={cate} value={cate}>
-                    {cate}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <GiFleshyMass />
-              <input
-                type="number"
-                placeholder="Weight"
-                required
-                onChange={(e) => setWeight(e.target.value)}
-              />
-            </div>         
-
-            <div>
-              <AiOutlineDatabase />
-              <input
-                type="number"
-                placeholder="Stock"
-                required
-                onChange={(e) => setStock(e.target.value)}
-              />
-            </div>
-
-            <div id="createProductFormFile">
-              <input
-                type="file"
-                name="avatar"
-                accept="image/*"
-                onChange={handelimage}
-              />
-            </div>
-            <Button
-              id="createProductBtn"
-              type="submit"
-              isDisabled={btnop?true:false}
+    <MetaData title="Create Product" />
+    <div>
+      <div className="col-span-3 p-4 rounded-md lg:w-[30%] md:w-[50%] bg-white shadow-lg my-10 mx-auto shadow-blue-600">
+        <form
+          className="space-y-4 flex-col justify-center items-center"
+          encType="multipart/form-data"
+          onSubmit={createProductSubmitHandler}
+        >
+          <h1 className="text-2xl font-bold text-gray-800">Create Product</h1>
+  
+          <div className="flex items-center space-x-2">
+            <FiCheckCircle className="text-blue-500" />
+            <input
+              type="text"
+              placeholder="Product Name"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+  
+          <div className="flex items-center space-x-2">
+            <BiMoney className="text-blue-500" />
+            <input
+              type="number"
+              placeholder="Price"
+              required
+              onChange={(e) => setPrice(e.target.value)}
+              className="w-full border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+  
+          <div className="flex items-center space-x-2">
+            <FaTree className="text-blue-500" />
+            <select
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
             >
-              Create
-            </Button>
-          </form>
-        </div>
+              <option value="">Choose Category</option>
+              {categories.map((cate) => (
+                <option key={cate} value={cate}>
+                  {cate}
+                </option>
+              ))}
+            </select>
+          </div>
+  
+          <div className="flex items-center space-x-2">
+            <GiFleshyMass className="text-blue-500" />
+            <input
+              type="number"
+              placeholder="Weight"
+              required
+              onChange={(e) => setWeight(e.target.value)}
+              className="w-full border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+  
+          <div className="flex items-center space-x-2">
+            <AiOutlineDatabase className="text-blue-500" />
+            <input
+              type="number"
+              placeholder="Stock"
+              required
+              onChange={(e) => setStock(e.target.value)}
+              className="w-full border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+  
+          <div id="createProductFormFile" className="flex items-center space-x-2">
+            <input
+              type="file"
+              name="avatar"
+              accept="image/*"
+              onChange={handelimage}
+              className="border-gray-300 focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+  
+          <Button
+            id="createProductBtn"
+            type="submit"
+            isDisabled={btnop ? true : false}
+            className="p-4 rounded-md text-center m-auto w-20"
+          >
+            Create
+          </Button>
+        </form>
       </div>
-    </Fragment>
+    </div>
+  </Fragment>
+  
+
   );
 };
 

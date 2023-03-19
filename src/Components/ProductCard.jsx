@@ -1,7 +1,9 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Box, Button, Image, Badge } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { postcart } from "../Redux/CartReducer/action";
+import Aos from "aos"
+ import "aos/dist/aos.css"
 function ProductCard({ el, redir, setshowalert }) {
   let mrp = el.price + 100;
   const dispatch = useDispatch();
@@ -33,10 +35,15 @@ function ProductCard({ el, redir, setshowalert }) {
     dispatch(postcart(cart));
     setshowalert(true);
   };
+  useEffect(() => {
+    Aos.init({ duration: 1000});
+  }, []);
+
   return (
     <>
       {el.stock > 0 && (
         <Box
+        data-aos="fade-up"
           w="90%"
           mx={"auto"}
           my={"3"}
@@ -133,11 +140,7 @@ function ProductCard({ el, redir, setshowalert }) {
               </Box>
             </Box>
 
-            <Box d="flex" mt="2" alignItems="center">
-              <Box as="span" color="gray.600" fontSize="sm">
-                In stock
-              </Box>
-            </Box>
+           
           </Box>
           <Box d="flex" mt="2" alignItems="center">
             <Button

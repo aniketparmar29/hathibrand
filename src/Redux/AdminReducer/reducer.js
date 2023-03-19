@@ -7,7 +7,10 @@ import {
   PRODUCT_DETAILS_SUCCESS,
   ALL_USERS_REQUEST,
   ALL_USERS_SUCCESS,
-  ALL_USERS_FAIL
+  ALL_USERS_FAIL,
+  NEW_PRODUCT_REQUEST,
+  NEW_PRODUCT_SUCCESS,
+  NEW_PRODUCT_FAIL,
   } from "./actions-types";
 
   const initialState = {
@@ -15,7 +18,8 @@ import {
     users:[],
     isLoading:false,
     isError:false,
-    single:{}
+    single:{},
+    success:false,
   };
 
   export const AdminReducer = (state = initialState, { type, payload }) => {
@@ -47,6 +51,24 @@ import {
     case PRODUCT_DETAILS_FAIL: {
         return {...state,isError: true,isLoading: false}
     }
+    case NEW_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        isError: false,
+      };
+    case NEW_PRODUCT_SUCCESS:
+      return {
+        isLoading: false,
+        success:true,
+        isError: false,
+      };
+    case NEW_PRODUCT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        isError: true,
+      };
       default: {
         return { ...state };
       }

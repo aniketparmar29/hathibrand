@@ -1,91 +1,85 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, createProduct } from "../../actions/productAction";
+import {createProduct } from "../Redux/AdminReducer/actions";
 import { useAlert } from "react-alert";
 import { Button } from "@chakra-ui/react";
-import MetaData from "../layout/MetaData";
+import MetaData from "./MetaData";
 import { FaTree } from 'react-icons/fa';
-import { IoMdDocument } from 'react-icons/io';
+import { GiFleshyMass } from 'react-icons/gi';
 import { AiOutlineDatabase } from 'react-icons/ai';
 import { FiCheckCircle } from 'react-icons/fi';
 import { BiMoney } from 'react-icons/bi';
-import SideBar from "./Sidebar";
-import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
+import SideBar from "./components/Sidebar";
 
-const NewProduct = ({ history }) => {
+const NewProduct = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const { loading, error, success } = useSelector((state) => state.newProduct);
-
+  const isLoading = useSelector((state) => state.AdminReducer.isLoading);
+  const isError = useSelector((state) => state.AdminReducer.isError);
+  const success = useSelector((state) => state.AdminReducer.success);
+  const [btnop, setbtnop] = useState(false)
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [Stock, setStock] = useState(0);
-  const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([]);
-
+  const [stock, setStock] = useState(0);
+  const [weight, setWeight] = useState(0);
+  const [image, setImage] = useState("");
   const categories = [
-    "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
+    "Agarbatti",
+    "Cosmetic",
   ];
-
+console.log(isLoading,success,isError)
   useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
-
     if (success) {
       alert.success("Product Created Successfully");
-      history.push("/admin/dashboard");
-      dispatch({ type: NEW_PRODUCT_RESET });
     }
-  }, [dispatch, alert, error, history, success]);
+    if(isError){
+      alert.error("Some Error is there");
+    }
+  }, [dispatch, alert, isError, success]);
 
   const createProductSubmitHandler = (e) => {
     e.preventDefault();
 
-    const myForm = new FormData();
-
-    myForm.set("name", name);
-    myForm.set("price", price);
-    myForm.set("description", description);
-    myForm.set("category", category);
-    myForm.set("Stock", Stock);
-
-    images.forEach((image) => {
-      myForm.append("images", image);
-    });
-    dispatch(createProduct(myForm));
+    const product={
+      name,
+      price,
+      category,
+      image,
+      stock,
+      weight
+    }
+      
+    console.log(product)
+    dispatch(createProduct(product));
   };
 
-  const createProductImagesChange = (e) => {
-    const files = Array.from(e.target.files);
 
-    setImages([]);
-    setImagesPreview([]);
 
-    files.forEach((file) => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImagesPreview((old) => [...old, reader.result]);
-          setImages((old) => [...old, reader.result]);
-        }
-      };
-
-      reader.readAsDataURL(file);
-    });
-  };
+  async function handelimage(e){
+    let api_key= "8b1f01edede5586a463d22be7a935729";
+    setbtnop(true);
+    try{
+      const files = Array.from(e.target.files);
+      console.log(files);
+      let form = new FormData();
+      files.forEach(file => form.append('image', file));
+      
+      let res = await fetch(`https://api.imgbb.com/1/upload?key=${api_key}`,{
+        method:'POST',
+        body: form,
+      });
+      let data = await res.json();
+      setImage(data.data.display_url);
+      setbtnop(false);
+    } catch(e){
+      console.log(e);
+    }
+  }
+  
+  
 
   return (
     <Fragment>
@@ -94,7 +88,7 @@ const NewProduct = ({ history }) => {
         <SideBar />
         <div className="newProductContainer">
           <form
-            className="createProductForm"
+            className="createProductForm "
             encType="multipart/form-data"
             onSubmit={createProductSubmitHandler}
           >
@@ -121,18 +115,6 @@ const NewProduct = ({ history }) => {
             </div>
 
             <div>
-              <IoMdDocument />
-
-              <textarea
-                placeholder="Product Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                cols="30"
-                rows="1"
-              ></textarea>
-            </div>
-
-            <div>
               <FaTree />
               <select onChange={(e) => setCategory(e.target.value)}>
                 <option value="">Choose Category</option>
@@ -143,6 +125,16 @@ const NewProduct = ({ history }) => {
                 ))}
               </select>
             </div>
+
+            <div>
+              <GiFleshyMass />
+              <input
+                type="number"
+                placeholder="Weight"
+                required
+                onChange={(e) => setWeight(e.target.value)}
+              />
+            </div>         
 
             <div>
               <AiOutlineDatabase />
@@ -159,21 +151,13 @@ const NewProduct = ({ history }) => {
                 type="file"
                 name="avatar"
                 accept="image/*"
-                onChange={createProductImagesChange}
-                multiple
+                onChange={handelimage}
               />
             </div>
-
-            <div id="createProductFormImage">
-              {imagesPreview.map((image, index) => (
-                <img key={index} src={image} alt="Product Preview" />
-              ))}
-            </div>
-
             <Button
               id="createProductBtn"
               type="submit"
-              disabled={loading ? true : false}
+              isDisabled={btnop?true:false}
             >
               Create
             </Button>

@@ -39,7 +39,7 @@ let cosmetic=0;
 for(let i=0;i<products.length;i++){
   if(products[i].Category==="Agarbatti"){
     aggarbati++;
-  }else{
+  }else if(products[i].Category==="Cosmetic"){
     cosmetic++;
   }
 }

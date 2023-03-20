@@ -14,6 +14,7 @@ import { postcart } from '../Redux/CartReducer/action'
 import Aos from "aos"
  import "aos/dist/aos.css"
 function Home() {
+  window.document.title="Hathibrand"
   const dispatch=useDispatch();
   const [showalert,setshowalert]=useState(false)
   const product= useSelector((state)=>state.ProductReducer.product)

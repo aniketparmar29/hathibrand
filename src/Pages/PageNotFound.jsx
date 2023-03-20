@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 function PageNotFound() {
+  window.document.title="PageNotFound-Hathibrand"
+
   return (
     <div
   className="

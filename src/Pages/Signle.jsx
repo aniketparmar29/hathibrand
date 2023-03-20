@@ -30,7 +30,6 @@ const Signle = () => {
     const dispatch=useDispatch();
 
     const single= useSelector((state)=>state.ProductReducer.single)
-
     const cart= useSelector((state)=>state.cartReducer.cart)
 
   const check = async ()=>{
@@ -63,9 +62,9 @@ const Signle = () => {
     useEffect(()=>{
       dispatch(getcart(user.id))
       dispatch(getsingle(id))
+      window.document.title=single.name
       check();
      },[dispatch])
-
      
      const cartp={
       pr_name:single.name, 

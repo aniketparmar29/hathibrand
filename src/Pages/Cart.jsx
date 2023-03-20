@@ -11,6 +11,7 @@ import Navbar from "../Components/Navbar"
 
 const Cart = () => {
 
+  window.document.title="Cart-Hathibrand"
 
     const dispatch=useDispatch();
     const cart= useSelector((state)=>state.cartReducer.cart)

@@ -1,5 +1,5 @@
 import {
-    ALL_PRODUCT_REQUEST,
+  ALL_PRODUCT_REQUEST,
   ALL_PRODUCT_SUCCESS,
   ALL_PRODUCT_FAIL,
   PRODUCT_DETAILS_REQUEST,
@@ -11,6 +11,15 @@ import {
   NEW_PRODUCT_REQUEST,
   NEW_PRODUCT_SUCCESS,
   NEW_PRODUCT_FAIL,
+  ALL_SLIDERS_REQUEST,
+  ALL_SLIDERS_SUCCESS,
+  ALL_SLIDERS_FAIL,
+  CREATE_SLIDER_REQUEST,
+  CREATE_SLIDER_SUCCESS,
+  CREATE_SLIDER_FAIL,
+  DELETE_SLIDER_REQUEST,
+  DELETE_SLIDER_SUCCESS,
+  DELETE_SLIDER_FAIL,
 } from "./actions-types";
   import axios from "axios";
 
@@ -135,4 +144,29 @@ import {
   };
   
  
+   //get all SLiders
+   const getSLIDERSRequestAction = () => {
+    return { type: ALL_SLIDERS_REQUEST };
+  };
   
+  const getSLIDERSSuccesAction = (payload) => {
+    return { type: ALL_SLIDERS_SUCCESS, payload };
+  };
+  
+  const getSLIDERSFailureAction = () => {
+    return { type: ALL_SLIDERS_FAIL };
+  };
+  export const getSliders = () => {
+    return (dispatch) => {
+      dispatch(getSLIDERSRequestAction());
+  
+      axios
+        .get(`https://real-cyan-swallow-boot.cyclic.app/slider`)
+        .then((res) => {
+          dispatch(getSLIDERSSuccesAction(res.data));
+        })
+        .catch((err) => {
+          dispatch(getSLIDERSFailureAction());
+        });
+    };
+  };

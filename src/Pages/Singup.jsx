@@ -19,7 +19,7 @@ function Signup() {
   const handleOnchange = (e)=>{
     setLoginData({...loginData,[e.target.name]:e.target.value})
   }
-
+  window.document.title="Singup-Hathibrand"
   const handleSubmit = async (event) => {
     setPass(!pass)
     event.preventDefault()

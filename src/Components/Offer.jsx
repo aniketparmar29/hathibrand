@@ -18,19 +18,24 @@ import slider4 from "../Enhance/slider/slider4.jpg"
 import slider5 from "../Enhance/slider/slider5.jpeg"
 import slider6 from "../Enhance/slider/slider8.jpeg"
 import slider7 from "../Enhance/slider/slider7.jpeg"
-// import required modules
-
+import { useDispatch,useSelector } from "react-redux";
+import {getSliders} from '../Redux/AdminReducer/actions'
 import{useMediaQuery} from "@chakra-ui/react"
+
 SwiperCore.use([Autoplay]);
 export default function Offer() {
   const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const sliders = useSelector((state) => state.AdminReducer.sliders);
+  const isLoading = useSelector((state) => state.ProductReducer.isLoading);
   const [screenmid] = useMediaQuery('(min-width: 800px)')
   const  redir = (id) => {
     navigate(`singlepage/${id}`)
   }
   useEffect(() => {
+    dispatch(getSliders());
     Aos.init({ duration: 1000});
-  }, []);
+  }, [dispatch]);
 
   return (
       
@@ -48,15 +53,10 @@ export default function Offer() {
         }}
         
       >
-        <SwiperSlide><img  onClick={()=>redir(7)} src={slider1} alt="slide"/></SwiperSlide>
-        <SwiperSlide><img  onClick={()=>redir(13)} src={slider2} alt="slide"/></SwiperSlide>
-        <SwiperSlide><img  onClick={()=>redir(7)} src={slider3} alt="slide"/></SwiperSlide>
-        <SwiperSlide><img  onClick={()=>redir(13)} src={slider4} alt="slide"/></SwiperSlide>
-        <SwiperSlide><img  onClick={()=>redir(5)} src={slider5} alt="slide"/></SwiperSlide>
-        <SwiperSlide><img  onClick={()=>redir(3)} src={slider6} alt="slide"/></SwiperSlide>
-        <SwiperSlide><img  onClick={()=>redir(13)} src={slider7} alt="slide"/></SwiperSlide>
-        
-       
+         {sliders &&
+          sliders.map((el) => (
+        <SwiperSlide><img  onClick={()=>redir(7)} src={el.url} alt="slide"/></SwiperSlide>  
+          ))}
       </Swiper>
     </>
   );

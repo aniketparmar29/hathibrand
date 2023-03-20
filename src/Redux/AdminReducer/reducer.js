@@ -11,9 +11,19 @@ import {
   NEW_PRODUCT_REQUEST,
   NEW_PRODUCT_SUCCESS,
   NEW_PRODUCT_FAIL,
+  ALL_SLIDERS_REQUEST,
+  ALL_SLIDERS_SUCCESS,
+  ALL_SLIDERS_FAIL,
+  CREATE_SLIDER_REQUEST,
+  CREATE_SLIDER_SUCCESS,
+  CREATE_SLIDER_FAIL,
+  DELETE_SLIDER_REQUEST,
+  DELETE_SLIDER_SUCCESS,
+  DELETE_SLIDER_FAIL,
   } from "./actions-types";
 
   const initialState = {
+    sliders:[],
     products:[],
     users:[],
     isLoading:false,
@@ -50,6 +60,15 @@ import {
     }
     case PRODUCT_DETAILS_FAIL: {
         return {...state,isError: true,isLoading: false}
+    }
+    case ALL_SLIDERS_REQUEST: {
+      return { ...state,isLoading: true}
+    }
+    case ALL_SLIDERS_SUCCESS: {
+      return {...state,isLoading:false,sliders: payload}
+    }
+    case ALL_SLIDERS_FAIL: {
+      return {...state,isError: true,isLoading: false}
     }
     case NEW_PRODUCT_REQUEST:
       return {

@@ -20,7 +20,7 @@ function Login() {
   const handleOnchange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value })
   }
-
+  window.document.title="Login-Hathibrand"
   if (isAuth === true) {
     setTimeout(() => {
       navigate("/");

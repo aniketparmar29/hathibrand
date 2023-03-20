@@ -3,6 +3,7 @@ import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import ProductList from '../Components/ProductList'
 function ProudctPage() {
+  window.document.title="Products-Hathibrand"
   const [showalert,setshowalert]=useState(false)
   return (
     <>

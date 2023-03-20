@@ -2,6 +2,7 @@
 import React,{useEffect} from 'react'
 import { useDispatch,useSelector } from "react-redux";
 import {getSliders} from '../Redux/AdminReducer/actions'
+import CreateSlider from './CreateSliders';
 import Aos from "aos"
  import "aos/dist/aos.css"
  import SideBar from './components/Sidebar' 

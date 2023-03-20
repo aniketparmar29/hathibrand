@@ -1,5 +1,4 @@
 import {Box, Flex, Input,Stack,InputGroup,InputRightElement} from "@chakra-ui/react"
-import axios from 'axios'
 import { Cartcard } from '../Components/Cartcard';
 import React, { useEffect,useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -30,11 +29,20 @@ const Cart = () => {
   
   useEffect(()=>{
     dispatch(getcart(user.id))
-   },[dispatch,cart])
+   },[dispatch,cart,user.id])
 
    
     const[Total,setTotal]= useState(0)
-  
+    const calculateTotal = () => {
+      let sum = 0;
+      for (let i = 0; i < cart.length; i++) {
+        sum += cart[i].pr_price * cart[i].pr_que;
+      }
+      setTotal(sum);
+    };
+    useEffect(() => {
+      calculateTotal();
+    }, [cart,dispatch]);
   return (
     <>
     <Navbar/>

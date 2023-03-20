@@ -28,6 +28,7 @@ function ProductList({ setshowalert, showalert }) {
 
   return (
     <>
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="min-w-full divide-y divide-gray-200">
   <thead className="bg-gray-50">
     <tr>
@@ -113,7 +114,7 @@ function ProductList({ setshowalert, showalert }) {
     ))}
   </tbody>
 </table>
-
+</div>
     </>
   );
 }

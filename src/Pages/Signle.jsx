@@ -72,11 +72,9 @@ const Signle = () => {
        pr_que:quantity,
         pr_id:single.id, 
         pr_img:single.image,
+    pr_category:single.Category,
         pr_weight:single.weight,
          user_id:user.id
-
-
-
      }
 
   const addcart=()=>{

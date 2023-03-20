@@ -20,7 +20,6 @@ export default function Offer() {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const sliders = useSelector((state) => state.AdminReducer.sliders);
-  const isLoading = useSelector((state) => state.ProductReducer.isLoading);
   const [screenmid] = useMediaQuery('(min-width: 800px)')
   const  redir = (id) => {
     navigate(`singlepage/${id}`)

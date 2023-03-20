@@ -1,143 +1,71 @@
-import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@chakra-ui/react";
-import "./productList.css";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
-import { Button } from "@chakra-ui/react";
-import MetaData from "../layout/MetaData";
-import {FaEdit} from "react-icons/fa"
-import {MdDelete} from 'react-icons/md'
-import SideBar from "./Sidebar";
-import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";
-import { DELETE_USER_RESET } from "../../constants/userConstants";
+import React ,{useEffect}from "react";
+import { Box} from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getAllUsers } from "../Redux/AdminReducer/actions";
 
-const UsersList = ({ history }) => {
+import Aos from "aos"
+ import "aos/dist/aos.css"
+function ProductList({ setshowalert, showalert }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const alert = useAlert();
 
-  const { error, users } = useSelector((state) => state.allUsers);
-
-  const {
-    error: deleteError,
-    isDeleted,
-    message,
-  } = useSelector((state) => state.profile);
-
-  const deleteUserHandler = (id) => {
-    dispatch(deleteUser(id));
-  };
-
+  const users = useSelector((state) => state.AdminReducer.users);
   useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
-
-    if (deleteError) {
-      alert.error(deleteError);
-      dispatch(clearErrors());
-    }
-
-    if (isDeleted) {
-      alert.success(message);
-      history.push("/admin/users");
-      dispatch({ type: DELETE_USER_RESET });
-    }
 
     dispatch(getAllUsers());
-  }, [dispatch, alert, error, deleteError, history, isDeleted, message]);
+  }, [dispatch]);
+console.log(users)
+  
+  useEffect(() => {
+    Aos.init({ duration: 1000});
+  }, []);
 
-  const columns = [
-    { field: "id", headerName: "User ID", minWidth: 180, flex: 0.8 },
-
-    {
-      field: "email",
-      headerName: "Email",
-      minWidth: 200,
-      flex: 1,
-    },
-    {
-      field: "name",
-      headerName: "Name",
-      minWidth: 150,
-      flex: 0.5,
-    },
-
-    {
-      field: "role",
-      headerName: "Role",
-      type: "number",
-      minWidth: 150,
-      flex: 0.3,
-      cellClassName: (params) => {
-        return params.getValue(params.id, "role") === "admin"
-          ? "greenColor"
-          : "redColor";
-      },
-    },
-
-    {
-      field: "actions",
-      flex: 0.3,
-      headerName: "Actions",
-      minWidth: 150,
-      type: "number",
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <Fragment>
-            <Link to={`/admin/user/${params.getValue(params.id, "id")}`}>
-              <FaEdit />
-            </Link>
-
-            <Button
-              onClick={() =>
-                deleteUserHandler(params.getValue(params.id, "id"))
-              }
-            >
-              <MdDelete />
-            </Button>
-          </Fragment>
-        );
-      },
-    },
-  ];
-
-  const rows = [];
-
-  users &&
-    users.forEach((item) => {
-      rows.push({
-        id: item._id,
-        role: item.role,
-        email: item.email,
-        name: item.name,
-      });
-    });
 
   return (
-    <Fragment>
-      <MetaData title={`ALL USERS - Admin`} />
-
-      <div className="dashboard">
-        <SideBar />
-        <div className="productListContainer">
-          <h1 id="productListHeading">ALL USERS</h1>
-
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            className="productListTable"
-            autoHeight
-          />
-        </div>
-      </div>
-    </Fragment>
+    <>
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <table className="min-w-full divide-y divide-gray-200">
+  <thead className="bg-gray-50">
+    <tr>
+      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        Name
+      </th>
+      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        Email
+      </th>
+      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        Role
+      </th>
+      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        Delete
+      </th>
+    </tr>
+  </thead>
+  <tbody className="bg-white divide-y divide-gray-200">
+    {users && users.map((el) => (
+      <tr key={el.id}>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm font-medium text-gray-900">{el.name}</div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm font-medium text-gray-900">{el.email}</div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm font-medium text-gray-900">{el.role}</div>
+        </td>
+        <td className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+          <button className="text-red-600 hover:text-red-900">Delete</button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+</div>
+    </>
   );
-};
+}
 
-export default UsersList;
+export default ProductList;
+

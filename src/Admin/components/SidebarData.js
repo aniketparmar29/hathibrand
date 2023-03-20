@@ -17,7 +17,7 @@ export const SidebarData = [
   },
   {
     title: 'Users',
-    path: '/overview/users',
+    path: '/admin/users',
     icon: <IoIcons.IoIosPaper />
   },
   {
@@ -27,7 +27,17 @@ export const SidebarData = [
   },
   {
     title: 'Orders',
-    path: '/orders',
+    path: '/admin/orders',
     icon: <FaIcons.FaFirstOrder />
+  },
+  {
+    title: 'Sliders',
+    path: '/admin/sliders',
+    icon: <FaIcons.FaAd />
+  },
+  {
+    title: 'Coupans',
+    path: '/admin/coupan',
+    icon: <FaIcons.FaDiaspora />
   }
 ];

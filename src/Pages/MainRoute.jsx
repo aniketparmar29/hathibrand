@@ -5,7 +5,6 @@ import Home from './Home'
 import Signle from './Signle'
 import PageNotFound from './PageNotFound'
 import Singup from './Singup'
-// import Admin from '../admin/Admin'
 import Login from './Login'
 import ProudctPage from './ProudctPage'
 import AboutUs from './AboutUs'
@@ -13,6 +12,8 @@ import ContactUs from './ContactUs'
 import MoreWebsite from './MoreWebsite'
 import Dashboard from '../Admin/Dashboard'
 import Products from '../Admin/Products'
+import Users from '../Admin/Users'
+import Sliders from '../Admin/Sliders'
 function MainRoute() {
   return (
     <div>
@@ -30,6 +31,8 @@ function MainRoute() {
             <Route path='/contact' element={<ContactUs/>}></Route>
             <Route path='/website' element={<MoreWebsite/>}></Route>
             <Route path="/admin/products" element={<Products/>}></Route>
+            <Route path="/admin/users" element={<Users/>}></Route>
+            <Route path="/admin/sliders" element={<Sliders/>}></Route>
         </Routes>
     </div>
   )

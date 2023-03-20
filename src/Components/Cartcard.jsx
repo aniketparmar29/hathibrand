@@ -1,13 +1,12 @@
 import React,{useState,useEffect} from 'react'
 import { FaPlus,FaMinus } from 'react-icons/fa'
-import {AiFillHeart } from 'react-icons/ai'
 import { TiDelete} from 'react-icons/ti'
 import { Box ,Image,Button, Flex} from '@chakra-ui/react';
 import { removecart,editcart } from '../Redux/CartReducer/action';
 import Aos from "aos"
  import "aos/dist/aos.css"
 
-export const Cartcard = ( {el,userid,dispatch,key,Total,setTotal}) => {
+export const Cartcard = ( {el,userid,dispatch,Total}) => {
     
     const [quantity, setQuantity] = useState(el.pr_que);
 
@@ -43,13 +42,7 @@ export const Cartcard = ( {el,userid,dispatch,key,Total,setTotal}) => {
       
         useEffect(() => {
           Aos.init({ duration: 1000});
-        }, []);
-
- useEffect(()=>{
-  setTotal(Total+=el.pr_price*quantity)
- },[quantity])
-      
-    
+        }, [Total]);
      
   return (
     <>

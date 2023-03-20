@@ -114,30 +114,30 @@ import {
 
 //create product
 
-  const newProductRequestAction = () => {
-    return { type: NEW_PRODUCT_REQUEST};
+  const newSlidersRequestAction = () => {
+    return { type: CREATE_SLIDER_REQUEST};
   };
   
-  const newProductSuccesAction = (payload) => {
-    return { type: NEW_PRODUCT_SUCCESS, payload };
+  const newSlidersSuccesAction = (payload) => {
+    return { type: CREATE_SLIDER_SUCCESS, payload };
   };
   
-  const newProductFailureAction = () => {
-    return { type: NEW_PRODUCT_FAIL};
+  const newSlidersFailureAction = () => {
+    return { type: CREATE_SLIDER_FAIL};
   };
   
   
-  export const createProduct = (product) => {
+  export const createSlider = (product) => {
     return (dispatch) => {
-      dispatch(newProductRequestAction());
+      dispatch(newSlidersRequestAction());
   
       axios
-        .post(`https://real-cyan-swallow-boot.cyclic.app/products/new`,product)
+        .post(`https://real-cyan-swallow-boot.cyclic.app/slider`,product)
         .then((res) => {
-          dispatch(newProductSuccesAction(res.data));
+          dispatch(newSlidersSuccesAction(res.data));
         })
         .catch((err) => {
-          dispatch(newProductFailureAction(err));
+          dispatch(newSlidersFailureAction(err));
           console.log(err)
         });
     };
@@ -167,6 +167,38 @@ import {
         })
         .catch((err) => {
           dispatch(getSLIDERSFailureAction());
+        });
+    };
+  };
+
+
+  //create product
+
+  const newProductRequestAction = () => {
+    return { type: NEW_PRODUCT_REQUEST};
+  };
+  
+  const newProductSuccesAction = (payload) => {
+    return { type: NEW_PRODUCT_SUCCESS, payload };
+  };
+  
+  const newProductFailureAction = () => {
+    return { type: NEW_PRODUCT_FAIL};
+  };
+  
+  
+  export const createProduct = (product) => {
+    return (dispatch) => {
+      dispatch(newProductRequestAction());
+  
+      axios
+        .post(`https://real-cyan-swallow-boot.cyclic.app/products/new`,product)
+        .then((res) => {
+          dispatch(newProductSuccesAction(res.data));
+        })
+        .catch((err) => {
+          dispatch(newProductFailureAction(err));
+          console.log(err)
         });
     };
   };

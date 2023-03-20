@@ -49,10 +49,13 @@ const Sidebar = ({title}) => {
   return (
     <>
       <IconContext.Provider  value={{ color: '#fff' }}>
-        <Nav className='sticky top-0'>
+        <Nav className='sticky top-0 z-50'>
           <NavIcon to='#'>
             <FaIcons.FaBars onClick={showSidebar} />
-            <h1 className='text-white'>{title}</h1>
+            <div className='flex justify-items-end gap-10  ml-5 items-center'>
+            <h1 className='text-white border-2 border-white p-1 text-lg hover:bg-white hover:text-black rounded-lg'>{title}</h1>
+            <Link className='text-white border-2 border-white p-1 text-lg hover:bg-white hover:text-black rounded-lg' to="/">Main Web</Link>
+            </div>
           </NavIcon>
         </Nav>
         <SidebarNav sidebar={sidebar}>

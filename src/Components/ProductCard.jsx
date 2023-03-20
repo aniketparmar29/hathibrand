@@ -28,6 +28,7 @@ function ProductCard({ el, redir, setshowalert }) {
     pr_que: 1,
     pr_id: el.id,
     pr_img: el.image,
+    pr_category:el.Category,
     pr_weight: el.weight,
     user_id: user.id,
   };

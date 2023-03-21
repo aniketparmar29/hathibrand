@@ -7,12 +7,11 @@ import Aos from "aos"
  import "aos/dist/aos.css"
 
 export const Cartcard = ( {el,userid,dispatch,Total}) => {
-    
-    const [quantity, setQuantity] = useState(el.pr_que);
+    console.log(el)
 
     const handleIncrease = () => {
-        setQuantity(quantity + 1);
-        edit()
+        dispatch(editcart(userid,el.pr_id,{pr_que:el.pr_que+1}))
+        // edit()
       };
 
       const del = ()=>{
@@ -20,24 +19,15 @@ export const Cartcard = ( {el,userid,dispatch,Total}) => {
         dispatch(removecart(userid,el.pr_id))
       }
 
-      const quntitybody={
-        pr_que:quantity,
-      }
-     
-      const edit = ()=>{
-
-        dispatch(editcart(userid,el.pr_id,quntitybody))
-      }
       
 
  
       const handleDecrease = () => {
-        if (quantity > 1) {
-          setQuantity(quantity - 1);
-          edit()
+        if (el.pr_que > 1) {
+          dispatch(editcart(userid,el.pr_id,{pr_que:el.pr_que-1}))
         }
       }
-      let weight=el.pr_weight*quantity
+      let weight=el.pr_weight*el.pr_que
 
       
         useEffect(() => {
@@ -68,7 +58,7 @@ export const Cartcard = ( {el,userid,dispatch,Total}) => {
       >
         <FaMinus/>
       </Button>
-      <span className="font-medium">{quantity}</span>
+      <span className="font-medium">{el.pr_que}</span>
       <Button
       colorScheme="#440430"
       bgColor={"#440430"}
@@ -81,12 +71,33 @@ export const Cartcard = ( {el,userid,dispatch,Total}) => {
        <FaPlus/>
       </Button>
     </div>
-        <Box mt={"6%"} color="green">₹{el.pr_price*quantity} </Box>
+        <Box mt={"6%"} color="green">₹{el.pr_price*el.pr_que} </Box>
         <Box mt={"6%"}>
-        {weight >= 1000
-            ? weight / 1000
-            : weight}
-          {weight >= 1000 ? "kg" : "gm"}
+        {el.pr_category === "Agarbatti" ? (
+                <Box
+                  color="gray.500"
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="sm"
+                  textTransform="uppercase"
+                  mt="2"
+                >
+                  {weight >= 1000 ?weight / 1000 : weight}
+                  {weight >= 1000 ? "kg" : "gm"}
+                </Box>
+              ) : (
+                <Box
+                  color="gray.500"
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="sm"
+                  textTransform="uppercase"
+                  mt="2"
+                >
+                  {weight >= 1000 ? weight / 1000 : weight}
+                  {weight >= 1000 ? "l" : "ml"}
+                </Box>
+              )}
 
         </Box>
        

@@ -11,10 +11,8 @@ import Navbar from "../Components/Navbar"
 const Cart = () => {
 
   window.document.title="Cart-Hathibrand"
-
     const dispatch=useDispatch();
     const cart= useSelector((state)=>state.cartReducer.cart)
-
   let user =window.localStorage.getItem("user")||{};
   if (user!=={}) {
     try {
@@ -29,20 +27,22 @@ const Cart = () => {
   
   useEffect(()=>{
     dispatch(getcart(user.id))
-   },[dispatch,cart,user.id])
+   },[dispatch,user.id])
 
    
     const[Total,setTotal]= useState(0)
+
     const calculateTotal = () => {
-      let sum = 0;
-      for (let i = 0; i < cart.length; i++) {
-        sum += cart[i].pr_price * cart[i].pr_que;
-      }
+      let sum = cart.reduce(
+        (acc, item) => acc + item.pr_que * item.pr_price,
+        0
+      )
+      console.log(sum)
       setTotal(sum);
     };
     useEffect(() => {
       calculateTotal();
-    }, [cart,dispatch]);
+    }, [cart]);
   return (
     <>
     <Navbar/>
@@ -52,7 +52,7 @@ const Cart = () => {
 
       cart.map((el)=>(
         <>
-         <Cartcard el={el} key={el.id} userid={user.id} dispatch={dispatch} Total={Total} setTotal={setTotal}/>
+         <Cartcard el={el} key={el.id} userid={user.id} dispatch={dispatch}  Total={Total}/>
      
         </>
 

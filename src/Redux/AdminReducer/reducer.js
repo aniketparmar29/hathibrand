@@ -30,17 +30,27 @@ import {
     isError:false,
     single:{},
     success:false,
+    isdelete:false
   };
 
   export const AdminReducer = (state = initialState, { type, payload }) => {
     switch (type) {
-      case ALL_PRODUCT_REQUEST: {
+    case ALL_PRODUCT_REQUEST: {
         return { ...state,isLoading: true}
     }
     case ALL_PRODUCT_SUCCESS: {
         return {...state,isLoading:false,products: payload}
     }
     case ALL_PRODUCT_FAIL: {
+        return {...state,isError: true,isLoading: false}
+    }
+    case DELETE_SLIDER_REQUEST: {
+        return { ...state,isLoading: true}
+    }
+    case DELETE_SLIDER_SUCCESS: {
+        return {...state,isLoading:false,isdelete: true}
+    }
+    case DELETE_SLIDER_FAIL: {
         return {...state,isError: true,isLoading: false}
     }
       case ALL_USERS_REQUEST: {

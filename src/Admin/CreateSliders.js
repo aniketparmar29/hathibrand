@@ -5,5 +5,4 @@ function CreateSliders() {
     <div>CreateSliders</div>
   )
 }
-
 export default CreateSliders

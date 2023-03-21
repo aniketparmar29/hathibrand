@@ -202,3 +202,32 @@ import {
         });
     };
   };
+
+
+  
+ //get Delete Slider 
+ const delRequestAction = () => {
+  return { type: PRODUCT_DETAILS_REQUEST};
+};
+
+const delSuccesAction = (payload) => {
+  return { type: PRODUCT_DETAILS_SUCCESS, payload };
+};
+
+const delFailureAction = () => {
+  return { type: PRODUCT_DETAILS_FAIL};
+};
+
+export const deleteslider = (id) => {
+  return (dispatch) => {
+    dispatch(delRequestAction());
+    axios
+      .delete(`https://real-cyan-swallow-boot.cyclic.app/slider/${id}`)
+      .then((res) => {
+        dispatch(delSuccesAction(res.data));
+      })
+      .catch((err) => {
+        dispatch(delFailureAction());
+      });
+  };
+};

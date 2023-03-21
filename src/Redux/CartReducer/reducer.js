@@ -64,11 +64,21 @@ const reducer = (state = initialState, action) => {
         case REMOVE_CART_FAILURE: {
             return {...state,isError: true,isLoading: false}
         }
+
+
         case  EDIT_CART_REQUEST: {
             return { ...state,isLoading: true}
         }
         case EDIT_CART_SUCCESS: {
-            return {...state,isLoading: false}
+            let {pr_que} = payload.quntitybody
+            let update = state.cart.map((el)=>{
+                if(el.pr_id===payload.prId){
+                    return {...el,pr_que}
+                }else{
+                    return el;
+                }
+            })
+            return {...state,isLoading: false,cart:update}
         }
         case EDIT_CART_FAILURE: {
             return {...state,isError: true,isLoading: false}

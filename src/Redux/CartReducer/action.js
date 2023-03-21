@@ -55,8 +55,8 @@ const editcartrequestAction = () => {
   return { type: EDIT_CART_REQUEST };
 };
 
-const editcartsuccessAction = () => {
-  return { type: EDIT_CART_SUCCESS };
+const editcartsuccessAction = (payload) => {
+  return { type: EDIT_CART_SUCCESS ,payload};
 };
 
 const editcartfailureAction = () => {
@@ -100,7 +100,7 @@ export const editcart = (id,prId,quntitybody) => {
     axios
       .put(`https://real-cyan-swallow-boot.cyclic.app/cart/${id}/${prId}`,quntitybody)
       .then((res) => {
-        dispatch(editcartsuccessAction(res.data));
+        dispatch(editcartsuccessAction({quntitybody,prId}));
       })
       .catch((err) => {
         dispatch(editcartfailureAction());

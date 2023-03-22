@@ -1,12 +1,16 @@
 import React,{useEffect} from "react";
 import { Box, Button, Image, Badge } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { postcart } from "../Redux/CartReducer/action";
 import Aos from "aos"
  import "aos/dist/aos.css"
-function ProductCard({ el, redir, setshowalert }) {
+ import { useAlert } from "react-alert";
+ 
+ function ProductCard({ el, redir, setshowalert }) {
+  const alert = useAlert();
   let mrp = el.price + 100;
   const dispatch = useDispatch();
+  const isAuth= useSelector((state)=>state.userAuth.isAuth)
 
   const discount = Math.floor(((mrp - el.price) / mrp) * 100);
 
@@ -33,12 +37,16 @@ function ProductCard({ el, redir, setshowalert }) {
     user_id: user.id,
   };
   const addcart = () => {
+    if(isAuth===false){
+      alert.error("Please Login To Add Product")
+      return;
+    }
     dispatch(postcart(cart));
     setshowalert(true);
   };
   useEffect(() => {
     Aos.init({ duration: 1000});
-  }, []);
+  }, [alert]);
 
   return (
     <>
@@ -57,7 +65,7 @@ function ProductCard({ el, redir, setshowalert }) {
           <Image
             src={el.image}
             alt={el.name}
-            height="240px"
+            // height="240px"
             onClick={() => redir(el.id)}
             width={"100%"}
           />

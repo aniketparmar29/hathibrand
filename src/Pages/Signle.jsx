@@ -11,7 +11,7 @@ import "../Style/nav.css"
 import { useAlert } from "react-alert";
 const Signle = () => {
   const alert = useAlert();
-
+  const isAuth= useSelector((state)=>state.userAuth.isAuth)
     const {id} = useParams()
     let user =window.localStorage.getItem("user")||{};
      if (user!=={}) {
@@ -64,6 +64,10 @@ const Signle = () => {
      }
 
   const addcart=()=>{
+    if(isAuth===false){
+      alert.error("Please Login To Add Product")
+      return;
+    }
      dispatch(postcart(cartp))
      setshowalert(true)
   }

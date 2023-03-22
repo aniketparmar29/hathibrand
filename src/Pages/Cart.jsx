@@ -5,8 +5,7 @@ import { useSelector } from 'react-redux';
 import {getcart} from "../Redux/CartReducer/action"
 import { useDispatch } from 'react-redux'
 import Navbar from "../Components/Navbar"
- 
- 
+import Footer from '../Components/Footer'
 
 const Cart = () => {
 
@@ -14,6 +13,7 @@ const Cart = () => {
     const dispatch=useDispatch();
     const cart= useSelector((state)=>state.cartReducer.cart)
     const rmv= useSelector((state)=>state.cartReducer.rmv)
+  const isAuth= useSelector((state)=>state.userAuth.isAuth)
     
   let user =window.localStorage.getItem("user")||{};
   if (user!=={}) {
@@ -48,9 +48,11 @@ const Cart = () => {
   return (
     <>
     <Navbar/>
+    {!isAuth && <div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">LOGIN THEN YOU CAN ACCESS YOUR CART</div>}
+    {isAuth && 
     <Flex direction={["column","row","row"]}>
     <Box  border={"0px solid gray"} w={["100%","80%"]}>
-    {
+    {cart.length!==0?
 
       cart.map((el)=>(
         <>
@@ -58,10 +60,7 @@ const Cart = () => {
      
         </>
 
-      ))
-
-
-    }
+      )):<div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">ADD ITEMS IN CART</div>}
      
      </Box>
      <Box height={["500","500"]} width={["100%","30%"]} >
@@ -100,8 +99,8 @@ const Cart = () => {
        
 
     </Flex>
-    
-     
+}
+     <Footer/>
     
 
       

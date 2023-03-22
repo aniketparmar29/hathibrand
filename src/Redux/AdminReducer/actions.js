@@ -207,15 +207,15 @@ import {
   
  //get Delete Slider 
  const delRequestAction = () => {
-  return { type: PRODUCT_DETAILS_REQUEST};
+  return { type: DELETE_SLIDER_REQUEST};
 };
 
 const delSuccesAction = (payload) => {
-  return { type: PRODUCT_DETAILS_SUCCESS, payload };
+  return { type: DELETE_SLIDER_SUCCESS, payload };
 };
 
 const delFailureAction = () => {
-  return { type: PRODUCT_DETAILS_FAIL};
+  return { type: DELETE_SLIDER_FAIL};
 };
 
 export const deleteslider = (id) => {

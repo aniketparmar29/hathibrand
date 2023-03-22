@@ -50,7 +50,7 @@ function Home() {
         <Box  pl={7}  pt={"250"} w={"59%"}><Text color={"white"} fontSize='3xl' data-aos="fade-up">  મહેક જે ઘરને રાખે પવિત્ર અને વાતાવરણને બનાવે શુદ્ધ...</Text></Box>
         </Box>
 
-        <SimpleGrid columns={[1,2,4]} data-aos="fade-up">
+        <SimpleGrid columns={[1,2,4]}  data-aos="fade-up">
         {product && 
          product.slice(0,4).map((el)=>(
           <ProductCard el={el} key={el.id} setshowalert={setshowalert} redir={redir} doIt={doIt}/>

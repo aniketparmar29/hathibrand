@@ -1,26 +1,16 @@
 import React ,{useEffect}from "react";
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { getProducts } from "../Redux/AdminReducer/actions";
-import ProductCardSkeleton from "./ProductCardSkeleton";
-import Alert from "../Components/Alert";
 import Aos from "aos"
  import "aos/dist/aos.css"
-function ProductList({ setshowalert, showalert }) {
-  const navigate = useNavigate();
+function ProductList() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.AdminReducer.products);
-  const isLoading = useSelector((state) => state.ProductReducer.isLoading);
 
-  const redir = (id) => {
-    navigate(`singlepage/${id}`);
-  };
   React.useEffect(() => {
     dispatch(getProducts());
-    console.log(products)
-  }, [dispatch,products]);
-  
+  }, [dispatch]);
   useEffect(() => {
     Aos.init({ duration: 1000});
   }, []);

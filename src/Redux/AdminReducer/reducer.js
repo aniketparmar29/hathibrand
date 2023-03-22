@@ -98,6 +98,24 @@ import {
         loading: false,
         isError: true,
       };
+    case CREATE_SLIDER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        isError: false,
+      };
+    case CREATE_SLIDER_SUCCESS:
+      return {
+        isLoading: false,
+        success:true,
+        isError: false,
+      };
+    case CREATE_SLIDER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        isError: true,
+      };
       default: {
         return { ...state };
       }

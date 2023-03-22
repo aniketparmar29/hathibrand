@@ -45,7 +45,7 @@ function ProductCard({ el, redir, setshowalert }) {
       {el.stock > 0 && (
         <Box
         data-aos="fade-up"
-          w="90%"
+          w="95%"
           mx={"auto"}
           my={"3"}
           borderWidth="1px"

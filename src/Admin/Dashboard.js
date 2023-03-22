@@ -48,7 +48,6 @@ for(let i=0;i<products.length;i++){
     dispatch(getProducts());
     dispatch(getAllUsers());
   }, [dispatch]);
-
   const chartRef = useRef(null);
   const [chartInstance, setChartInstance] = useState(null);
 
@@ -90,7 +89,7 @@ for(let i=0;i<products.length;i++){
 
       setChartInstance(newChartInstance);
     }
-  }, [chartRef, outOfStock, products]);
+  }, [chartRef, outOfStock]);
 
   const chartRef2 = useRef(null);
   const [chartInstance2, setChartInstance2] = useState(null);

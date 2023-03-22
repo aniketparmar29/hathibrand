@@ -18,8 +18,8 @@ const initialState = {
     cart:[],
     isLoading:false,
     isError:false,
-    rmv:false
-
+    rmv:false,
+    add:false
 }
 
 const reducer = (state = initialState, action) => {
@@ -28,10 +28,10 @@ const reducer = (state = initialState, action) => {
 
     switch (type) {
         case  POST_CART_REQUEST: {
-            return { ...state,isLoading: true}
+            return { ...state,isLoading: true,add:false}
         }
         case POST_CART_SUCCESS: {
-            return {...state,isLoading: false}
+            return {...state,isLoading: false,add:true}
         }
         case POST_CART_FAILURE: {
             return {...state,isError: true,isLoading: false}

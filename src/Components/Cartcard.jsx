@@ -1,21 +1,16 @@
-import React,{useState,useEffect} from 'react'
+import React,{useEffect} from 'react'
 import { FaPlus,FaMinus } from 'react-icons/fa'
-import { TiDelete} from 'react-icons/ti'
-import { Box ,Image,Button, Flex, SimpleGrid} from '@chakra-ui/react';
+import { Box ,Image,Button, Flex} from '@chakra-ui/react';
 import { removecart,editcart } from '../Redux/CartReducer/action';
 import Aos from "aos"
  import "aos/dist/aos.css"
 
 export const Cartcard = ( {el,userid,dispatch,Total}) => {
-    console.log(el)
-
     const handleIncrease = () => {
         dispatch(editcart(userid,el.pr_id,{pr_que:el.pr_que+1}))
-        // edit()
       };
 
       const del = ()=>{
-
         dispatch(removecart(userid,el.pr_id))
       }
 
@@ -25,6 +20,8 @@ export const Cartcard = ( {el,userid,dispatch,Total}) => {
       const handleDecrease = () => {
         if (el.pr_que > 1) {
           dispatch(editcart(userid,el.pr_id,{pr_que:el.pr_que-1}))
+        }else{
+          dispatch(removecart(userid,el.pr_id))
         }
       }
       let weight=el.pr_weight*el.pr_que

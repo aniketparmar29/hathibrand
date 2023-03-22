@@ -4,7 +4,6 @@ import {getProducts } from "../Redux/ProductReducer/action"
 import { useEffect } from 'react'
 import {useNavigate} from "react-router-dom"
 import { useState } from 'react'
-import Alert from '../Components/Alert'
 import ProductCard from '../Components/ProductCard'
 import "../Style/nav.css"
 import Offer from '../Components/Offer'
@@ -13,13 +12,20 @@ import Navbar from '../Components/Navbar'
 import { postcart } from '../Redux/CartReducer/action'
 import Aos from "aos"
  import "aos/dist/aos.css"
+ import { useAlert } from "react-alert";
 function Home() {
+  const alert = useAlert();
   window.document.title="Hathibrand"
   const dispatch=useDispatch();
+  const isAuth= useSelector((state)=>state.userAuth.isAuth)
+
   const [showalert,setshowalert]=useState(false)
   const product= useSelector((state)=>state.ProductReducer.product)
   const navigate = useNavigate()
   const doIt = (el) => {
+    if(isAuth===true){
+      alert.error("Please Login To Add Product")
+    }
      dispatch(postcart(postcart))
    
   }
@@ -33,8 +39,12 @@ function Home() {
   },[dispatch])
 
   useEffect(() => {
+    if(showalert===true){
+      alert.success("Product Added To Cart")
+      setshowalert(!showalert)
+    }
     Aos.init({ duration: 1000});
-  }, []);
+  }, [alert,showalert]);
 
   return (
     < >
@@ -58,9 +68,6 @@ function Home() {
         
         </SimpleGrid>
 
-        {
-  showalert&&<Alert  msg="Item Add To Cart" bgColor="bg-green-500"/>
-}
       <Box className='big_boxx5'>
       <Box  mt={"50px"}  ml={"40%"} pt={"150"} w={"50%"}><Text color={"white"} fontSize='3xl' data-aos="fade-up">હાથી બ્રાન્ડ અગરબત્તી -પવિત્રતાની મહેક તો આજે જ ઓર્ડર કરો-Free shipping All Over India.</Text></Box>
       </Box>
@@ -72,9 +79,7 @@ function Home() {
           <ProductCard el={el} key={el.id} setshowalert={setshowalert} redir={redir} doIt={doIt}/>
         ))}
         </SimpleGrid>
-        {
-  showalert&&<Alert  msg="Item Add To Cart" bgColor="bg-green-500"/>
-}
+  
         <Box width={"80%"} height={["200px","500px"]} margin="auto" padding={["2","10"]} data-aos="fade-right">
         <iframe width={"100%"} height={"100%"} src="https://www.youtube.com/embed/IUcoX-9BL3U" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
         </Box>

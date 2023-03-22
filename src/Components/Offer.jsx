@@ -47,7 +47,7 @@ export default function Offer() {
       >
          {sliders &&
           sliders.map((el) => (
-        <SwiperSlide><img  onClick={()=>redir(7)} src={el.url} alt="slide"/></SwiperSlide>  
+        <SwiperSlide key={el.id}><img  onClick={()=>redir(7)} src={el.url} alt="slide"/></SwiperSlide>  
           ))}
       </Swiper>
     </>

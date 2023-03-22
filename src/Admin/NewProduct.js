@@ -9,13 +9,11 @@ import { GiFleshyMass } from 'react-icons/gi';
 import { AiOutlineDatabase } from 'react-icons/ai';
 import { FiCheckCircle } from 'react-icons/fi';
 import { BiMoney } from 'react-icons/bi';
-import SideBar from "./components/Sidebar";
 
 const NewProduct = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const isLoading = useSelector((state) => state.AdminReducer.isLoading);
   const isError = useSelector((state) => state.AdminReducer.isError);
   const success = useSelector((state) => state.AdminReducer.success);
   const [btnop, setbtnop] = useState(false)
@@ -29,7 +27,6 @@ const NewProduct = () => {
     "Agarbatti",
     "Cosmetic",
   ];
-console.log(isLoading,success,isError)
   useEffect(() => {
     if (success) {
       alert.success("Product Created Successfully");

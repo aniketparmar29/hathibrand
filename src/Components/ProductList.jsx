@@ -1,14 +1,16 @@
 import React ,{useEffect}from "react";
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "./ProductCard";
 import { useNavigate } from "react-router-dom";
 import { getProducts } from "../Redux/ProductReducer/action";
 import ProductCardSkeleton from "./ProductCardSkeleton";
-import Alert from "../Components/Alert";
 import Aos from "aos"
  import "aos/dist/aos.css"
+import { useAlert } from "react-alert";
 function ProductList({ setshowalert, showalert }) {
+  const alert = useAlert();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.ProductReducer.product);
@@ -17,13 +19,17 @@ function ProductList({ setshowalert, showalert }) {
   const redir = (id) => {
     navigate(`singlepage/${id}`);
   };
+ 
   React.useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
-  
   useEffect(() => {
+    if(showalert===true){
+      alert.success("Product Added To Cart")
+      setshowalert(!showalert)
+    }
     Aos.init({ duration: 1000});
-  }, []);
+  }, [alert,showalert]);
 
 
   return (
@@ -50,7 +56,6 @@ function ProductList({ setshowalert, showalert }) {
       </SimpleGrid>}
         
       </div>
-      {showalert && <Alert msg="Item Add To Cart" bgColor="bg-green-500" />}
     </>
   );
 }

@@ -6,13 +6,11 @@ import {Link, useParams} from "react-router-dom"
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import { getsingle } from '../Redux/ProductReducer/action'
-import {getcart} from "../Redux/CartReducer/action"
 import {postcart} from "../Redux/CartReducer/action"
 import "../Style/nav.css"
-import Alert from '../Components/Alert'
-
+import { useAlert } from "react-alert";
 const Signle = () => {
-  const [goto, setgoto] = useState(false)
+  const alert = useAlert();
 
     const {id} = useParams()
     let user =window.localStorage.getItem("user")||{};
@@ -30,19 +28,7 @@ const Signle = () => {
     const dispatch=useDispatch();
 
     const single= useSelector((state)=>state.ProductReducer.single)
-    const cart= useSelector((state)=>state.cartReducer.cart)
 
-  const check = async ()=>{
-    if(user ==={role:"hello"}){
-      setgoto(false)
-    }else{
-      for(let i=0;i<cart.length;i++){
-        if(cart[i].pr_id===single.id){
-          setgoto(true);
-        }
-      }
-    }
-  }
     const [quantity, setQuantity] = useState(1);
       const [showalert,setshowalert]=useState(false)
 
@@ -54,18 +40,18 @@ const Signle = () => {
   const handleDecrease = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
-      
     }
   }
   let mrp=single.price+100;
   const discount=Math.floor(((mrp-single.price)/mrp)*100);
     useEffect(()=>{
-      dispatch(getcart(user.id))
       dispatch(getsingle(id))
+      if(showalert===true){
+        alert.success("Product Added To Cart")
+        setshowalert(!showalert)
+      }
       window.document.title=single.name
-      check();
-     },[dispatch])
-     
+     },[dispatch,alert,showalert])
      const cartp={
       pr_name:single.name, 
       pr_price:single.price,
@@ -80,8 +66,6 @@ const Signle = () => {
   const addcart=()=>{
      dispatch(postcart(cartp))
      setshowalert(true)
-
-
   }
 
 
@@ -204,7 +188,7 @@ const Signle = () => {
        <FaPlus/>
       </button>
     </div>
-      {!goto &&  <Box d="flex" mt="5" alignItems="center">
+        <Box d="flex" mt="5" alignItems="center">
         <Button
           borderRadius={0}
           width={"100%"}
@@ -215,26 +199,13 @@ const Signle = () => {
         >
           Add to cart
         </Button>
-      </Box>}
-      {goto &&  <Box d="flex" mt="5" alignItems="center">
-        <Button
-          borderRadius={0}
-          width={"100%"}
-          bgColor="#5E0E42"
-          colorScheme="#440430"
-          color={"white"}
-        >
-         <Link to={"/cart"}>Go To Cart</Link>
-        </Button>
-      </Box>}
+      </Box>
 
      
     </Box>
   </Box>
 )}
-{
-  showalert&&<Alert  msg="Item Add To Cart" bgColor="bg-green-500"/>
-}
+
 <Footer />
     </>
   )

@@ -11,8 +11,12 @@ import {FaShoppingCart } from 'react-icons/fa'
 import { getProducts } from '../Redux/ProductReducer/action';
 import { Link } from 'react-router-dom';
 import {useNavigate} from "react-router-dom"
+import {getcart} from "../Redux/CartReducer/action"
 function Navbar() {
- 
+  
+  const [isOpen, setIsOpen] = useState(false);
+  const cart= useSelector((state)=>state.cartReducer.cart)
+  const toggleDropdown = () => setIsOpen(!isOpen);
   const [color,setColor]=useState(false);
   const dispatch = useDispatch();
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
@@ -65,38 +69,88 @@ const navigate = useNavigate()
 const  redir = (id) => {
   navigate(`singlepage/${id}`)
 }
-
-
-
+useEffect(()=>{
+  dispatch(getcart(user.id))
+ },[dispatch,user.id])
   return (
     <>
     { navMid &&
-    <Box zIndex={"100"} justifyContent={"space-between"} className={color?"header header-bg backdrop-blur-lg ":"header backdrop-blur-lg "} display={"flex"}  gap="70px" position={"sticky"} top={"0"} pb="2">
+    <Box zIndex={"100"} justifyContent={"space-between"} width="100%" className={color?"header header-bg backdrop-blur-lg ":"header backdrop-blur-lg "} display={"flex"}  gap="10%" position={"sticky"} top={"0"} pb="2">
       
-    <Box> <Link to={"/"}><Image width={"340px"} src={logo}/></Link></Box>
+    <Box width={"20%"}> <Link to={"/"}><Image className='lg:w-[60%] md:w-[150%]' src={logo}/></Link></Box>
     
-      <InputGroup   mt={"20px"}>
+      <InputGroup width={"30%"}   mt={"20px"}>
     <InputRightElement
       pointerEvents='none'
       children={<SearchIcon color='gray.300' />}
     />
-    <Input onChange={sugg} value={query} placeholder='Search...'  borderRadius={"20"} className={`${color}?"text-white":"text-red"`}/>
-
-      
-
-
-
-    
+    <Input onChange={sugg} value={query} placeholder='Search...'  borderRadius={"20"}  className={`${color}?"text-white":"text-red"`}/>
 
   </InputGroup>
   
 
-    <Box mr={"10"} pt={"25px"} display={"flex"} gap="35" ml={"70"}>
-    <Text fontSize='2xl' ><Link to="/">Home</Link></Text>
-      <Text fontSize='2xl' ><Link to="/products">Categories</Link></Text>
-      <Text display={"flex"} fontSize='2xl' ><Link to="/cart">Cart</Link><Box pt={"10px"}><FaShoppingCart/></Box></Text>
-      {isAuth?<Text display={"flex"} fontSize='2xl'  onClick={()=>{dispatch(logoutUser())}} cursor="pointer" >Logout<Box pt={"10px"}></Box></Text>:<Text display={"flex"} fontSize='2xl' ><Link to="/login">Login</Link> <Box pt={"10px"}></Box></Text>}
-      {user.role==="admin" && isAuth===true && <Text fontSize='2xl' ><Link to="/admin">Admin</Link></Text> }
+    <Box mx="5"  width={"50%"} pt={"25px"} display={"flex"} gap={["5","10"]} >
+    <Text fontSize='xl' ><Link to="/">Home</Link></Text>
+      <Text fontSize='xl' ><Link to="/products">Categories</Link></Text>
+      <Text display={"flex"} fontSize='xl' >
+  <Link to="/cart">Cart</Link>
+  <Box pt={"10px"} className="flex">
+    <sup style={{marginLeft: '5px'}}>
+      {cart.length || 0}
+    </sup>
+  </Box>
+</Text>
+
+      {isAuth? <div className="relative inline-block text-left">
+      <div>
+        <button
+          className={`text-gray-700 inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500`}
+          id="options-menu"
+          onClick={toggleDropdown}
+        >
+          {user.name}
+          <svg
+            className="-mr-1 ml-2 h-5 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fillRule="evenodd"
+              d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {isOpen && (
+        <div
+          className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="options-menu"
+        >
+          <div className="py-1" role="none">
+            <button
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
+              role="menuitem"
+            >
+              My Orders
+            </button>
+            <button
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
+              role="menuitem"
+              onClick={()=>{dispatch(logoutUser())}}
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      )}
+    </div>:<Text display={"flex"} fontSize='xl' ><Link to="/login">Login</Link> <Box pt={"10px"}></Box></Text>}
+      {user.role==="admin" && isAuth===true && <Text fontSize='xl' ><Link to="/admin">Admin</Link></Text> }
     </Box>
     
      

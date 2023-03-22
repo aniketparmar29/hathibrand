@@ -1,4 +1,4 @@
-import {Box, Flex, Input,Stack,InputGroup,InputRightElement} from "@chakra-ui/react"
+import {Box, Flex, Input,Stack,InputGroup,InputRightElement, Button} from "@chakra-ui/react"
 import { Cartcard } from '../Components/Cartcard';
 import React, { useEffect,useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -13,6 +13,8 @@ const Cart = () => {
   window.document.title="Cart-Hathibrand"
     const dispatch=useDispatch();
     const cart= useSelector((state)=>state.cartReducer.cart)
+    const rmv= useSelector((state)=>state.cartReducer.rmv)
+    
   let user =window.localStorage.getItem("user")||{};
   if (user!=={}) {
     try {
@@ -27,7 +29,7 @@ const Cart = () => {
   
   useEffect(()=>{
     dispatch(getcart(user.id))
-   },[dispatch,user.id])
+   },[dispatch,user.id,rmv])
 
    
     const[Total,setTotal]= useState(0)
@@ -37,7 +39,7 @@ const Cart = () => {
         (acc, item) => acc + item.pr_que * item.pr_price,
         0
       )
-      console.log(sum)
+      
       setTotal(sum);
     };
     useEffect(() => {
@@ -62,7 +64,7 @@ const Cart = () => {
     }
      
      </Box>
-     <Box height={["150","400"]} width={["100%","30%"]} >
+     <Box height={["500","500"]} width={["100%","30%"]} >
 
       <Box border={"1px solid gray"} m="4" borderRadius={"20"} height="30%" >
         <Box fontWeight={"bold" } fontSize="xl" py={"5"} px="8">Have Coupon?</Box>
@@ -80,13 +82,14 @@ const Cart = () => {
   </Stack>
   
       </Box>
-      <Box border={"1px solid gray"} m="4" height="50%" borderRadius={"20"}>
+      <Box border={"1px solid gray"} m="4" height="30%" borderRadius={"20"}>
         <Box>
           <Flex display={"flex"}>
-            <Box>
-              Total price : {Total}
-             
+            <Box fontWeight={"bold"} fontSize="xl" ml={"20%"}  mt="5%">
+              Total price : <span className="text-green-600">{Total}</span>
+             <Button ml={"30px"} mt={["5px","10px"]} bgColor={"#440430"} color="white">Checkout</Button>
             </Box>
+            
            
           </Flex>
         </Box>

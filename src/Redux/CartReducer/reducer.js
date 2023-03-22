@@ -18,6 +18,7 @@ const initialState = {
     cart:[],
     isLoading:false,
     isError:false,
+    rmv:false
 
 }
 
@@ -56,10 +57,11 @@ const reducer = (state = initialState, action) => {
        
        
         case  REMOVE_CART_REQUEST: {
-            return { ...state,isLoading: true}
+            return { ...state,isLoading: true,rmv:false}
         }
         case REMOVE_CART_SUCCESS: {
-            return {...state,isLoading: false}
+
+            return {...state,isLoading: false ,rmv:true}
         }
         case REMOVE_CART_FAILURE: {
             return {...state,isError: true,isLoading: false}

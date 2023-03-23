@@ -47,13 +47,13 @@ console.log(users)
     {users && users.map((el) => (
       <tr key={el.id}>
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm font-medium text-gray-900">{el.name}</div>
+          <span className="text-sm font-medium text-gray-900">{el.name}</span>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm font-medium text-gray-900">{el.email}</div>
+          <span className="text-sm font-medium text-gray-900">{el.email}</span>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-          <div className="text-sm font-medium text-gray-900">{el.role}</div>
+          <span className="text-sm font-medium text-gray-900">{el.role}</span>
         </td>
         <td className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
           <button className="text-red-600 hover:text-red-900">Delete</button>

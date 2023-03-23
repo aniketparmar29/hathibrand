@@ -143,22 +143,22 @@ for(let i=0;i<products.length;i++){
           <div className="dashboardContainer">
             <div className="dashboardSummary">
               <div>
-                <p>
+                <span>
                   Total Amount <br /> ₹{totalAmount}
-                </p>
+                </span>
               </div>
               <div className="dashboardSummaryBox2">
                 <Link to="/admin/products">
-                  <p>Product</p>
-                  <p>{products && products.length}</p>
+                  <span>Product</span>
+                  <span>{products && products.length}</span>
                 </Link>
                 <Link to="/admin/orders">
-                  <p>Orders</p>
+                  <span>Orders</span>
                   {/* <p>{orders && orders.length}</p> */}
                 </Link>
                 <Link to="/admin/users">
-                  <p>Users</p>
-                  <p>{users && users.length}</p>
+                  <span>Users</span>
+                  <span>{users && users.length}</span>
                 </Link>
               </div>
             </div>

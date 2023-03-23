@@ -5,7 +5,7 @@ import { removecart,editcart } from '../Redux/CartReducer/action';
 import Aos from "aos"
  import "aos/dist/aos.css"
 
-export const Cartcard = ( {el,userid,dispatch,Total}) => {
+export const Cartcard = ( {el,userid,dispatch,Total,key}) => {
     const handleIncrease = () => {
         dispatch(editcart(userid,el.pr_id,{pr_que:el.pr_que+1}))
       };
@@ -35,9 +35,9 @@ export const Cartcard = ( {el,userid,dispatch,Total}) => {
     <>
   
 
-<Box data-aos="fade-up" fontWeight={"bold"}  key={el.id} border={"0px solid gray"} className="shadow-lg shadow-gray"  >
-        <Box border={"0px solid green"} >
-        <Box  >
+  <Box data-aos="fade-up" fontWeight={"bold"} border={"0px solid gray"} className="shadow-lg shadow-gray" key={key}>
+  <Box border={"0px solid green"}>
+    <Box>
         <Flex  justifyContent={"space-between"} > <Box m={"auto"} pl={["20px","40px"]} border={"0px solid red"} w={["70%","35%"]}><Image p={"3%"} w={["90%","100%"]} border={"0px solid red"} src={el.pr_img}/></Box>
 
         <Box width={"50%"} justifyContent="center" alignItems={"center"} textAlign="center" display={["block","flex"]} >

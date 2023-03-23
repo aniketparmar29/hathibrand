@@ -51,18 +51,25 @@ const Cart = () => {
     {!isAuth && <div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">LOGIN THEN YOU CAN ACCESS YOUR CART</div>}
     {isAuth && 
     <Flex direction={["column","row","row"]}>
-    <Box  border={"0px solid gray"} w={["100%","80%"]}>
-    {cart.length!==0?
+    <Box border={"0px solid gray"} w={["100%", "80%"]}>
+    {cart.length !== 0 ? (
+  cart.map((el) => (
+    <Cartcard
+      el={el}
+      key={el.id}
+      userid={user.id}
+      dispatch={dispatch}
+      Total={Total}
+    />
+  ))
+) : (
+  <div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">
+    ADD ITEMS IN CART
+  </div>
+)}
 
-      cart.map((el)=>(
-        <>
-         <Cartcard el={el} key={el.id} userid={user.id} dispatch={dispatch}  Total={Total}/>
-     
-        </>
 
-      )):<div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">ADD ITEMS IN CART</div>}
-     
-     </Box>
+          </Box>
      <Box height={["500","500"]} width={["100%","30%"]} >
 
       <Box border={"1px solid gray"} m="4" borderRadius={"20"} height="30%" >

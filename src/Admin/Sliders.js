@@ -11,17 +11,18 @@ import { useAlert } from "react-alert";
  function Sliders() {
     const dispatch = useDispatch();
     const alert = useAlert();
-    const [del, setdel] = useState(false)
+  const adds = useSelector((state) => state.userAuth.adds);
+  const isdelete = useSelector((state) => state.userAuth.isdelete);
+
      const sliders = useSelector((state) => state.AdminReducer.sliders);
      const remove = async (id)=>{
        dispatch(deleteslider(id));
        alert.success("Slider Deleted");
-       setdel(!del)
      }
     useEffect(() => {
        dispatch(getSliders());
        Aos.init({ duration: 1000});
-     }, [dispatch,del]);
+     }, [dispatch,isdelete,adds]);
   return (
     <div> 
     <div className='sticky top-0 z-50'>

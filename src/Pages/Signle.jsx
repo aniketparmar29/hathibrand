@@ -43,6 +43,7 @@ const Signle = () => {
     }
   }
   let mrp=single.price+100;
+  window.document.title=single.name
   const discount=Math.floor(((mrp-single.price)/mrp)*100);
     useEffect(()=>{
       dispatch(getsingle(id))
@@ -50,7 +51,6 @@ const Signle = () => {
         alert.success("Product Added To Cart")
         setshowalert(!showalert)
       }
-      window.document.title=single.name
      },[dispatch,alert,showalert])
      const cartp={
       pr_name:single.name, 

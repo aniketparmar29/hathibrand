@@ -30,7 +30,8 @@ import {
     isError:false,
     single:{},
     success:false,
-    isdelete:false
+    isdelete:false,
+    adds:false,
   };
 
   export const AdminReducer = (state = initialState, { type, payload }) => {
@@ -45,7 +46,7 @@ import {
         return {...state,isError: true,isLoading: false}
     }
     case DELETE_SLIDER_REQUEST: {
-        return { ...state,isLoading: true}
+        return { ...state,isLoading: true,isdelete: false}
     }
     case DELETE_SLIDER_SUCCESS: {
         return {...state,isLoading:false,isdelete: true}
@@ -103,12 +104,14 @@ import {
         ...state,
         loading: true,
         isError: false,
+        adds:false,
       };
     case CREATE_SLIDER_SUCCESS:
       return {
         isLoading: false,
         success:true,
         isError: false,
+        adds:true
       };
     case CREATE_SLIDER_FAIL:
       return {

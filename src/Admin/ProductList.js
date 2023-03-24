@@ -1,19 +1,34 @@
-import React ,{useEffect}from "react";
+import React ,{useEffect, useState}from "react";
 import { Box} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../Redux/AdminReducer/actions";
+import { deleteProduct, getProducts } from "../Redux/AdminReducer/actions";
 import Aos from "aos"
  import "aos/dist/aos.css"
-function ProductList() {
+ import { useAlert } from "react-alert";
+ 
+ function ProductList() {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.AdminReducer.products);
+  const [isdelete,setisdelte] = useState(false)
 
-  React.useEffect(() => {
+  const delpro = (id) =>{
+    setisdelte(false)
+    dispatch(deleteProduct(id));
+    setisdelte(true)
     dispatch(getProducts());
-  }, [dispatch]);
+  }
+
+ useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch,isdelete]);
+
   useEffect(() => {
+    if(isdelete===true){
+      alert.success("Product is deleted")
+    }
     Aos.init({ duration: 1000});
-  }, []);
+  }, [isdelete,alert]);
 
 
   return (
@@ -98,7 +113,7 @@ function ProductList() {
         </td>
         <td className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
           <button className="text-indigo-600 hover:text-indigo-900">Edit</button>
-          <button className="ml-2 text-red-600 hover:text-red-900">Delete</button>
+          <button onClick={()=>delpro(el.id)} className="ml-2 text-red-600 hover:text-red-900">Delete</button>
         </td>
       </tr>
     ))}

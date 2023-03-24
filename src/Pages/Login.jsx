@@ -6,10 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from '../Redux/AuthReducer/user.actions'
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import Alert from '../Components/Alert'
 import Spinner from '../Components/Spinner';
-import { useLocation } from 'react-router-dom';
+import { useAlert } from "react-alert";
+
 function Login() {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.userAuth.isAuth)
@@ -24,8 +25,16 @@ function Login() {
   if (isAuth === true) {
     setTimeout(() => {
       navigate("/");
-    }, 2000);
+    }, 1000);
   }
+useEffect(() => {
+  if(isAuth){
+    alert.success("Login Succefully")
+  }
+  if(login_error){
+    alert.error("Somthing went wrong")
+  }
+}, [alert,isAuth,login_error])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -45,12 +54,7 @@ function Login() {
           <Spinner />
         </div>
       )}
-         {login_error && (
-        <Alert
-        msg="Email Or Password Is Wrong"
-        bgColor="bg-red-500"
-      />
-      )}
+        
       <form onSubmit={handleSubmit} className="w-[70%] m-auto " >
       <div className="mb-4">
         <label className="block text-white font-bold mb-2" htmlFor="email">
@@ -90,13 +94,6 @@ function Login() {
       </div>
       <Link to="/singup" className='text-white text-2xl underline pt-10 z-20'>Create Account?</Link>
     </form>
-
-    {isAuth && (
-        <Alert
-          msg="Login Successfully!"
-          bgColor="bg-green-500"
-        />
-      )}
     </div>
       </>
   )

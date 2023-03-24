@@ -5,6 +5,12 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_SUCCESS,
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_FAIL,
+  UPDATE_PRODUCT_FAIL,
+  UPDATE_PRODUCT_REQUEST,
+  UPDATE_PRODUCT_SUCCESS,
   ALL_USERS_REQUEST,
   ALL_USERS_SUCCESS,
   ALL_USERS_FAIL,
@@ -20,6 +26,9 @@ import {
   DELETE_SLIDER_REQUEST,
   DELETE_SLIDER_SUCCESS,
   DELETE_SLIDER_FAIL,
+  ALL_REVIEW_FAIL,
+  ALL_REVIEW_REQUEST,
+  ALL_REVIEW_SUCCESS
 } from "./actions-types";
   import axios from "axios";
 
@@ -205,7 +214,7 @@ import {
 
 
   
- //get Delete Slider 
+ // Delete Slider 
  const delRequestAction = () => {
   return { type: DELETE_SLIDER_REQUEST};
 };
@@ -228,6 +237,62 @@ export const deleteslider = (id) => {
       })
       .catch((err) => {
         dispatch(delFailureAction());
+      });
+  };
+};
+
+//get all reviews
+const getREviewsRequestAction = () => {
+  return { type: ALL_REVIEW_REQUEST };
+};
+
+const getREviewsSuccesAction = (payload) => {
+  return { type: ALL_REVIEW_SUCCESS, payload };
+};
+
+const getREviewsFailureAction = () => {
+  return { type: ALL_REVIEW_FAIL };
+};
+
+export const getAllReviews = () => {
+  return (dispatch) => {
+    dispatch(getREviewsRequestAction());
+
+    axios
+      .get(`https://real-cyan-swallow-boot.cyclic.app/reviews`)
+      .then((res) => {
+        dispatch(getREviewsSuccesAction(res.data));
+      })
+      .catch((err) => {
+        dispatch(getREviewsFailureAction());
+      });
+  };
+};
+
+
+// Delete Slider 
+const delproductRequestAction = () => {
+  return { type: DELETE_PRODUCT_REQUEST};
+};
+
+const delproductSuccesAction = (payload) => {
+  return { type: DELETE_PRODUCT_SUCCESS, payload };
+};
+
+const delproductFailureAction = () => {
+  return { type: DELETE_PRODUCT_FAIL};
+};
+
+export const deleteProduct = (id) => {
+  return (dispatch) => {
+    dispatch(delproductRequestAction());
+    axios
+      .delete(`https://real-cyan-swallow-boot.cyclic.app/products/${id}`)
+      .then((res) => {
+        dispatch(delproductSuccesAction(res.data));
+      })
+      .catch((err) => {
+        dispatch(delproductFailureAction());
       });
   };
 };

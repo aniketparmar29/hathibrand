@@ -1,18 +1,19 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import img from '../assets/singup.jpg'
 import Navbar from '../Components/Navbar'
 import { useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import {usersignup} from  '../Redux/AuthReducer/user.actions'
 import { useNavigate } from "react-router-dom";
-import Alert from '../Components/Alert'
 import Spinner from '../Components/Spinner'
+import { useAlert } from "react-alert";
+
 function Signup() {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const register_laoding= useSelector((state)=>state.userAuth.register_laoding)
   const register_error= useSelector((state)=>state.userAuth.register_error)
-  const register_success= useSelector((state)=>state.userAuth.register_success)
   const [loginData, setLoginData] = useState({name:"",email:"",password:""})
   const [showAlert, setShowAlert] = useState(false);
   const [pass, setPass] = useState(false);
@@ -36,17 +37,22 @@ function Signup() {
     }, 2000);
   };
 
-
+  useEffect(() => {
+    if(pass){
+      alert.error("password length more than 8 charters")
+    }
+    if(register_error){
+      alert.error("Somthing went wrong")
+    }
+    if(showAlert){
+      alert.success("Signup Successfully!");
+    }
+  }, [alert,pass,register_error,showAlert])
   return (
 
     <>
     <Navbar/>
-    {pass && (
-        <Alert
-          msg="Password Should Be More Than 8 Charater"
-          bgColor="bg-red-500"
-        />
-      )}
+   
     <div
       className="h-screen w-full bg-cover bg-no-repeat bg-center pt-32 -mt-20"
       style={{ backgroundImage: `url(${img})` }}
@@ -108,12 +114,7 @@ function Signup() {
         </button>
       </div>
     </form>
-    {showAlert && (
-        <Alert
-          msg="Signup Successfully!"
-          bgColor="bg-green-500"
-        />
-      )}
+    
     </div>
       </>
   )

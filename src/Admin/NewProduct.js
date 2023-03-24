@@ -59,7 +59,6 @@ const NewProduct = () => {
     setbtnop(true);
     try{
       const files = Array.from(e.target.files);
-      console.log(files);
       let form = new FormData();
       files.forEach(file => form.append('image', file));
       

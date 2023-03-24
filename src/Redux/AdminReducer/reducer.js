@@ -20,11 +20,21 @@ import {
   DELETE_SLIDER_REQUEST,
   DELETE_SLIDER_SUCCESS,
   DELETE_SLIDER_FAIL,
+  ALL_REVIEW_FAIL,
+  ALL_REVIEW_REQUEST,
+  ALL_REVIEW_SUCCESS,
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_FAIL,
+  UPDATE_PRODUCT_FAIL,
+  UPDATE_PRODUCT_REQUEST,
+  UPDATE_PRODUCT_SUCCESS
   } from "./actions-types";
 
   const initialState = {
     sliders:[],
     products:[],
+    reviews:[],
     users:[],
     isLoading:false,
     isError:false,
@@ -54,6 +64,15 @@ import {
     case DELETE_SLIDER_FAIL: {
         return {...state,isError: true,isLoading: false}
     }
+    case DELETE_PRODUCT_REQUEST: {
+        return { ...state,isLoading: true,isdelete: false}
+    }
+    case DELETE_PRODUCT_SUCCESS: {
+        return {...state,isLoading:false,isdelete: true}
+    }
+    case DELETE_PRODUCT_FAIL: {
+        return {...state,isError: true,isLoading: false}
+    }
       case ALL_USERS_REQUEST: {
         return { ...state,isLoading: true}
     }
@@ -81,10 +100,20 @@ import {
     case ALL_SLIDERS_FAIL: {
       return {...state,isError: true,isLoading: false}
     }
+    case ALL_REVIEW_REQUEST: {
+      return { ...state,isLoading: true}
+    }
+    case ALL_REVIEW_SUCCESS: {
+      return {...state,isLoading:false,reviews: payload}
+    }
+    case ALL_REVIEW_FAIL: {
+      return {...state,isError: true,isLoading: false}
+    }
     case NEW_PRODUCT_REQUEST:
       return {
         ...state,
         loading: true,
+        success:false,
         isError: false,
       };
     case NEW_PRODUCT_SUCCESS:

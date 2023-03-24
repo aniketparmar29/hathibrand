@@ -14,6 +14,7 @@ import Dashboard from '../Admin/Dashboard'
 import Products from '../Admin/Products'
 import Users from '../Admin/Users'
 import Sliders from '../Admin/Sliders'
+import Reviews from '../Admin/Reviews'
 function MainRoute() {
   return (
     <div>
@@ -33,6 +34,7 @@ function MainRoute() {
             <Route path="/admin/products" element={<Products/>}></Route>
             <Route path="/admin/users" element={<Users/>}></Route>
             <Route path="/admin/sliders" element={<Sliders/>}></Route>
+            <Route path="/admin/reviews" element={<Reviews/>}></Route>
         </Routes>
     </div>
   )

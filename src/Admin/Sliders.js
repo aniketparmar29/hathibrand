@@ -1,5 +1,5 @@
 
-import React,{useEffect,useState} from 'react'
+import React,{useEffect} from 'react'
 import { useDispatch,useSelector } from "react-redux";
 import {getSliders,deleteslider} from '../Redux/AdminReducer/actions'
 import CreateSliders from './CreateSliders';

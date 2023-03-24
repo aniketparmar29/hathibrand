@@ -166,10 +166,10 @@ for(let i=0;i<products.length;i++){
         <div>
           <h1 className="text-3xl text-center font-bold">Charts</h1>
           <div className="lg:flex md:flex  justify-center items-center w-[100%] m-auto">
-            <div className="lg:w-[50%] w-[70%] m-auto">
+            <div className="lg:w-[40%] w-[70%] m-auto">
               <canvas ref={chartRef} />
             </div>
-            <div className="lg:w-[50%] w-[70%] m-auto">
+            <div className="lg:w-[40%] w-[70%] m-auto">
               <canvas ref={chartRef2} />
             </div>
           </div>

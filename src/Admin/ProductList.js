@@ -3,10 +3,11 @@ import { Box} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../Redux/AdminReducer/actions";
 import Aos from "aos"
- import "aos/dist/aos.css"
- import { useAlert } from "react-alert";
+import "aos/dist/aos.css"
+import { useAlert } from "react-alert";
  
  function ProductList() {
+
   const alert = useAlert();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.AdminReducer.products);
@@ -29,8 +30,6 @@ import Aos from "aos"
     }
     Aos.init({ duration: 1000});
   }, [isdelete,alert]);
-
-
   return (
     <>
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

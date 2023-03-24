@@ -3,6 +3,7 @@ import NewProduct from './NewProduct'
 import ProductList from './ProductList'
 import SideBar from "./components/Sidebar";
 function Products() {
+  window.document.title="Admin-Product"
   return (
     <div>
       <div>

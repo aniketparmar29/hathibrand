@@ -13,8 +13,6 @@ import { BiMoney } from 'react-icons/bi';
 const NewProduct = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-
-  const isError = useSelector((state) => state.AdminReducer.isError);
   const success = useSelector((state) => state.AdminReducer.success);
   const [btnop, setbtnop] = useState(false)
   const [name, setName] = useState("");
@@ -31,14 +29,10 @@ const NewProduct = () => {
     if (success) {
       alert.success("Product Created Successfully");
     }
-    if(isError){
-      alert.error("Some Error is there");
-    }
-  }, [dispatch, alert, isError, success]);
+  }, [dispatch, alert, success]);
 
   const createProductSubmitHandler = (e) => {
     e.preventDefault();
-
     const product={
       name,
       price,
@@ -47,14 +41,9 @@ const NewProduct = () => {
       stock,
       weight
     }
-      
-    console.log(product)
     dispatch(createProduct(product));
   };
-
-
-
-  async function handelimage(e){
+async function handelimage(e){
     let api_key= "8b1f01edede5586a463d22be7a935729";
     setbtnop(true);
     try{
@@ -73,9 +62,6 @@ const NewProduct = () => {
       console.log(e);
     }
   }
-  
-  
-
   return (
     <Fragment>
     <MetaData title="Create Product" />
@@ -157,7 +143,6 @@ const NewProduct = () => {
               className="border-gray-300 focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
-  
           <Button
             id="createProductBtn"
             type="submit"

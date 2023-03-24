@@ -296,3 +296,34 @@ export const deleteProduct = (id) => {
       });
   };
 };
+
+//Edit Product
+
+const UpdateProductRequestAction = () => {
+  return { type: UPDATE_PRODUCT_REQUEST};
+};
+
+const UpdateProductSuccesAction = (payload) => {
+  return { type: UPDATE_PRODUCT_SUCCESS, payload };
+};
+
+const UpdateProductFailureAction = () => {
+  return { type: UPDATE_PRODUCT_FAIL};
+};
+
+
+export const EditProduct = (id,product) => {
+  return (dispatch) => {
+    dispatch(UpdateProductRequestAction());
+
+    axios
+      .post(`https://real-cyan-swallow-boot.cyclic.app/products/${id}`,product)
+      .then((res) => {
+        dispatch(UpdateProductSuccesAction(res.data));
+      })
+      .catch((err) => {
+        dispatch(UpdateProductFailureAction(err));
+        console.log(err)
+      });
+  };
+};

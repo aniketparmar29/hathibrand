@@ -86,7 +86,7 @@ useEffect(()=>{
       pointerEvents='none'
       children={<SearchIcon color='gray.300' />}
     />
-    <Input onChange={sugg} value={query} placeholder='Search...'  borderRadius={"20"}  className={`${color}?"text-white":"text-red"`}/>
+    <Input onChange={sugg} width="100%" value={query} placeholder='Search...'  borderRadius={"20"}  className={`${color}?"text-white":"text-red"`}/>
 
   </InputGroup>
   
@@ -95,12 +95,14 @@ useEffect(()=>{
     <Text fontSize='xl' ><Link to="/">Home</Link></Text>
       <Text fontSize='xl' ><Link to="/products">Categories</Link></Text>
       <Text display={"flex"} fontSize='xl' >
-  <Link to="/cart">Cart</Link>
-  <Box pt={"10px"} className="flex">
-    <sup style={{marginLeft: '5px'}}>
-      <span  className='border-2 rounded-[30%] px-2 py-1'>{cart.length || 0}</span>
-    </sup>
-  </Box>
+  <Link to="/cart">Cart
+  <li className="font-sans block  lg:inline-block align-middle  hover:text-gray-700">
+  <span className="relative flex">
+    <FaShoppingCart  className='flex-1 w-7 h-7 fill-current'/>
+      <span className="absolute right-0 top-0 rounded-full bg-black w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">{cart.length || 0}</span>
+  </span>
+</li>
+</Link>
 </Text>
 {user.role==="admin" && isAuth===true && <Text fontSize='xl' ><Link to="/admin">Admin</Link></Text> }
       {isAuth? <div className="relative inline-block text-left">

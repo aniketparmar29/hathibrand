@@ -54,7 +54,6 @@ const Sidebar = ({title}) => {
             <FaIcons.FaBars onClick={showSidebar} />
             <div className='flex justify-items-end gap-10  ml-5 items-center'>
             <h1 className='text-white border-2 border-white p-1 text-lg hover:bg-white hover:text-black rounded-lg'>{title}</h1>
-            <Link className='text-white border-2 border-white p-1 text-lg hover:bg-white hover:text-black rounded-lg' to="/">Main Web</Link>
             </div>
           </NavIcon>
         </Nav>

@@ -5,6 +5,11 @@ import * as IoIcons from 'react-icons/io';
 
 export const SidebarData = [
   {
+    title: 'Main Page',
+    path: '/',
+    icon: <AiIcons.AiOutlineHome/>,
+  },
+  {
     title: 'Home',
     path: '/admin',
     icon: <AiIcons.AiFillHome />,

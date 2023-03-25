@@ -28,7 +28,7 @@ import { useAlert } from "react-alert";
         Aos.init({ duration: 1000});
     }, []);
 
-  
+
     const toggleCreateProductModal = () => {
       setShowCreateProductModal(!showCreateProductModal);
     };

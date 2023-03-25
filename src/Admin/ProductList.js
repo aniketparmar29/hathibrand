@@ -1,7 +1,8 @@
 import React ,{useEffect, useState}from "react";
 import { SimpleGrid} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, getProducts } from "../Redux/AdminReducer/actions";
+import { deleteProduct} from "../Redux/AdminReducer/actions";
+import { getProducts } from "../Redux/ProductReducer/action";
 import Aos from "aos"
 import "aos/dist/aos.css"
 import { useAlert } from "react-alert";
@@ -12,27 +13,24 @@ import ProductCardad from "./ProductCardad";
 
   const alert = useAlert();
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.AdminReducer.products);
+  const product = useSelector((state) => state.ProductReducer.product);
   const isLoading = useSelector((state) => state.AdminReducer.isLoading);
-  const [isdelete,setisdelte] = useState(false)
 
   const delpro = (id) =>{
-    setisdelte(false)
     dispatch(deleteProduct(id));
-    setisdelte(true)
     dispatch(getProducts());
   }
 
  useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch,isdelete]);
-
+  }, [dispatch]);
+ console.log(product)
   useEffect(() => {
-    if(isdelete===true){
-      alert.success("Product is deleted")
-    }
+    // if(isdelete===true){
+    //   alert.success("Product is deleted")
+    // }
     Aos.init({ duration: 1000});
-  }, [isdelete,alert]);
+  }, [alert]);
   return (
     <>
      <div >
@@ -45,8 +43,8 @@ import ProductCardad from "./ProductCardad";
             ))}
           </div>
         ):<SimpleGrid data-aos="fade-up" columns={[1, 2, 4]} gap="3">
-        {products &&
-          products.map((el) => (
+        {product &&
+          product.map((el) => (
             <ProductCardad
               el={el}
               key={el.id}

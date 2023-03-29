@@ -11,5 +11,22 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "description": "Hathibrand - Your source for premium quality incense sticks & Cosmetics. Shop our extensive selection of fragrances and enjoy free shipping on orders.",
+  "keywords": "hathibrand,hathibrand agarbatti,agarbatti,incense sticks, fragrances, cosmetics, free shipping",
+  "social": {
+    "twitter:card": "summary_large_image",
+    "twitter:site": "@hathibrand",
+    "twitter:title": "Hathibrand Agarbatti",
+    "twitter:description": "Your source for premium quality incense sticks & Cosmetics. Shop our extensive selection of fragrances and enjoy free shipping on orders.",
+    "twitter:image": "%PUBLIC_URL%/logo192.png",
+    "og:title": "Hathibrand Agarbatti",
+    "og:type": "website",
+    "og:url": "https://www.hathibrand.in/",
+    "og:description": "Your source for premium quality incense sticks & Cosmetics. Shop our extensive selection of fragrances and enjoy free shipping on orders.",
+    "og:image": "%PUBLIC_URL%/logo192.png",
+    "og:image:width": "192",
+    "og:image:height": "192",
+    "og:image:type": "image/png"
+  }
 }

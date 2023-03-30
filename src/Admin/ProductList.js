@@ -16,10 +16,10 @@ import ProductCardad from "./ProductCardad";
   const product = useSelector((state) => state.ProductReducer.product);
   const isLoading = useSelector((state) => state.AdminReducer.isLoading);
 
-  const delpro = (id) =>{
-    dispatch(deleteProduct(id));
-    dispatch(getProducts());
-  }
+  // const delpro = (id) =>{
+  //   dispatch(deleteProduct(id));
+  //   dispatch(getProducts());
+  // }
 
  useEffect(() => {
     dispatch(getProducts());
@@ -48,7 +48,7 @@ import ProductCardad from "./ProductCardad";
             <ProductCardad
               el={el}
               key={el.id}
-              delpro={delpro}
+              // delpro={delpro}
             />
           ))}
       </SimpleGrid>}

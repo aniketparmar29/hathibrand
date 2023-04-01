@@ -54,12 +54,6 @@ function Home() {
          
         </Box>
         <Box>
-        <Box><Offer/></Box>
-        </Box>
-        <Box className='big_boxx4' mt="40px">
-        <Box  pl={7}  pt={"250"} w={"59%"}><Text color={"white"} fontSize='3xl' data-aos="fade-up">  મહેક જે ઘરને રાખે પવિત્ર અને વાતાવરણને બનાવે શુદ્ધ...</Text></Box>
-        </Box>
-
         <SimpleGrid columns={[1,2,4]}  data-aos="fade-up">
         {product && 
          product.slice(0,4).map((el)=>(
@@ -67,6 +61,13 @@ function Home() {
         ))}
         
         </SimpleGrid>
+        </Box>
+        <Box className='big_boxx4' mt="40px">
+        <Box  pl={7}  pt={"250"} w={"59%"}><Text color={"white"} fontSize='3xl' data-aos="fade-up">  મહેક જે ઘરને રાખે પવિત્ર અને વાતાવરણને બનાવે શુદ્ધ...</Text></Box>
+        </Box>
+
+        <Box><Offer/></Box>
+       
 
       <Box className='big_boxx5'>
       <Box  mt={"50px"}  ml={"40%"} pt={"150"} w={"50%"}><Text color={"white"} fontSize='3xl' data-aos="fade-up">હાથી બ્રાન્ડ અગરબત્તી -પવિત્રતાની મહેક તો આજે જ ઓર્ડર કરો-Free shipping All Over India.</Text></Box>

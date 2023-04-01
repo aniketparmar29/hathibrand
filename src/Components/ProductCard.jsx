@@ -2,11 +2,12 @@ import React,{useEffect} from "react";
 import { Box, Button, Image, Badge } from "@chakra-ui/react";
 import { useDispatch,useSelector } from "react-redux";
 import { postcart } from "../Redux/CartReducer/action";
+import { useNavigate } from "react-router-dom";
 import Aos from "aos"
  import "aos/dist/aos.css"
  import { useAlert } from "react-alert";
- 
  function ProductCard({ el, redir, setshowalert }) {
+   const navigate = useNavigate();
   const alert = useAlert();
   let mrp = el.price + 100;
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ import Aos from "aos"
   const addcart = () => {
     if(isAuth===false){
       alert.error("Please Login To Add Product")
+    navigate(`/login`);
       return;
     }
     dispatch(postcart(cart));

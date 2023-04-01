@@ -1,19 +1,12 @@
-import React,{useEffect} from "react";
+import React,{useState,useEffect} from "react";
 import { Box, Button, Image, Badge } from "@chakra-ui/react";
 import { useDispatch,useSelector } from "react-redux";
-import { postcart } from "../Redux/CartReducer/action";
 import Aos from "aos"
- import "aos/dist/aos.css"
- import { useAlert } from "react-alert";
- 
- function ProductCardad({ el,delpro}) {
+import "aos/dist/aos.css"
+import { useAlert } from "react-alert";
+import EditProductModal from './EditProductModal'
+function ProductCardad({ el}) {
   const alert = useAlert();
-  let mrp = el.price + 100;
-  const dispatch = useDispatch();
-  const isAuth= useSelector((state)=>state.userAuth.isAuth)
-
-  const discount = Math.floor(((mrp - el.price) / mrp) * 100);
-
   let user = window.localStorage.getItem("user") || {};
   if (user !== {}) {
     try {
@@ -25,24 +18,11 @@ import Aos from "aos"
   } else {
     user = { role: "hello" };
   }
+  const [isEditing, setIsEditing] = useState(false);
 
-  const cart = {
-    pr_name: el.name,
-    pr_price: el.price,
-    pr_que: 1,
-    pr_id: el.id,
-    pr_img: el.image,
-    pr_category:el.Category,
-    pr_weight: el.weight,
-    user_id: user.id,
-  };
-  const addcart = () => {
-    if(isAuth===false){
-      alert.error("Please Login To Add Product")
-      return;
-    }
-    dispatch(postcart(cart));
-  };
+  const handleEditClick = () => setIsEditing(true);
+  const handleCloseModal = () => setIsEditing(false);
+
   useEffect(() => {
     Aos.init({ duration: 1000});
   }, [alert]);
@@ -109,19 +89,6 @@ import Aos from "aos"
             >
               {el.name}
             </Box>
-            <Box>
-              <Box as="span" color="gray.600" fontSize="sm">
-                MRP:
-              </Box>
-              <Box
-                as="span"
-                color="gray.700"
-                fontSize="sm"
-                className="line-through"
-                ml="2"
-              >
-                ₹ {el.price + 100}
-              </Box>
               <Box
                 as="span"
                 color="gray.700"
@@ -129,9 +96,8 @@ import Aos from "aos"
                 fontWeight="bold"
                 ml="2"
               >
-                ₹ {el.price}
+              ₹{el.price}
               </Box>
-            </Box>
 
            
           </Box>
@@ -142,7 +108,6 @@ import Aos from "aos"
               bgColor="#5E0E42"
               colorScheme="#440430"
               color={"white"}
-              onClick={delpro(el.id)}
             >
               Delete
             </Button>
@@ -154,11 +119,14 @@ import Aos from "aos"
               bgColor="#5E0E42"
               colorScheme="#440430"
               color={"white"}
-              onClick={addcart}
+              onClick={handleEditClick}
             >
               Edit
             </Button>
           </Box>
+          {isEditing && (
+        <EditProductModal product={el} closeModal={handleCloseModal} />
+      )}
         </Box>
     </>
   );

@@ -10,16 +10,13 @@ import Aos from "aos"
 import { useAlert } from "react-alert";
 function ProductList({ setshowalert, showalert }) {
   const alert = useAlert();
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.ProductReducer.product);
   const isLoading = useSelector((state) => state.ProductReducer.isLoading);
-
   const redir = (id) => {
     navigate(`singlepage/${id}`);
   };
- 
   React.useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -29,9 +26,7 @@ function ProductList({ setshowalert, showalert }) {
       setshowalert(!showalert)
     }
     Aos.init({ duration: 1000});
-  }, [alert,showalert]);
-
-
+  }, [alert,showalert,setshowalert]);
   return (
     <>
       <div >

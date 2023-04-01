@@ -31,7 +31,7 @@ function MainRoute() {
             <Route path='/about' element={<AboutUs/>}></Route>
             <Route path='/contact' element={<ContactUs/>}></Route>
             <Route path='/website' element={<MoreWebsite/>}></Route>
-            {/* <Route path="/admin/products" element={<Products/>}></Route> */}
+            <Route path="/admin/products" element={<Products/>}></Route>
             <Route path="/admin/users" element={<Users/>}></Route>
             <Route path="/admin/sliders" element={<Sliders/>}></Route>
             <Route path="/admin/reviews" element={<Reviews/>}></Route>

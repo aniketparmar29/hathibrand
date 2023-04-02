@@ -1,9 +1,12 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch,useSelector} from 'react-redux';
 import { EditProduct } from '../Redux/AdminReducer/actions';
-
+import { useAlert } from "react-alert";
 const EditProductModal = ({ product, closeModal }) => {
   const dispatch = useDispatch();
+  const editsuccess = useSelector((state) => state.AdminReducer.editsuccess);
+  const alert = useAlert();
+
   const [name, setName] = useState(product.name);
   const [weight, setWeight] = useState(product.weight);
   const [price, setPrice] = useState(product.price);
@@ -16,15 +19,18 @@ const EditProductModal = ({ product, closeModal }) => {
 
   const pro = {
     name,
-    weight,
-    stock,
-    price
+    weight: Number(weight),
+    stock: Number(stock), 
+    price: Number(price)
   }
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(EditProduct(product.id,pro));
     closeModal();
   };
+useEffect(() => {
+  
+},[])
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">

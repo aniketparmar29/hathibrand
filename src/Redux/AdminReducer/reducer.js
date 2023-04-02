@@ -35,6 +35,7 @@ import {
     sliders:[],
     products:[],
     reviews:[],
+    editsuccess:false,
     users:[],
     isLoading:false,
     isError:false,
@@ -55,10 +56,10 @@ import {
         return {...state,isError: true,isLoading: false}
     }
     case UPDATE_PRODUCT_REQUEST: {
-        return { ...state,isLoading: true}
+        return { ...state,isLoading: true,editsuccess:false}
     }
     case UPDATE_PRODUCT_SUCCESS: {
-        return {...state,isLoading:false}
+        return {...state,isLoading:false,editsuccess:true}
     }
     case UPDATE_PRODUCT_FAIL: {
         return {...state,isError: true,isLoading: false}

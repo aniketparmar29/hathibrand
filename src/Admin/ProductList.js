@@ -15,6 +15,7 @@ import ProductCardad from "./ProductCardad";
   const dispatch = useDispatch();
   const product = useSelector((state) => state.ProductReducer.product);
   const isLoading = useSelector((state) => state.AdminReducer.isLoading);
+  const editsuccess = useSelector((state) => state.AdminReducer.editsuccess);
 
   // const delpro = (id) =>{
   //   dispatch(deleteProduct(id));
@@ -23,8 +24,7 @@ import ProductCardad from "./ProductCardad";
 
  useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch]);
- console.log(product)
+  }, [dispatch,editsuccess]);
   useEffect(() => {
     // if(isdelete===true){
     //   alert.success("Product is deleted")

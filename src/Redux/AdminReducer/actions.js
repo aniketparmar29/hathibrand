@@ -313,12 +313,14 @@ const UpdateProductFailureAction = () => {
 
 
 export const EditProduct = (id,product) => {
+  console.log(product)
   return (dispatch) => {
     dispatch(UpdateProductRequestAction());
 
     axios
-      .post(`https://real-cyan-swallow-boot.cyclic.app/products/${id}`,product)
+      .put(`https://real-cyan-swallow-boot.cyclic.app/products/${id}`,product)
       .then((res) => {
+        console.log(res)
         dispatch(UpdateProductSuccesAction(res.data));
       })
       .catch((err) => {

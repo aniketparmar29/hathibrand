@@ -16,7 +16,7 @@ const reviewchange=(value)=>{
 
 
 }
-const {"single_id": id, "pr_name":name} = single_id
+// const {"single_id": id, "pr_name":name} = single_id
 const {user_id,user_name} = user;
 
  const postfunction=()=>{

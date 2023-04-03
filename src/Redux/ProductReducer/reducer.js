@@ -6,6 +6,25 @@ import {
     GET_SINGLE_FAILURE,
     GET_SINGLE_SUCCESS,
     GET_SINGLE_REQUEST,
+
+
+    CREATE_REVIEW_FAIL,
+ CREATE_REVIEW_SUCCESS,
+ CREATE_REVIEW_REQUEST,
+
+DELETE_REVIEW_FAIL,
+DELETE_REVIEW_SUCCESS,
+DELETE_REVIEW_REQUEST,
+
+
+EDIT_REVIEW_FAIL,
+EDIT_REVIEW_SUCCESS,
+EDIT_REVIEW_REQUEST,
+
+GET_REVIEW_SUCCESS,
+GET_REVIEW_FAIL,
+GET_REVIEW_REQUEST,
+
     
   } from "./actionTypes";
 
@@ -14,6 +33,7 @@ const initialState = {
     isLoading:false,
     isError:false,
     single:{},
+    reviw:[],
 }
 
 
@@ -41,9 +61,60 @@ const reducer = (state = initialState, action) => {
             return {...state,isError: true,isLoading: false}
         }
         
+// reviw get
+        case GET_REVIEW_REQUEST: {
+            return { ...state,isLoading: true}
+        }
+        case GET_REVIEW_SUCCESS: {
+            return {...state,isLoading:false,reviw: payload}
+        }
+        case GET_REVIEW_FAIL: {
+            return {...state,isError: true,isLoading: false}
+        }
+
+// reviw edit
+
+            case EDIT_REVIEW_REQUEST: {
+                return { ...state,isLoading: true}
+            }
+            case EDIT_REVIEW_SUCCESS: {
+                return {...state,isLoading:false,reviw: payload}
+            }
+            case EDIT_REVIEW_FAIL: {
+                return {...state,isError: true,isLoading: false}
+            }
+
+// reviw create
+                case CREATE_REVIEW_REQUEST: {
+                    return { ...state,isLoading: true}
+                }
+                case CREATE_REVIEW_SUCCESS: {
+                    return {...state,isLoading:false,reviw: payload}
+                }
+                case CREATE_REVIEW_FAIL: {
+                    return {...state,isError: true,isLoading: false}
+                }
+
+// delete
+
+                case DELETE_REVIEW_REQUEST: {
+                    return { ...state,isLoading: true}
+                }
+                case DELETE_REVIEW_SUCCESS: {
+                    return {...state,isLoading:false,reviw: payload}
+                }
+                case DELETE_REVIEW_FAIL: {
+                    return {...state,isError: true,isLoading: false}
+                }
         default: return state;
     }
 
 }
+
+
+
+
+
+
 
 export { reducer }

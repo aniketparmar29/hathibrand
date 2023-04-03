@@ -8,7 +8,9 @@ import Navbar from '../Components/Navbar'
 import { getsingle } from '../Redux/ProductReducer/action'
 import {postcart} from "../Redux/CartReducer/action"
 import "../Style/nav.css"
+import RatingBar from "../Admin/RatingBar"
 import { useAlert } from "react-alert";
+import Starform from '../Components/Starform'
 const Signle = () => {
   const alert = useAlert();
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
@@ -72,7 +74,6 @@ const Signle = () => {
      setshowalert(true)
   }
 
-
   return (
     <>
     <Navbar />
@@ -82,7 +83,7 @@ const Signle = () => {
     flexDirection={["column","column","row"]}
     mx={["0","0","10%"]}
     my="5%"
-    pt={["130px"]}
+    
     justifyContent="center"
     alignItems="center"
   >
@@ -116,8 +117,9 @@ const Signle = () => {
       >
         {single.name}
       </Box>
+      <Box mt={"4"} display={"flex"} gap="2"><span>Rating:</span><RatingBar rating={5}/></Box>
 
-      <Box mt={"5"}>
+      <Box mt={"4"}>
         <Box as="span" color="gray.600" fontSize="lg">
           MRP:
         </Box>
@@ -139,8 +141,8 @@ const Signle = () => {
           {single.price}₹
         </Box>
       </Box>
-
-      <Box mt={"5"}>
+      
+      <Box mt={"4"}>
         <Box as="span" color="red.500" fontSize="lg">
           Discount:
         </Box>
@@ -161,37 +163,44 @@ const Signle = () => {
           letterSpacing="wide"
           fontSize="lg"
         >
-          Weight:-
+          Weight:
           {single.weight >= 1000
             ? single.weight / 1000
             : single.weight}
           {single.weight >= 1000 ? "kg" : "gm"}
         </Text>
       </Box>
-
-      <Box d="flex" mt="5" alignItems="center">
-        <Box as="span"  color="gray.600" fontSize="xl">
-          In stock
-        </Box>
-      </Box>
-      
-      <div className="flex items-center justify-center space-x-4">
-      <button
+      <Box mt={"4"} className="flex  space-x-4">
+      <Button
+        size={'xs'}
+        bgColor="#440430"
         type="button"
+        color='white'
         onClick={handleDecrease}
         className="bg-gray-100 text-gray-500 rounded-md p-2 hover:bg-gray-200 focus:outline-none"
       >
         <FaMinus/>
-      </button>
+      </Button>
       <span className="font-medium">{quantity}</span>
-      <button
+      <Button
+       size={'xs'}
+        bgColor="#440430"
+        color='white'
         type="button"
         onClick={handleIncrease}
         className="bg-gray-100 text-gray-500 rounded-md p-2 hover:bg-gray-200 focus:outline-none"
       >
        <FaPlus/>
-      </button>
-    </div>
+      </Button>
+    </Box>
+
+      <Box d="flex" mt="5" alignItems="center" >
+        <Box as="span"  color="green" fontSize="xl">
+          In stock
+        </Box>
+      </Box>
+      
+     
         <Box d="flex" mt="5" alignItems="center">
         <Button
           borderRadius={0}
@@ -209,7 +218,7 @@ const Signle = () => {
     </Box>
   </Box>
 )}
-
+<Starform  single={single} user={user} />
 <Footer />
     </>
   )

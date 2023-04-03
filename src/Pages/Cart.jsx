@@ -50,8 +50,8 @@ const Cart = () => {
     <Navbar/>
     {!isAuth && <div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">LOGIN THEN YOU CAN ACCESS YOUR CART</div>}
     {isAuth && 
-    <Flex direction={["column","row","row"]}>
-    <Box border={"0px solid gray"} w={["100%", "80%"]}>
+    <Flex direction={["column","column","row"]}>
+    <Box border={"0px solid gray"} w={["100%", "80%","80%"]}>
     {cart.length !== 0 ? (
   cart.map((el) => (
     <Cartcard

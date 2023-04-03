@@ -11,8 +11,8 @@ const RatingBar = ({ rating }) => {
       {[...Array(5)].map((_, i) => (
         <svg
           key={i}
-          className={`w-5 h-5 fill-current ${
-            i < currentRating ? 'text-yellow-500' : 'text-gray-300'
+          className={`w-7 h-7 fill-current ${
+            i < currentRating ? 'text-yellow-400' : 'text-gray-300'
           } cursor-pointer`}
           onClick={() => handleRatingChange(i + 1)}
           xmlns="http://www.w3.org/2000/svg"

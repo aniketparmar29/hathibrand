@@ -15,6 +15,7 @@ import Products from '../Admin/Products'
 import Users from '../Admin/Users'
 import Sliders from '../Admin/Sliders'
 import Reviews from '../Admin/Reviews'
+import Checkout from './Checkout'
 function MainRoute() {
   return (
     <div>
@@ -27,6 +28,7 @@ function MainRoute() {
             <Route path='/admin' element={<Dashboard/>}></Route>
             <Route path='/products' element={<ProudctPage/>}></Route>
             <Route path='/cart' element={<Cart/>}></Route>
+            <Route path='/checkout' element={<Checkout/>}></Route>
             <Route path='*' element={<PageNotFound/>}></Route>
             <Route path='/about' element={<AboutUs/>}></Route>
             <Route path='/contact' element={<ContactUs/>}></Route>

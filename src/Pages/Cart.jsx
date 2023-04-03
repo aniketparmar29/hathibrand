@@ -6,7 +6,7 @@ import {getcart} from "../Redux/CartReducer/action"
 import { useDispatch } from 'react-redux'
 import Navbar from "../Components/Navbar"
 import Footer from '../Components/Footer'
-
+import { Link } from "react-router-dom";
 const Cart = () => {
 
   window.document.title="Cart-Hathibrand"
@@ -93,7 +93,7 @@ const Cart = () => {
           <Flex display={"flex"}>
             <Box fontWeight={"bold"} fontSize="xl" ml={"20%"}  mt="5%">
               Total price : <span className="text-green-600">{Total}</span>
-             <Button ml={"30px"} mt={["5px","10px"]} bgColor={"#440430"} color="white">Checkout</Button>
+             <Link to="/checkout" ml={"30px"} mt={["5px","10px"]} bgColor={"#440430"} color="white">Checkout</Link>
             </Box>
             
            

@@ -2,9 +2,6 @@ import { useState } from "react";
 const RatingBar = ({ rating }) => {
   
   const [currentRating, setCurrentRating] = useState(rating);
-  const handleRatingChange = (newRating) => {
-    setCurrentRating(newRating);
-  };
 
   return (
     <div className="flex items-center z-0">
@@ -14,7 +11,6 @@ const RatingBar = ({ rating }) => {
           className={`w-7 h-7 fill-current ${
             i < currentRating ? 'text-yellow-400' : 'text-gray-300'
           } cursor-pointer`}
-          onClick={() => handleRatingChange(i + 1)}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
         >

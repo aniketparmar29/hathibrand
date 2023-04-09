@@ -214,17 +214,17 @@ export const deletereview=(user_id,pr_id)=>{
 
 
 // create
-export const createreviw=(user_id,pr_id,reviw)=>{
+export const createreviw=(reviw)=>{
   return(dispatch)=>{
-    dispatch(deletereviewrequestAction())
+    dispatch(createreviewrequestAction())
 
     axios
-    .post(`https://real-cyan-swallow-boot.cyclic.app/reviews/${user_id}/${pr_id}`,reviw)
+    .post(`https://real-cyan-swallow-boot.cyclic.app/reviews/new`,reviw)
     .then((res)=>{
-      dispatch(deletereviewsuccessAction(res.data))
+      dispatch(createreviewsuccessAction(res.data))
     })
     .catch((err)=>{
-      dispatch(deletereviewfailureAction())
+      dispatch(createreviewfailureAction())
     })
   }
 

@@ -10,7 +10,6 @@ import {postcart} from "../Redux/CartReducer/action"
 import "../Style/nav.css"
 import RatingBar from "../Admin/RatingBar"
 import { useAlert } from "react-alert";
-import Starform from '../Components/Starform'
 const Signle = () => {
   const alert = useAlert();
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
@@ -218,7 +217,6 @@ const Signle = () => {
     </Box>
   </Box>
 )}
-<Starform  single={single} user={user} />
 <Footer />
     </>
   )

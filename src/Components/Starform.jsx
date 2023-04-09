@@ -2,8 +2,13 @@ import { Box, Button, Input } from '@chakra-ui/react';
 import React from 'react'
 import { useState } from "react";
 import StarRating from "./StarRating";
+import {createreviw} from '../Redux/ProductReducer/action';
+import {useDispatch} from 'react-redux';
+import { useAlert } from "react-alert";
 
 export default function Starform({single,user}) {
+  const alert = useAlert();
+    const dispatch = useDispatch();
     const [rating, setRating] = useState(0);
     const [review, setreview] = useState("");
     const [post,setpost]=useState([])
@@ -13,19 +18,19 @@ export default function Starform({single,user}) {
 
 const reviewchange=(value)=>{
   setreview(value)
-
-
 }
-// const {"single_id": id, "pr_name":name} = single_id
-const {user_id,user_name} = user;
-
- const postfunction=()=>{
-
-   
-
-
+const postfunction=()=>{
+   const finalreview={
+     review,
+     rating,
+     user_name:user.name,
+     pr_id:single.id,
+     pr_name:single.name,
+     user_id:user.id
+   } 
+  dispatch(createreviw(finalreview));
+  alert.success("Review Post Successfuly")
  }
-console.log(review)
   return (
     <>
      <Box m={["3"]} display={"flex"} flexDirection={"column"} padding={"10"} justifyContent={"center"} alignItems={"center"} borderRadius={"20"} border={"1px solid gray"} bgColor="#440430" >

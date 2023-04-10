@@ -16,6 +16,7 @@ import Users from '../Admin/Users'
 import Sliders from '../Admin/Sliders'
 import Reviews from '../Admin/Reviews'
 import Checkout from './Checkout'
+import AdminCoupan from '../Admin/AdminCoupan'
 function MainRoute() {
   return (
     <div>
@@ -37,6 +38,7 @@ function MainRoute() {
             <Route path="/admin/users" element={<Users/>}></Route>
             <Route path="/admin/sliders" element={<Sliders/>}></Route>
             <Route path="/admin/reviews" element={<Reviews/>}></Route>
+            <Route path="/admin/coupan" element={<AdminCoupan/>}></Route>
         </Routes>
     </div>
   )

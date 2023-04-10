@@ -28,7 +28,16 @@ import {
   DELETE_SLIDER_FAIL,
   ALL_REVIEW_FAIL,
   ALL_REVIEW_REQUEST,
-  ALL_REVIEW_SUCCESS
+  ALL_REVIEW_SUCCESS,
+  ALL_COUPAN_FAIL,
+  ALL_COUPAN_REQUEST,
+  ALL_COUPAN_SUCCESS,
+  CREATE_COUPAN_FAIL,
+  CREATE_COUPAN_REQUEST,
+  CREATE_COUPAN_SUCCESS,
+  DELETE_COUPAN_FAIL,
+  DELETE_COUPAN_REQUEST,
+  DELETE_COUPAN_SUCCESS
 } from "./actions-types";
   import axios from "axios";
 
@@ -329,3 +338,32 @@ export const EditProduct = (id,product) => {
       });
   };
 };
+
+
+
+  //get all Coupan
+  const getCoupanRequestAction = () => {
+    return { type: ALL_COUPAN_REQUEST };
+  };
+  
+  const getCoupanSuccesAction = (payload) => {
+    return { type: ALL_COUPAN_SUCCESS, payload };
+  };
+  
+  const getCoupanFailureAction = () => {
+    return { type: ALL_COUPAN_FAIL };
+  };
+  export const getCoupans = () => {
+    return (dispatch) => {
+      dispatch(getCoupanRequestAction());
+  
+      axios
+        .get(`https://real-cyan-swallow-boot.cyclic.app/coupons`)
+        .then((res) => {
+          dispatch(getCoupanSuccesAction(res.data));
+        })
+        .catch((err) => {
+          dispatch(getCoupanFailureAction());
+        });
+    };
+  };

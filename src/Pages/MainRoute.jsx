@@ -17,6 +17,10 @@ import Sliders from '../Admin/Sliders'
 import Reviews from '../Admin/Reviews'
 import Checkout from './Checkout'
 import AdminCoupan from '../Admin/AdminCoupan'
+import CustomerSupp from './CustomerSupp'
+import Termsofserice from './Termsofserice'
+import Privacypolicy from './privacypolicy'
+import RefundPolicy from './RefundPolicy'
 function MainRoute() {
   return (
     <div>
@@ -39,6 +43,10 @@ function MainRoute() {
             <Route path="/admin/sliders" element={<Sliders/>}></Route>
             <Route path="/admin/reviews" element={<Reviews/>}></Route>
             <Route path="/admin/coupan" element={<AdminCoupan/>}></Route>
+            <Route path="/support" element={<CustomerSupp/>}></Route>
+            <Route path="/terms-of-service" element={<Termsofserice/>}></Route>
+            <Route path="/privacy-policy" element={<Privacypolicy/>}></Route>
+            <Route path="/cancellation" element={<RefundPolicy/>}></Route>
         </Routes>
     </div>
   )

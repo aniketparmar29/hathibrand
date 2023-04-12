@@ -16,11 +16,11 @@ import Users from '../Admin/Users'
 import Sliders from '../Admin/Sliders'
 import Reviews from '../Admin/Reviews'
 import Checkout from './Checkout'
-import AdminCoupan from '../Admin/AdminCoupan'
 import CustomerSupp from './CustomerSupp'
 import Termsofserice from './Termsofserice'
-import Privacypolicy from './privacypolicy'
+import Privacypolicy from './Privacypolicy'
 import RefundPolicy from './RefundPolicy'
+import CheckoutSuccess from './CheckoutSuccess'
 function MainRoute() {
   return (
     <div>
@@ -33,6 +33,7 @@ function MainRoute() {
             <Route path='/admin' element={<Dashboard/>}></Route>
             <Route path='/products' element={<ProudctPage/>}></Route>
             <Route path='/cart' element={<Cart/>}></Route>
+            <Route path='/checkout-success' element={<CheckoutSuccess/>}></Route>
             <Route path='/checkout' element={<Checkout/>}></Route>
             <Route path='*' element={<PageNotFound/>}></Route>
             <Route path='/about' element={<AboutUs/>}></Route>
@@ -42,7 +43,6 @@ function MainRoute() {
             <Route path="/admin/users" element={<Users/>}></Route>
             <Route path="/admin/sliders" element={<Sliders/>}></Route>
             <Route path="/admin/reviews" element={<Reviews/>}></Route>
-            <Route path="/admin/coupan" element={<AdminCoupan/>}></Route>
             <Route path="/support" element={<CustomerSupp/>}></Route>
             <Route path="/terms-of-service" element={<Termsofserice/>}></Route>
             <Route path="/privacy-policy" element={<Privacypolicy/>}></Route>

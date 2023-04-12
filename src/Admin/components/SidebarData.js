@@ -38,10 +38,5 @@ export const SidebarData = [
     title: 'Sliders',
     path: '/admin/sliders',
     icon: <FaIcons.FaAd />
-  },
-  {
-    title: 'Coupans',
-    path: '/admin/coupan',
-    icon: <FaIcons.FaDiaspora />
   }
 ];

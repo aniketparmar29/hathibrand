@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import Navbar from "../Components/Navbar"
 import Footer from '../Components/Footer'
 import { Link } from "react-router-dom";
+import PayButton from "../Components/PayButton";
 const Cart = () => {
 
   window.document.title="Cart-Hathibrand"
@@ -55,8 +56,8 @@ const Cart = () => {
     {cart.length !== 0 ? (
   cart.map((el) => (
     <Cartcard
-      el={el}
       key={el.id}
+      el={el}
       userid={user.id}
       dispatch={dispatch}
       Total={Total}
@@ -72,32 +73,17 @@ const Cart = () => {
           </Box>
      <Box height={["500","500"]} width={["100%","30%"]} >
 
-      <Box border={"1px solid gray"} m="4" borderRadius={"20"} height="30%" >
-        <Box fontWeight={"bold" } fontSize="xl" py={"5"} px="8">Have Coupon?</Box>
-        <Stack spacing={4}>
-  <InputGroup w={"90%"} pl="10%">
-    <InputRightElement
-      pointerEvents='none'
-      children={"Apply"}
-      color="white"
-      bgColor="#440430"
-      width={"30%"}
-    />
-    <Input type='tel' placeholder='Enter Code' />
-  </InputGroup>
-  </Stack>
-  
-      </Box>
+    
       <Box border={"1px solid gray"} m="4" height="30%" borderRadius={"20"}>
         <Box>
-          <Flex display={"flex"}>
-            <Box fontWeight={"bold"} fontSize="xl" ml={"20%"}  mt="5%">
-              Total price : <span className="text-green-600">{Total}</span>
-             <Link to="/checkout" ml={"30px"} mt={["5px","10px"]} bgColor={"#440430"} color="white">Checkout</Link>
+          <Box >
+            <Box className="flex-col justify-between items-center" fontWeight={"bold"} fontSize="xl" ml={"20%"}  mt="5%">
+             <p>Total price : <span className="text-green-600">{Total}</span></p>
+             <PayButton cartItems={cart} user={user}/>
             </Box>
             
            
-          </Flex>
+          </Box>
         </Box>
       </Box>
      

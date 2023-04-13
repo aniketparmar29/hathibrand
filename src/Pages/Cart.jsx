@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux'
 import Navbar from "../Components/Navbar"
 import Footer from '../Components/Footer'
 import { Link } from "react-router-dom";
-import PayButton from "../Components/PayButton";
 const Cart = () => {
 
   window.document.title="Cart-Hathibrand"
@@ -52,7 +51,7 @@ const Cart = () => {
     {!isAuth && <div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">LOGIN THEN YOU CAN ACCESS YOUR CART</div>}
     {isAuth && 
     <Flex direction={["column","column","row"]}>
-    <Box border={"0px solid gray"} w={["100%", "80%","80%"]}>
+    <Box border={"0px solid gray"} w={["100%", "90%","80%"]}>
     {cart.length !== 0 ? (
   cart.map((el) => (
     <Cartcard
@@ -71,23 +70,9 @@ const Cart = () => {
 
 
           </Box>
-     <Box height={["500","500"]} width={["100%","30%"]} >
-
-    
-      <Box border={"1px solid gray"} m="4" height="30%" borderRadius={"20"}>
-        <Box>
-          <Box >
-            <Box className="flex-col justify-between items-center" fontWeight={"bold"} fontSize="xl" ml={"20%"}  mt="5%">
+     <Box  className="shadow-lg h-28 w-36 flex-col justify-center items-center "  borderRadius={"20"} m={"2"} >
              <p>Total price : <span className="text-green-600">{Total}</span></p>
-             <PayButton cartItems={cart} user={user}/>
-            </Box>
-            
-           
-          </Box>
-        </Box>
-      </Box>
-     
-      
+             <Link to="/checkout" className="text-white bg-[#440430] p-3 rounded-lg ">Checkout</Link>   
        </Box>
        
 

@@ -40,7 +40,7 @@ export const Cartcard = ( {el,userid,dispatch,Total,key}) => {
     <Box>
         <Flex  justifyContent={"space-between"} > <Box m={"auto"} pl={["20px","40px"]} border={"0px solid red"} w={["70%","35%"]}><Image p={"3%"} w={["90%","100%"]} border={"0px solid red"} src={el.pr_img}/></Box>
 
-        <Box width={"50%"} justifyContent="center" alignItems={"center"} textAlign="center" display={["block","flex"]} >
+        <Box width={"50%"} justifyContent="center" alignItems={"center"} textAlign="center" display={["block","block","flex"]} >
        
         <Box border={"0px solid red"}  mt={"6%"} fontSize={["sm","xl"]} fontFamily={"revert-layer"}>{el.pr_name}</Box>
         

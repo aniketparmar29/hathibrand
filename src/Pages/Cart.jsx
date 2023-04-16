@@ -1,4 +1,4 @@
-import {Box, Flex, Input,Stack,InputGroup,InputRightElement, Button} from "@chakra-ui/react"
+import {Box, Flex, } from "@chakra-ui/react"
 import { Cartcard } from '../Components/Cartcard';
 import React, { useEffect,useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -50,7 +50,7 @@ const Cart = () => {
     <Navbar/>
     {!isAuth && <div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">LOGIN THEN YOU CAN ACCESS YOUR CART</div>}
     {isAuth && 
-    <Flex direction={["column","column","row"]}>
+    <Flex justifyContent={"space-around"} direction={["column","column","row"]}>
     <Box border={"0px solid gray"} w={["100%", "90%","80%"]}>
     {cart.length !== 0 ? (
   cart.map((el) => (
@@ -70,12 +70,11 @@ const Cart = () => {
 
 
           </Box>
-     <Box  className="shadow-lg h-28 w-36 flex-col justify-center items-center "  borderRadius={"20"} m={"2"} >
-             <p>Total price : <span className="text-green-600">{Total}</span></p>
-             <Link to="/checkout" className="text-white bg-[#440430] p-3 rounded-lg ">Checkout</Link>   
-       </Box>
-       
 
+           <div className="shadow-lg text-center font-bold  p-10 h-56  " style={{display:"flex",flexDirection:"column"}}>
+            <p>Total: <span>{Total}</span></p>
+            <Link to="/checkout" className="bg-[#440430] p-2 mt-5 text-white rounded-lg">Checkout</Link>
+           </div>
     </Flex>
 }
      <Footer/>

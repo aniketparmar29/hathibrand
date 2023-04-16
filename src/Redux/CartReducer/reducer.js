@@ -11,7 +11,10 @@ import {
     EDIT_CART_FAILURE,
     EDIT_CART_SUCCESS,
     EDIT_CART_REQUEST,
-    REMOVE_CART_REQUEST
+    REMOVE_CART_REQUEST,
+    REMOVE_ALL_CART_FAILURE,
+  REMOVE_ALL_CART_SUCCESS,
+  REMOVE_ALL_CART_REQUEST
   } from "./actiontypes";
 
 const initialState = {
@@ -64,6 +67,17 @@ const reducer = (state = initialState, action) => {
             return {...state,isLoading: false ,rmv:true}
         }
         case REMOVE_CART_FAILURE: {
+            return {...state,isError: true,isLoading: false}
+        }
+
+        case  REMOVE_ALL_CART_REQUEST: {
+            return { ...state,isLoading: true,rmv:false}
+        }
+        case REMOVE_ALL_CART_SUCCESS: {
+
+            return {...state,isLoading: false ,rmv:true}
+        }
+        case REMOVE_ALL_CART_FAILURE: {
             return {...state,isError: true,isLoading: false}
         }
 

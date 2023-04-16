@@ -58,42 +58,45 @@ function Checkout() {
     <Navbar/>
     <Flex justifyContent={"space-around"} direction={["column","column","row"]}>
 
-    <form onSubmit={handleSubmit} >
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        Name:
-        <input className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-      </label>
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        Phone:
-        <input className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} pattern="[0-9]{10}" required />
-      </label>
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        Village:
-        <input className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" type="text" value={village} onChange={(e) => setVillage(e.target.value)} required />
-      </label>
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        Address:
-        <input className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" type="text" value={Address} onChange={(e) => setAddress(e.target.value)} required />
-      </label>
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        Taluka:
-        <input className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" type="text" value={taluka} onChange={(e) => setTaluka(e.target.value)} required />
-      </label>
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        District:
-        <input className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" type="text" value={district} onChange={(e) => setDistrict(e.target.value)} required />
-      </label>
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        Pincode:
-        <input className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" type="text" value={pincode} onChange={(e) => setPincode(e.target.value)} pattern="[0-9]{6}" required />
-      </label>
-      <label className="block text-gray-700 text-sm font-bold mb-2">
+    <form className="p-3 " onSubmit={handleSubmit}>
+  <div>
+    <label className="text-gray-700 text-md font-bold mb-2 block" htmlFor="name">Name:</label>
+    <input className="mt-1 block w-full rounded-md p-2 shadow-lg  focus:border-indigo-500 focus:ring-indigo-500" type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter your name" required />
+  </div>
+  <div>
+    <label className="text-gray-700 text-md font-bold mb-2 block" htmlFor="phone">Phone:</label>
+    <input className="mt-1 block w-full rounded-md p-2 shadow-lg  focus:border-indigo-500 focus:ring-indigo-500" type="tel" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Enter your phone number" pattern="[0-9]{10}" required />
+  </div>
+  <div>
+    <label className="text-gray-700 text-md font-bold mb-2 block" htmlFor="village">Village:</label>
+    <input className="mt-1 block w-full rounded-md p-2 shadow-lg  focus:border-indigo-500 focus:ring-indigo-500" type="text" id="village" value={village} onChange={(e) => setVillage(e.target.value)} placeholder="Enter your village" required />
+  </div>
+  <div>
+    <label className="text-gray-700 text-md font-bold mb-2 block" htmlFor="address">Address:</label>
+    <input className="mt-1 block w-full rounded-md p-2 shadow-lg  focus:border-indigo-500 focus:ring-indigo-500" type="text" id="address" value={Address} onChange={(e) => setAddress(e.target.value)} placeholder="Enter your address" required />
+  </div>
+  <div>
+    <label className="text-gray-700 text-md font-bold mb-2 block" htmlFor="taluka">Taluka:</label>
+    <input className="mt-1 block w-full rounded-md p-2 shadow-lg  focus:border-indigo-500 focus:ring-indigo-500" type="text" id="taluka" value={taluka} onChange={(e) => setTaluka(e.target.value)} placeholder="Enter your taluka" required />
+  </div>
+  <div>
+    <label className="text-gray-700 text-md font-bold mb-2 block" htmlFor="district">District:</label>
+    <input className="mt-1 block w-full rounded-md p-2 shadow-lg  focus:border-indigo-500 focus:ring-indigo-500" type="text" id="district" value={district} onChange={(e) => setDistrict(e.target.value)} placeholder="Enter your district" required />
+  </div>
+  <div>
+    <label className="text-gray-700 text-md font-bold mb-2 block" htmlFor="pincode">Pincode:</label>
+    <input className="mt-1 block w-full rounded-md p-2 shadow-lg  focus:border-indigo-500 focus:ring-indigo-500" type="text" id="pincode" value={pincode} onChange={(e) => setPincode(e.target.value)} placeholder="Enter your pincode" required/>
+</div>
+<div>
+
+      <label className="block text-gray-700 text-md font-bold mb-2">
         State:
-        <input className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" type="text" value={state} onChange={(e) => setState(e.target.value)} required />
       </label>
-      <label className="block text-gray-700 text-sm font-bold mb-2">
+        <input className="mt-1 block w-full rounded-md p-2 shadow-lg  focus:border-indigo-500 focus:ring-indigo-500" type="text" value={state} onChange={(e) => setState(e.target.value)} placeholder="Enter your state" required />
+</div>
+      <label className="block text-gray-700 text-md font-bold mb-2 p-3 shadow-lg mt-5">
         Payment Method:
-        <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+        <select className='shadow-lg bg-black text-white rounded-lg ml-2 p-1' value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
           <option value="Online Payment">Online Payment</option>
           <option value="COD">Cash on Delivery</option>
         </select>
@@ -103,9 +106,12 @@ function Checkout() {
       )}
       <button className="bg-[#440430] p-2 mt-5 text-white rounded-lg" type="submit">Submit Order</button>
     </form>
+    
     {!isAuth && <div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">LOGIN THEN YOU CAN ACCESS YOUR CART</div>}
     {isAuth && 
-    <Flex justifyContent={"space-around"} direction={["column","column","row"]}>
+   
+   <Flex justifyContent={"space-around"} direction={["column","column","row"]}>
+      <p>Total: <span>{Total}</span></p>
     <Box border={"0px solid gray"} w={["100%", "90%","80%"]}>
     {cart.length !== 0 ? (
   cart.map((el) => (
@@ -116,6 +122,7 @@ function Checkout() {
       <p className="text-sm text-gray-500">{el.pr_que}*<span>{el.pr_price}</span></p>
     </div>
     <p className="text-lg font-medium">{el.pr_que * el.pr_price}</p>
+    
   </div>
   
   ))

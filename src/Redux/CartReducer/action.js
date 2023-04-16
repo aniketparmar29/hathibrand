@@ -11,7 +11,10 @@ import {
   EDIT_CART_FAILURE,
   EDIT_CART_SUCCESS,
   EDIT_CART_REQUEST,
-  REMOVE_CART_REQUEST
+  REMOVE_CART_REQUEST,
+  REMOVE_ALL_CART_FAILURE,
+  REMOVE_ALL_CART_SUCCESS,
+  REMOVE_ALL_CART_REQUEST
 } from "./actiontypes";
 import axios from "axios";
 
@@ -49,6 +52,18 @@ const removecartsuccessAction = () => {
 
 const removecartfailureAction = () => {
   return { type: REMOVE_CART_FAILURE };
+};
+
+const removeallcartrequestAction = () => {
+  return { type:REMOVE_ALL_CART_REQUEST };
+};
+
+const removeallcartsuccessAction = () => {
+  return { type: REMOVE_ALL_CART_SUCCESS };
+};
+
+const removeallcartfailureAction = () => {
+  return { type: REMOVE_ALL_CART_FAILURE };
 };
 
 const editcartrequestAction = () => {
@@ -118,6 +133,21 @@ export const getcart = (id) => {
       })
       .catch((err) => {
         dispatch(getcartfailureAction());
+      });
+  };
+};
+
+export const removeallcart = (id) => {
+  return (dispatch) => {
+    dispatch(removeallcartrequestAction());
+
+    axios
+      .delete(`https://real-cyan-swallow-boot.cyclic.app/cart/${id}`)
+      .then((res) => {
+        dispatch(removeallcartsuccessAction(res.data));
+      })
+      .catch((err) => {
+        dispatch(removeallcartfailureAction());
       });
   };
 };

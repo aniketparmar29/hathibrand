@@ -6,7 +6,7 @@ import { Flex,Box } from '@chakra-ui/react';
 function Checkout() {
   const cart= useSelector((state)=>state.cartReducer.cart)
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
-
+  window.document.title="Checkout-Hathibrand"
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [village, setVillage] = useState('');
@@ -56,7 +56,7 @@ function Checkout() {
   return (
     <>
     <Navbar/>
-    <Flex justifyContent={"space-around"} direction={["column","column","row"]}>
+    <Flex padding={"10"} justifyContent={"space-around"} direction={["column","column","row"]}>
 
     <form className="p-3 " onSubmit={handleSubmit}>
   <div>
@@ -97,7 +97,7 @@ function Checkout() {
       <label className="block text-gray-700 text-md font-bold mb-2 p-3 shadow-lg mt-5">
         Payment Method:
         <select className='shadow-lg bg-black text-white rounded-lg ml-2 p-1' value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
-          <option value="Online Payment">Online Payment</option>
+          <option defaultChecked value="Online Payment">Online Payment</option>
           <option value="COD">Cash on Delivery</option>
         </select>
       </label>
@@ -110,9 +110,8 @@ function Checkout() {
     {!isAuth && <div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">LOGIN THEN YOU CAN ACCESS YOUR CART</div>}
     {isAuth && 
    
-   <Flex justifyContent={"space-around"} direction={["column","column","row"]}>
-      <p>Total: <span>{Total}</span></p>
-    <Box border={"0px solid gray"} w={["100%", "90%","80%"]}>
+   <Flex className='p-3 m-auto' justifyContent={"space-around"} direction={["column","column","row"]}>
+    <Box border={"0px solid gray"} w={["80%", "90%","80%"]}>
     {cart.length !== 0 ? (
   cart.map((el) => (
     <div key={el.id} className="flex items-center gap-4 py-2">
@@ -131,6 +130,7 @@ function Checkout() {
     ADD ITEMS IN CART
   </div>
 )}
+      <p className='flex justify-between font-bold border-t-2 border-black text-lg' key={"1"}>Total: <span>{Total}</span></p>
 
 
           </Box>

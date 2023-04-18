@@ -11,6 +11,8 @@ import { RiMenu3Fill } from 'react-icons/ri';
 import { getProducts } from '../Redux/ProductReducer/action';
 import { Link } from 'react-router-dom';
 import {useNavigate} from "react-router-dom"
+import { ChevronDownIcon } from '@chakra-ui/icons'
+import { Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
 import {getcart} from "../Redux/CartReducer/action"
 function Navbar() {
   
@@ -141,7 +143,7 @@ useEffect(()=>{
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
               role="menuitem"
             >
-              My Orders
+            <Link to="/myorder"> My Orders</Link>
             </button>
             <button
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
@@ -188,48 +190,49 @@ useEffect(()=>{
   </InputGroup>
              
           
-<section
-  className="block fixed bottom-0 inset-x-0 z-50  shadow-lg  bg-gray-700 dark:bg-dark backdrop-blur-lg bg-opacity-30 dark:bg-opacity-30 text-amber-400 border-t-2 border-royal/20">
+  <section className="fixed bottom-0 inset-x-0 z-50 shadow-lg bg-gray-700 dark:bg-dark backdrop-blur-lg bg-opacity-30 dark:bg-opacity-30 text-amber-400 border-t-2 border-royal/20">
   <div id="tabs" className="flex justify-between">
-    <Link to="/"
-      className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white"
-      >
-      <FaHome className="h-6 w-6 inline-block mb-1"/>
+    <Link to="/" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white">
+      <FaHome className="h-6 w-6 inline-block mb-1" />
       <span className="tab block text-xs font-extrabold">Home</span>
     </Link>
-    <Link to="/products"
-      className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white"
-      >
-     <RiMenu3Fill className="h-6 w-6 inline-block mb-1"/>
+    <Link to="/products" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white">
+      <RiMenu3Fill className="h-6 w-6 inline-block mb-1" />
       <span className="tab block text-xs font-extrabold">Categories</span>
     </Link>
-    <Link to="/cart"
-      className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white"
-      >
-      <FaShoppingCart className="h-6 w-6 inline-block mb-1"/>
+    <Link to="/cart" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white">
+      <FaShoppingCart className="h-6 w-6 inline-block mb-1" />
       <span className="tab block text-xs font-extrabold">Cart <span>{cart.length}</span></span>
     </Link>
-    {user.role==="admin" &&  isAuth===true &&<Link to="/admin"
-      className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white"
-      >
-     <GrUserAdmin className="h-6 w-6 inline-block mb-1" />
-      <span className="tab block text-xs font-extrabold">admin</span>
-    </Link>}
-    {isAuth?<Box onClick={()=>{dispatch(logoutUser())}}
-      className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white"
-      >
-     <FaUser className="h-6 w-6 inline-block mb-1"/>
-      <span className="tab block text-xs font-extrabold" >Logout</span>
-    </Box>:<Link to="/login"
-      className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white"
-      >
-          <FaUser className="h-6 w-6 inline-block mb-1"/>
-      <span className="tab block text-xs font-extrabold">Login</span>
-    </Link> }
-    
-    
+    {isAuth ? (
+      <Menu>
+        <MenuButton onClick={toggleDropdown} className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white">
+          <FaUser className="h-6 w-6 inline-block mb-1" />
+          <span className="tab block text-xs font-extrabold">{user.name}</span>
+        </MenuButton>
+        <MenuList>
+          <MenuItem>
+            <Link to="/myorder"> My Orders</Link>
+          </MenuItem>
+          <MenuItem onClick={() => { dispatch(logoutUser()) }}>
+            Logout
+          </MenuItem>
+          {user.role === "admin" && isAuth === true && (
+            <MenuItem>
+              <Link to="/admin">admin</Link>
+            </MenuItem>
+          )}
+        </MenuList>
+      </Menu>
+    ) : (
+      <Link to="/login" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white">
+        <FaUser className="h-6 w-6 inline-block mb-1" />
+        <span className="tab block text-xs font-extrabold">Login</span>
+      </Link>
+    )}
   </div>
 </section>
+
           </Box>
 
             }   

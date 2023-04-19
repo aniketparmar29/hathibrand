@@ -1,5 +1,6 @@
-import React,{useState} from 'react'
-
+import React,{useEffect, useState} from 'react'
+import Aos from "aos"
+ import "aos/dist/aos.css"
 const Address = () => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -27,10 +28,10 @@ const Address = () => {
         addressop = JSON.parse(addressop);
       } catch (error) {
         console.error("Error parsing user from local storage", error);
-        addressop = { };
+        addressop = { name:"op"};
       }
     } else {
-      addressop = {};
+      addressop = {name:"op"};
     }
 
     const addresss = {
@@ -55,11 +56,15 @@ const Address = () => {
     setTaluka("");
     setVillage("");
   }
+      const removeadc = () =>{
+        window.localStorage.removeItem("addressop");
+      }
+      useEffect(() => {
+        Aos.init({ duration: 1000});
+      }, [addressop]);
   return (
-    <div>
-        {
-
-        }
+    <div data-aos="fade-up">
+        {addressop.name==="op" && 
         <form className="p-3 " onSubmit={handleSubmit}>
   <div>
     <label className="text-gray-700 text-md font-bold mb-2 block" htmlFor="name">Name:</label>
@@ -99,6 +104,23 @@ const Address = () => {
 <button className="bg-[#440430] p-2 mt-5 text-white rounded-lg" type="submit">Add Address</button>
 
 </form>
+}
+{
+  addressop.name!=="op" && 
+  <div data-aos="fade-up" className="shadow-lg shadow-amber-600 hover:shadow-amber-800 p-4 my-4 flex-col justify-center items-center">
+  <h1 className='font-bold text-center'>Address</h1>
+  <h1 className="text-lg mb-2">Name: {addressop.name}</h1>
+  <h1 className="mr-2">Mobile: {addressop.phone}</h1> 
+  <h1 className="mb-2">Village: {addressop.village}</h1>
+  <h1 className="mb-2">Taluka: {addressop.taluka}</h1>
+  <h1 className="mb-2">Address: {addressop.Address}</h1>
+  <h1 className="mb-2">District: {addressop.district}</h1>
+  <h1 className="mb-2">Pincode: {addressop.pincode}</h1>
+  <h1>State: {addressop.state}</h1>
+  <button className="bg-red-500 hover:bg-red-700 absolute top-2 left-[15rem] text-white font-bold py-1 px-2 ml-2 rounded" onClick={()=>removeadc()}>Delete</button>
+</div>
+
+}
     </div>
   )
 }

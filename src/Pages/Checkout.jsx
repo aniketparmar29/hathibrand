@@ -40,7 +40,7 @@ function Checkout() {
     <Navbar/>
     <Flex padding={"10"} justifyContent={"space-around"} direction={["column","column","row"]}>
 
-    <div>
+    <div className=''>
       <Address/>
       <label className="block text-gray-700 text-md font-bold mb-2 p-3 shadow-lg mt-5">
         Payment Method:
@@ -51,7 +51,7 @@ function Checkout() {
       {paymentMethod === 'Online Payment' && (
         <p>You will be redirected to the payment page after submitting the order.</p>
         )}
-      <button className="bg-[#440430] p-2 mt-5 text-white rounded-lg" type="submit">Submit Order</button>
+      <button className="bg-[#440430] p-2 mt-5 text-white rounded-lg " type="submit">Submit Order</button>
         </div>
     
     {!isAuth && <div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">LOGIN THEN YOU CAN ACCESS YOUR CART</div>}

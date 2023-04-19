@@ -47,7 +47,7 @@ const reducer = (state = initialState, action) => {
             return { ...state,isLoading: true,add:false}
         }
         case POST_ORDER_SUCCESS: {
-            return {...state,isLoading: false,add:true,paymenturl:payload.payment_url}
+            return {...state,isLoading: false,add:true,paymenturl:payload.data.payment_url}
         }
         case POST_ORDER_FAILURE: {
             return {...state,isError: true,isLoading: false}

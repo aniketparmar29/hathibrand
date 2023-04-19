@@ -5,15 +5,12 @@ import { useSelector,useDispatch } from 'react-redux';
 import { Flex,Box } from '@chakra-ui/react';
 import Address from '../Components/Address';
 import { useAlert } from "react-alert";
-import { postoder } from '../Redux/CartReducer/action';
 import Spinner from '../Components/Spinner';
+import axios from 'axios';
 function Checkout() {
   const alert = useAlert();
-  const dispatch = useDispatch();
   const cart= useSelector((state)=>state.cartReducer.cart);
-  console.log(cart)
   const isLoading= useSelector((state)=>state.cartReducer.isLoading);
-  const paymenturl= useSelector((state)=>state.cartReducer.paymenturl);
   const isAuth= useSelector((state)=>state.userAuth.isAuth);
   window.document.title="Checkout-Hathibrand";
   const [paymentMethod, setPaymentMethod] = useState('COD');
@@ -45,13 +42,13 @@ function Checkout() {
   }
   const order_body = {
     client_txn_id: getRandomNumber(12),
-    amount: Total,
-    products: cart,
+    amount: Total.toString(),
+    products: JSON.stringify(cart),
     customer_name: user.name,
     customer_email: user.email,
     customer_mobile: addressop.phone,
     user_id:user.id,
-    address:addressop,
+    address:JSON.stringify(addressop),
   }
 
   function handleSubmit() {
@@ -60,11 +57,14 @@ function Checkout() {
       return;
     }
    
-      dispatch(postoder(order_body))
-    
-  }
-  if(isLoading===false && paymenturl.length>0){
-    window.location.href=paymenturl;
+    axios
+      .post(`https://real-cyan-swallow-boot.cyclic.app/create_order`,order_body)
+      .then((response) => {
+        if (response.data.url) {
+          window.location.href = response.data.data.payment_url;
+        }
+      })
+      .catch((err) => console.log(err.message));
   }
   const calculateTotal = () => {
     let sum = cart.reduce(
@@ -76,7 +76,7 @@ function Checkout() {
   };
   useEffect(() => {
     calculateTotal();
-  }, [cart]);
+  }, [cart,isLoading]);
 
   return (
     <>

@@ -35,7 +35,7 @@ export const Cartcard = ( {el,userid,dispatch,Total,key}) => {
     <>
   
 
-  <Box data-aos="fade-up" fontWeight={"bold"} border={"0px solid gray"} className="shadow-lg shadow-gray" key={key}>
+  <Box data-aos="fade-up" fontWeight={"bold"} border={"0px solid gray"}  className="mb-5 shadow-lg shadow-gray" key={key}>
   <Box border={"0px solid green"}>
     <Box>
         <Flex  justifyContent={"space-between"} > <Box m={"auto"} pl={["20px","40px"]} border={"0px solid red"} w={["70%","35%"]}><Image p={"3%"} w={["90%","100%"]} border={"0px solid red"} src={el.pr_img}/></Box>

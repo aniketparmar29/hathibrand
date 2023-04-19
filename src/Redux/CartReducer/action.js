@@ -14,7 +14,10 @@ import {
   REMOVE_CART_REQUEST,
   REMOVE_ALL_CART_FAILURE,
   REMOVE_ALL_CART_SUCCESS,
-  REMOVE_ALL_CART_REQUEST
+  REMOVE_ALL_CART_REQUEST,
+  POST_ORDER_FAILURE,
+  POST_ORDER_SUCCESS,
+  POST_ORDER_REQUEST
 } from "./actiontypes";
 import axios from "axios";
 
@@ -28,6 +31,18 @@ const postcartsuccessAction = (payload) => {
 
 const postcartfailureAction = () => {
   return { type: POST_CART_FAILURE };
+};
+
+const postorderrequestAction = () => {
+  return { type: POST_ORDER_REQUEST };
+};
+
+const postordersuccessAction = (payload) => {
+  return { type: POST_ORDER_SUCCESS, payload };
+};
+
+const postorderfailureAction = () => {
+  return { type: POST_ORDER_FAILURE };
 };
 
 const getcartrequestAction = () => {
@@ -85,7 +100,6 @@ export const postcart = (product) => {
     axios
       .post(`https://real-cyan-swallow-boot.cyclic.app/add-to-cart`, product)
       .then((res) => {
-        console.log(res.data);
         dispatch(postcartsuccessAction(res.data));
       })
       .catch((err) => {
@@ -148,6 +162,25 @@ export const removeallcart = (id) => {
       })
       .catch((err) => {
         dispatch(removeallcartfailureAction());
+      });
+  };
+};
+
+
+
+//orders
+export const postoder = (product) => {
+  return (dispatch) => {
+    dispatch(postorderrequestAction());
+
+    axios
+      .post(`https://real-cyan-swallow-boot.cyclic.app/create_order`, product)
+      .then((res) => {
+        console.log(res.data);
+        dispatch(postordersuccessAction(res.data));
+      })
+      .catch((err) => {
+        dispatch(postorderfailureAction());
       });
   };
 };

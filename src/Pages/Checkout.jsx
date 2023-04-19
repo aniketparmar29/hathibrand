@@ -1,16 +1,21 @@
 import React, { useState,useEffect  } from 'react';
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { Flex,Box } from '@chakra-ui/react';
 import Address from '../Components/Address';
 import { useAlert } from "react-alert";
-
+import { postoder } from '../Redux/CartReducer/action';
+import Spinner from '../Components/Spinner';
 function Checkout() {
   const alert = useAlert();
-  const cart= useSelector((state)=>state.cartReducer.cart)
-  const isAuth= useSelector((state)=>state.userAuth.isAuth)
-  window.document.title="Checkout-Hathibrand"
+  const dispatch = useDispatch();
+  const cart= useSelector((state)=>state.cartReducer.cart);
+  console.log(cart)
+  const isLoading= useSelector((state)=>state.cartReducer.isLoading);
+  const paymenturl= useSelector((state)=>state.cartReducer.paymenturl);
+  const isAuth= useSelector((state)=>state.userAuth.isAuth);
+  window.document.title="Checkout-Hathibrand";
   const [paymentMethod, setPaymentMethod] = useState('COD');
   let addressop = window.localStorage.getItem("addressop");
   if (addressop) {
@@ -23,17 +28,44 @@ function Checkout() {
   } else {
     addressop = {name:"op"};
   }
+  let user = window.localStorage.getItem("user");
+  if (user) {
+    try {
+      user = JSON.parse(user);
+    } catch (error) {
+      console.error("Error parsing user from local storage", error);
+      user = { role: "hello" };
+    }
+  } else {
+    user = { role: "hello" };
+  }
+  const[Total,setTotal]= useState(0)
+  function getRandomNumber(digit) {
+    return Math.random().toFixed(digit).split('.')[1];
+  }
+  const order_body = {
+    client_txn_id: getRandomNumber(12),
+    amount: Total,
+    products: cart,
+    customer_name: user.name,
+    customer_email: user.email,
+    customer_mobile: addressop.phone,
+    user_id:user.id,
+    address:addressop,
+  }
+
   function handleSubmit() {
     if(addressop.name==="op"){
       alert.error("please Enter Your Address")
       return;
     }
-    if (paymentMethod === 'Online Payment') {
-
-    }
+   
+      dispatch(postoder(order_body))
+    
   }
-  const[Total,setTotal]= useState(0)
-
+  if(isLoading===false && paymenturl.length>0){
+    window.location.href=paymenturl;
+  }
   const calculateTotal = () => {
     let sum = cart.reduce(
       (acc, item) => acc + item.pr_que * item.pr_price,
@@ -93,6 +125,9 @@ function Checkout() {
     </Flex>
 }
     </Flex>
+    {isLoading===true &&  <div className="fixed z-50 inset-0 bg-gray-500 opacity-75 flex items-center justify-center">
+          <Spinner />
+        </div>}
     <Footer/>
     </>
   );

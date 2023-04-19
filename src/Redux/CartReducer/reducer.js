@@ -52,9 +52,6 @@ const reducer = (state = initialState, action) => {
         case POST_ORDER_FAILURE: {
             return {...state,isError: true,isLoading: false}
         }
-
-
-
         case  GET_CART_REQUEST: {
             return { ...state,isLoading: true}
         }
@@ -64,14 +61,6 @@ const reducer = (state = initialState, action) => {
         case GET_CART_FAILURE: {
             return {...state,isError: true,isLoading: false}
         }
-       
-       
-       
-       
-       
-       
-       
-       
         case  REMOVE_CART_REQUEST: {
             return { ...state,isLoading: true,rmv:false}
         }
@@ -82,7 +71,6 @@ const reducer = (state = initialState, action) => {
         case REMOVE_CART_FAILURE: {
             return {...state,isError: true,isLoading: false}
         }
-
         case  REMOVE_ALL_CART_REQUEST: {
             return { ...state,isLoading: true,rmv:false}
         }

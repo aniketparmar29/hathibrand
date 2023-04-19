@@ -4,21 +4,32 @@ import Footer from '../Components/Footer'
 import { useSelector } from 'react-redux';
 import { Flex,Box } from '@chakra-ui/react';
 import Address from '../Components/Address';
+import { useAlert } from "react-alert";
+
 function Checkout() {
+  const alert = useAlert();
   const cart= useSelector((state)=>state.cartReducer.cart)
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
   window.document.title="Checkout-Hathibrand"
   const [paymentMethod, setPaymentMethod] = useState('COD');
-
-  function handleSubmit(event) {
-    // Create an order object using the user's information and payment details
-    
-    // If the user selected online payment, redirect to the payment page
+  let addressop = window.localStorage.getItem("addressop");
+  if (addressop) {
+    try {
+      addressop = JSON.parse(addressop);
+    } catch (error) {
+      console.error("Error parsing user from local storage", error);
+      addressop = { name:"op"};
+    }
+  } else {
+    addressop = {name:"op"};
+  }
+  function handleSubmit() {
+    if(addressop.name==="op"){
+      alert.error("please Enter Your Address")
+      return;
+    }
     if (paymentMethod === 'Online Payment') {
-      window.location.href = 'https://example.com/payment';
-    } else {
-      // Send the order to the server for processing
-      // console.log('Order submitted:', order);
+
     }
   }
   const[Total,setTotal]= useState(0)
@@ -51,7 +62,7 @@ function Checkout() {
       {paymentMethod === 'Online Payment' && (
         <p>You will be redirected to the payment page after submitting the order.</p>
         )}
-      <button className="bg-[#440430] p-2 mt-5 text-white rounded-lg " type="submit">Submit Order</button>
+      <button onClick={()=>handleSubmit()} className="bg-[#440430] p-2 mt-5 text-white rounded-lg " type="submit">Submit Order</button>
         </div>
     
     {!isAuth && <div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">LOGIN THEN YOU CAN ACCESS YOUR CART</div>}
@@ -78,13 +89,10 @@ function Checkout() {
   </div>
 )}
       <p className='flex justify-between font-bold border-t-2 border-black text-lg' key={"1"}>Total: <span>{Total}</span></p>
-
-
           </Box>
     </Flex>
 }
     </Flex>
-
     <Footer/>
     </>
   );

@@ -190,36 +190,36 @@ useEffect(()=>{
   </InputGroup>
              
           
-  <section className="fixed bottom-0 inset-x-0 z-50 shadow-lg bg-gray-700 dark:bg-dark backdrop-blur-lg bg-opacity-30 dark:bg-opacity-30 text-amber-400 border-t-2 border-royal/20">
+  <section className="fixed bottom-0 inset-x-0 z-50 shadow-lg bg-gray-700 dark:bg-dark backdrop-blur-lg bg-opacity-30 dark:bg-opacity-30  border-t-2 border-royal/20">
   <div id="tabs" className="flex justify-between">
-    <Link to="/" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white">
+    <Link to="/" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 ">
       <FaHome className="h-6 w-6 inline-block mb-1" />
       <span className="tab block text-xs font-extrabold">Home</span>
     </Link>
-    <Link to="/products" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white">
+    <Link to="/products" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 ">
       <RiMenu3Fill className="h-6 w-6 inline-block mb-1" />
       <span className="tab block text-xs font-extrabold">Categories</span>
     </Link>
-    <Link to="/cart" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white">
+    <Link to="/cart" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 ">
       <FaShoppingCart className="h-6 w-6 inline-block mb-1" />
       <span className="tab block text-xs font-extrabold">Cart <span>{cart.length}</span></span>
     </Link>
     {isAuth ? (
       <Menu>
-        <MenuButton onClick={toggleDropdown} className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 hover:bg-white">
+        <MenuButton onClick={toggleDropdown} className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 ">
           <FaUser className="h-6 w-6 inline-block mb-1" />
           <span className="tab block text-xs font-extrabold">{user.name}</span>
         </MenuButton>
-        <MenuList>
+        <MenuList >
           <MenuItem>
-            <Link to="/myorder"> My Orders</Link>
+            <Link className='text-black' to="/myorder"> My Orders</Link>
           </MenuItem>
-          <MenuItem onClick={() => { dispatch(logoutUser()) }}>
-            Logout
+          <MenuItem  onClick={() => { dispatch(logoutUser()) }}>
+          <p className='text-black'>Logout</p>
           </MenuItem>
           {user.role === "admin" && isAuth === true && (
             <MenuItem>
-              <Link to="/admin">admin</Link>
+              <Link className='text-black' to="/admin">admin</Link>
             </MenuItem>
           )}
         </MenuList>

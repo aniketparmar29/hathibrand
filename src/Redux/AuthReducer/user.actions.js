@@ -4,7 +4,8 @@ import{REGISTER_USER_LOADING,
     LOGIN_USER_LOADING,
     LOGIN_USER_ERROR,
     LOGIN_USER_SUCCESS,
-    LOGOUT_USER_SUCCESS,} from './user.action.types'
+    LOGOUT_USER_SUCCESS,
+ } from './user.action.types'
 import { loginUserApi, registerUserApi } from './user.auth.api';
 
 export const userLogin = (data)=>async(dispatch)=>{
@@ -27,7 +28,6 @@ export const usersignup = (data)=>async(dispatch)=>{
         dispatch({type:REGISTER_USER_ERROR})
     }
 }
-
 export const logoutUser = ()=> async(dispatch)=>{
     dispatch({type:LOGOUT_USER_SUCCESS})
 }

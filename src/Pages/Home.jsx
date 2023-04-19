@@ -18,7 +18,6 @@ function Home() {
   window.document.title="Hathibrand"
   const dispatch=useDispatch();
   const isAuth= useSelector((state)=>state.userAuth.isAuth)
-
   const [showalert,setshowalert]=useState(false)
   const product= useSelector((state)=>state.ProductReducer.product)
   const navigate = useNavigate()
@@ -85,8 +84,7 @@ function Home() {
         <iframe width={"100%"} height={"100%"} src="https://www.youtube.com/embed/IUcoX-9BL3U" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
         </Box>
        
-        
-
+       
         
         <Footer/>
     </>

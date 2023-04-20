@@ -57,12 +57,10 @@ function Checkout() {
       return;
     }
    
-    console.log(order_body)
     setloading(true)
     axios
       .post(`https://real-cyan-swallow-boot.cyclic.app/create_order`,order_body)
       .then((response) => {
-        console.log(response)
         if (response.data.data.payment_url) {
         setloading(false)
           window.location.href = response.data.data.payment_url;

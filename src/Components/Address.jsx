@@ -10,6 +10,7 @@ const Address = () => {
     const [district, setDistrict] = useState('');
     const [pincode, setPincode] = useState('');
     const [state, setState] = useState('');
+    const [del, setdel] = useState(false);
     
     let user = window.localStorage.getItem("user");
     if (user) {
@@ -57,11 +58,13 @@ const Address = () => {
     setVillage("");
   }
       const removeadc = () =>{
+        setdel(!del)
         window.localStorage.removeItem("addressop");
+        setdel(!del)
       }
       useEffect(() => {
         Aos.init({ duration: 1000});
-      }, [addressop]);
+      }, [addressop,del]);
   return (
     <div data-aos="fade-up">
         {addressop.name==="op" && 

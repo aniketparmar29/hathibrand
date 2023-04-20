@@ -15,16 +15,9 @@ function Checkout() {
   window.document.title="Checkout-Hathibrand";
   const [paymentMethod, setPaymentMethod] = useState('COD');
   let addressop = window.localStorage.getItem("addressop");
-  if (addressop) {
-    try {
-      addressop = JSON.parse(addressop);
-    } catch (error) {
-      console.error("Error parsing user from local storage", error);
-      addressop = { name:"op"};
-    }
-  } else {
-    addressop = {name:"op"};
-  }
+  addressop = addressop ? JSON.parse(addressop) : {};
+
+
   let user = window.localStorage.getItem("user");
   if (user) {
     try {
@@ -52,7 +45,7 @@ function Checkout() {
   }
 
   function handleSubmit() {
-    if(addressop.name==="op"){
+    if(addressop==={}){
       alert.error("please Enter Your Address")
       return;
     }
@@ -78,7 +71,7 @@ function Checkout() {
   };
   useEffect(() => {
     calculateTotal();
-  }, [cart]);
+  }, [cart,addressop]);
 
   return (
     <>

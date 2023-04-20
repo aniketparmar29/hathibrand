@@ -17,10 +17,14 @@ import {
   REMOVE_ALL_CART_REQUEST,
   POST_ORDER_FAILURE,
   POST_ORDER_SUCCESS,
-  POST_ORDER_REQUEST
+  POST_ORDER_REQUEST,
+  GET_ORDER_FAILURE,
+  GET_ORDER_REQUEST,
+  GET_ORDER_SUCCESS
   } from "./actiontypes";
 
 const initialState = {
+    userorders:[],
     paymenturl:"",
     cart:[],
     isLoading:false,
@@ -59,6 +63,16 @@ const reducer = (state = initialState, action) => {
             return {...state,isLoading: false,cart:payload}
         }
         case GET_CART_FAILURE: {
+            return {...state,isError: true,isLoading: false}
+        }
+        case  GET_ORDER_REQUEST: {
+            return { ...state,isLoading: true}
+        }
+        case GET_ORDER_SUCCESS: {
+            console.log(payload)
+            return {...state,isLoading: false,userorders:payload}
+        }
+        case GET_ORDER_FAILURE: {
             return {...state,isError: true,isLoading: false}
         }
         case  REMOVE_CART_REQUEST: {

@@ -33,6 +33,26 @@ const client_txn_id = urlSearchParams.get('client_txn_id');
         });
         const data = await response.json();
         const { status } = data.data;
+        if (status === 'success') {
+          const updatePaymentStatus = async () => {
+            try {
+              const response = await fetch(`https://real-cyan-swallow-boot.cyclic.app/orders/payment/${client_txn_id}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  payment: true
+                })
+              });
+              const data = await response.json();
+              console.log(data);
+            } catch (error) {
+              console.log(error.message);
+            }
+          };
+          updatePaymentStatus();
+        }
         setPaymentStatus(status);
         setLoading(false);
       } catch (error) {

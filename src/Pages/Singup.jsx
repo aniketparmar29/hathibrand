@@ -16,16 +16,14 @@ function Signup() {
   const register_error= useSelector((state)=>state.userAuth.register_error)
   const [loginData, setLoginData] = useState({name:"",email:"",password:""})
   const [showAlert, setShowAlert] = useState(false);
-  const [pass, setPass] = useState(false);
   const handleOnchange = (e)=>{
     setLoginData({...loginData,[e.target.name]:e.target.value})
   }
   window.document.title="Singup-Hathibrand"
   const handleSubmit = async (event) => {
-    setPass(!pass)
     event.preventDefault()
     if(loginData.password.length<8){
-      setPass(!pass);
+      alert.error("password length more than 8 charters")
       return;
     }
     let user = {...loginData}
@@ -38,16 +36,14 @@ function Signup() {
   };
 
   useEffect(() => {
-    if(pass){
-      alert.error("password length more than 8 charters")
-    }
+   
     if(register_error){
       alert.error("Somthing went wrong")
     }
     if(showAlert){
       alert.success("Signup Successfully!");
     }
-  }, [alert,pass,register_error,showAlert])
+  }, [alert,register_error,showAlert])
   return (
 
     <>

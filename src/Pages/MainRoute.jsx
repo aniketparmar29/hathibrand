@@ -40,7 +40,7 @@ function MainRoute() {
             <Route path="/admin/sliders" element={<Sliders/>}></Route>
             <Route path="/admin/reviews" element={<Reviews/>}></Route>
             <Route path="/myorder" element={<Myorders/>}></Route>
-            <Route path="/checkoutsuccess" element={<CheckoutSuccess/>}></Route>
+            <Route path="/checkoutsuccess" element={<CheckoutSuccess />} />
         </Routes>
     </div>
   )

@@ -2,8 +2,10 @@ import React from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
-
+import { useParams } from 'react-router-dom';
 const CheckoutSuccess = () => {
+  const param = useParams();
+  console.log(param)
   return (
     <>
       <Navbar />

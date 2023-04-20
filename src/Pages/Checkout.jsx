@@ -10,7 +10,7 @@ import axios from 'axios';
 function Checkout() {
   const alert = useAlert();
   const cart= useSelector((state)=>state.cartReducer.cart);
-  const isLoading= useSelector((state)=>state.cartReducer.isLoading);
+  const [loading, setloading] = useState(false)
   const isAuth= useSelector((state)=>state.userAuth.isAuth);
   window.document.title="Checkout-Hathibrand";
   const [paymentMethod, setPaymentMethod] = useState('COD');
@@ -48,7 +48,7 @@ function Checkout() {
     customer_email: user.email,
     customer_mobile: addressop.phone,
     user_id:user.id,
-    address:JSON.stringify(addressop),
+    addressop:JSON.stringify(addressop),
   }
 
   function handleSubmit() {
@@ -57,10 +57,14 @@ function Checkout() {
       return;
     }
    
+    console.log(order_body)
+    setloading(true)
     axios
       .post(`https://real-cyan-swallow-boot.cyclic.app/create_order`,order_body)
       .then((response) => {
-        if (response.data.url) {
+        console.log(response)
+        if (response.data.data.payment_url) {
+        setloading(false)
           window.location.href = response.data.data.payment_url;
         }
       })
@@ -76,7 +80,7 @@ function Checkout() {
   };
   useEffect(() => {
     calculateTotal();
-  }, [cart,isLoading]);
+  }, [cart]);
 
   return (
     <>
@@ -125,7 +129,7 @@ function Checkout() {
     </Flex>
 }
     </Flex>
-    {isLoading===true &&  <div className="fixed z-50 inset-0 bg-gray-500 opacity-75 flex items-center justify-center">
+    {loading===true &&  <div className="fixed z-50 inset-0 bg-gray-500 opacity-75 flex items-center justify-center">
           <Spinner />
         </div>}
     <Footer/>

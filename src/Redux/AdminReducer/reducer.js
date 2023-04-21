@@ -37,12 +37,16 @@ import {
   CREATE_COUPAN_SUCCESS,
   DELETE_COUPAN_FAIL,
   DELETE_COUPAN_REQUEST,
-  DELETE_COUPAN_SUCCESS
+  DELETE_COUPAN_SUCCESS,
+  ALL_ORDERS_FAIL,
+  ALL_ORDERS_REQUEST,
+  ALL_ORDERS_SUCCESS
   } from "./actions-types";
 
   const initialState = {
     sliders:[],
     products:[],
+    orders:[],
     coupan:[],
     reviews:[],
     editsuccess:false,
@@ -63,6 +67,15 @@ import {
         return {...state,isLoading:false,products: payload}
     }
     case ALL_PRODUCT_FAIL: {
+        return {...state,isError: true,isLoading: false}
+    }
+    case ALL_ORDERS_REQUEST: {
+        return { ...state,isLoading: true}
+    }
+    case ALL_ORDERS_SUCCESS: {
+        return {...state,isLoading:false,orders: payload}
+    }
+    case ALL_ORDERS_FAIL: {
         return {...state,isError: true,isLoading: false}
     }
     case UPDATE_PRODUCT_REQUEST: {

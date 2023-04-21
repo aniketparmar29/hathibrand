@@ -5,15 +5,18 @@ import { Link } from "react-router-dom";
 import Chart from "chart.js/auto";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../Redux/AdminReducer/actions";
-// import { getAllOrders } from "../Redux/AdminReducer/actions";
+import { getAllOrders } from "../Redux/AdminReducer/actions";
 import { getAllUsers } from "../Redux/AdminReducer/actions";
 import MetaData from "./MetaData";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.AdminReducer.products);
+  const orders = useSelector((state) => state.AdminReducer.orders);
   const users = useSelector((state) => state.AdminReducer.users);
   const isAuth = useSelector((state) => state.userAuth.isAuth);
-  let totalAmount=0;
+  const totalAmount = orders
+  .filter(order => order.payment === "1")
+  .reduce((acc, order) => acc + parseInt(order.amount), 0) || 0;
   let user = window.localStorage.getItem("user");
   if (user) {
     try {
@@ -47,6 +50,7 @@ for(let i=0;i<products.length;i++){
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getAllUsers());
+    dispatch(getAllOrders());
   }, [dispatch]);
   const chartRef = useRef(null);
   const [chartInstance, setChartInstance] = useState(null);
@@ -154,7 +158,7 @@ for(let i=0;i<products.length;i++){
                 </Link>
                 <Link to="/admin/orders">
                   <span>Orders</span>
-                  {/* <p>{orders && orders.length}</p> */}
+                  <p>{orders && orders.length}</p>
                 </Link>
                 <Link to="/admin/users">
                   <span>Users</span>

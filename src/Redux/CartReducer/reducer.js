@@ -69,7 +69,6 @@ const reducer = (state = initialState, action) => {
             return { ...state,isLoading: true}
         }
         case GET_ORDER_SUCCESS: {
-            console.log(payload)
             return {...state,isLoading: false,userorders:payload}
         }
         case GET_ORDER_FAILURE: {

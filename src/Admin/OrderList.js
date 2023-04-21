@@ -1,144 +1,46 @@
-import React, { Fragment, useEffect } from "react";
-import { SimpleGrid } from "@chakra-ui/react";
-import "./productList.css";
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
-import { Button } from "@chakra-ui/react";
-import MetaData from "../layout/MetaData";
-import {FaEdit} from "react-icons/fa"
-import {MdDelete} from 'react-icons/md'
-import SideBar from "./Sidebar";
-import {
-  deleteOrder,
-  getAllOrders,
-  clearErrors,
-} from "../../actions/orderAction";
-import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
+import { getAllOrders } from "../Redux/AdminReducer/actions";
 
-const OrderList = ({ history }) => {
+const OrderList = () => {
   const dispatch = useDispatch();
+  const orders = useSelector((state) => state.AdminReducer.orders);
+  const [filterBy, setFilterBy] = useState("");
 
-  const alert = useAlert();
-
-  const { error, orders } = useSelector((state) => state.allOrders);
-
-  const { error: deleteError, isDeleted } = useSelector((state) => state.order);
-
-  const deleteOrderHandler = (id) => {
-    dispatch(deleteOrder(id));
-  };
-
-  useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
-
-    if (deleteError) {
-      alert.error(deleteError);
-      dispatch(clearErrors());
-    }
-
-    if (isDeleted) {
-      alert.success("Order Deleted Successfully");
-      history.push("/admin/orders");
-      dispatch({ type: DELETE_ORDER_RESET });
-    }
-
+  useEffect(() => {  
     dispatch(getAllOrders());
-  }, [dispatch, alert, error, deleteError, history, isDeleted]);
+  }, [dispatch])
 
-  const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
+  const filteredOrders = orders.filter(order => order.trx_date.includes(filterBy));
+  console.log(filteredOrders,filterBy)
 
-    {
-      field: "status",
-      headerName: "Status",
-      minWidth: 150,
-      flex: 0.5,
-      cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
-      },
-    },
-    {
-      field: "itemsQty",
-      headerName: "Items Qty",
-      type: "number",
-      minWidth: 150,
-      flex: 0.4,
-    },
-
-    {
-      field: "amount",
-      headerName: "Amount",
-      type: "number",
-      minWidth: 270,
-      flex: 0.5,
-    },
-
-    {
-      field: "actions",
-      flex: 0.3,
-      headerName: "Actions",
-      minWidth: 150,
-      type: "number",
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <Fragment>
-            <Link to={`/admin/order/${params.getValue(params.id, "id")}`}>
-              <FaEdit />
-            </Link>
-
-            <Button
-              onClick={() =>
-                deleteOrderHandler(params.getValue(params.id, "id"))
-              }
-            >
-              <MdDelete />
-            </Button>
-          </Fragment>
-        );
-      },
-    },
-  ];
-
-  const rows = [];
-
-  orders &&
-    orders.forEach((item) => {
-      rows.push({
-        id: item._id,
-        itemsQty: item.orderItems.length,
-        amount: item.totalPrice,
-        status: item.orderStatus,
-      });
-    });
+  // Function to format date in dd-mm-yyyy format
+  
 
   return (
-    <Fragment>
-      <MetaData title={`ALL ORDERS - Admin`} />
+    <div>
+      <input
+        type="date"
+        id="filterByDate"
+        value={filterBy}
+        onChange={(e) => {
+          const [year, month, day] = e.target.value.split("-");
+          const formattedDate = `${day}/${month}/${year}`;
+          setFilterBy(formattedDate);
+        }}
+      />
 
-      <div className="dashboard">
-        <SideBar />
-        <div className="productListContainer">
-          <h1 id="productListHeading">ALL ORDERS</h1>
-
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            className="productListTable"
-            autoHeight
-          />
+      {filteredOrders && filteredOrders.map((order) => (
+        <div key={order.order_id}>
+          <p>Order ID: {order.order_id}</p>
+          <p>Transaction ID: {order.trx_id}</p>
+          <p>Amount: {order.amount}</p>
+          <p>Status: {order.status}</p>
+          <p>Transaction Date: {order.trx_date}</p>
         </div>
-      </div>
-    </Fragment>
+      ))}
+    </div>
   );
-};
+}
 
 export default OrderList;

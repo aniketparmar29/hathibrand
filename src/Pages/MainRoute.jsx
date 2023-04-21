@@ -18,6 +18,7 @@ import Reviews from '../Admin/Reviews'
 import Checkout from './Checkout'
 import Myorders from './Myorders'
 import CheckoutSuccess from './CheckoutSuccess'
+import Orders from '../Admin/Orders'
 function MainRoute() {
   return (
     <div>
@@ -39,6 +40,7 @@ function MainRoute() {
             <Route path="/admin/users" element={<Users/>}></Route>
             <Route path="/admin/sliders" element={<Sliders/>}></Route>
             <Route path="/admin/reviews" element={<Reviews/>}></Route>
+            <Route path="/admin/orders" element={<Orders/>}></Route>
             <Route path="/myorder" element={<Myorders/>}></Route>
             <Route path="/checkoutsuccess" element={<CheckoutSuccess />} />
         </Routes>

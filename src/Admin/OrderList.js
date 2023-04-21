@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { getAllOrders } from "../Redux/AdminReducer/actions";
 
@@ -7,22 +7,30 @@ const OrderList = () => {
   const orders = useSelector((state) => state.AdminReducer.orders);
   const [filterBy, setFilterBy] = useState("");
 
-  const handleGetAllOrders = () => {
+  useEffect(() => {  
     dispatch(getAllOrders());
-  };
+  }, [dispatch])
 
+  const filteredOrders = orders.filter(order => order.trx_date.includes(filterBy));
+  console.log(filteredOrders,filterBy)
+
+  // Function to format date in dd-mm-yyyy format
+  
 
   return (
     <div>
-      <button onClick={handleGetAllOrders}>Get All Orders</button>
-      
       <input
-       type="date"
-       id="filterByDate"
-       value={filterBy}
-       onChange={(e) => setFilterBy(e.target.value)}
+        type="date"
+        id="filterByDate"
+        value={filterBy}
+        onChange={(e) => {
+          const [year, month, day] = e.target.value.split("-");
+          const formattedDate = `${day}/${month}/${year}`;
+          setFilterBy(formattedDate);
+        }}
       />
-      {orders && orders.filter((order) => order.trx_date.includes(filterBy)).map((order) => (
+
+      {filteredOrders && filteredOrders.map((order) => (
         <div key={order.order_id}>
           <p>Order ID: {order.order_id}</p>
           <p>Transaction ID: {order.trx_id}</p>
@@ -32,7 +40,7 @@ const OrderList = () => {
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 export default OrderList;

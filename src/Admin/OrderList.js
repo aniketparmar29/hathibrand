@@ -21,6 +21,11 @@ const OrderList = () => {
   const filteredOrders = orders.filter(order => order.trx_date.includes(filterBy));
 
   const downloadInvoice = (order) => {
+    console.log(order);
+    // Parse the JSON strings into objects
+    const billingAddress = JSON.parse(order.addressop);
+    const products = JSON.parse(order.product);
+
     // Create a new jsPDF instance
     const doc = new jsPDF();
   
@@ -39,19 +44,12 @@ const OrderList = () => {
     doc.text(`Order ID: ${order.order_id}`, 10, 40);
     doc.text(`Date: ${order.trx_date}`, 10, 50);
   
-    // Add billing address
-    doc.text('BILL TO', 10, 70);
-    doc.text(order.billing_address.name, 10, 80);
-    doc.text(order.billing_address.street, 10, 90);
-    doc.text(`${order.billing_address.city}, ${order.billing_address.state}, ${order.billing_address.zip}`, 10, 100);
-    doc.text(order.billing_address.country, 10, 110);
-  
-    // Add shipping address
+    // Add shipping address (assuming it's the same as billing address)
     doc.text('SHIP TO', 150, 70);
-    doc.text(order.shipping_address.name, 150, 80);
-    doc.text(order.shipping_address.street, 150, 90);
-    doc.text(`${order.shipping_address.city}, ${order.shipping_address.state}, ${order.shipping_address.zip}`, 150, 100);
-    doc.text(order.shipping_address.country, 150, 110);
+    doc.text(billingAddress.name, 150, 80);
+    doc.text(billingAddress.Address, 150, 90);
+    doc.text(`${billingAddress.village}, ${billingAddress.taluka}, ${billingAddress.pincode}`, 150, 100);
+    doc.text(billingAddress.state, 150, 110);
   
     // Add table headers
     doc.text('Product Name', 10, 140);
@@ -60,28 +58,51 @@ const OrderList = () => {
     doc.text('Total', 170, 140);
   
     // Add table rows
-    let yPos = 150;
-    let subtotal = 0;
-    order.products.forEach((product) => {
-      doc.text(product.name, 10, yPos);
-      doc.text(`$${product.price}`, 100, yPos);
-      doc.text(product.quantity, 130, yPos);
-      const total = product.price * product.quantity;
-      doc.text(`$${total}`, 170, yPos);
-      yPos += 10;
-      subtotal += total;
-    });
+    // Add table rows
+let yPos = 150;
+let subtotal = 0;
+console.log(products)
+products.forEach((product) => {
+  doc.text(product.pr_name, 10, yPos);
+  doc.text(`$${product.pr_price}`, 100, yPos);
+  doc.text(product.pr_que.toString(), 130, yPos); // Convert to string
+  const total = product.pr_price * product.pr_que;
+  doc.text(`$${total}`, 170, yPos);
+  yPos += 10;
+  subtotal += total;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
   
     // Add subtotal, tax and total
-    const tax = subtotal * 0.1;
-    const total = subtotal + tax;
+    const total = subtotal;
     doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 100, yPos + 20);
-    doc.text(`Tax (10%): $${tax.toFixed(2)}`, 100, yPos + 30);
     doc.text(`Total: $${total.toFixed(2)}`, 100, yPos + 40);
   
     // Save the PDF
     doc.save(`invoice_${order.order_id}.pdf`);
-  }
+}
+
 
   return (
     <div className=" lg:flex-row items-center lg:justify-between">

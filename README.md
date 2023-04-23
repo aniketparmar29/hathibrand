@@ -41,7 +41,7 @@ ___
 
 | Team members | Functionality |
 | ------ | ------ |
-| Aniket Parmar | Admin Panle, Redux, Backend, Cart, Checkout, Authetecation  |
+| Aniket Parmar | Admin Panel, Redux, Backend, Cart, Checkout, Authentication  |
 | Krishna Kevadiya | Ui , Search  |
 
 

@@ -1,41 +1,93 @@
-Hathibrand
-Hathibrand is an online shop for premium quality incense sticks and cosmetics. This project is built using a stack of technologies including Redux, Node.js, MySQL, Express, React.js, Tailwind CSS, Hostinger, and Chakra UI.
+## Hathibrand 
+---
 
-Getting Started
-To get started with this project, you can follow the steps below:
+<img align="center" src="./src/assets/logo.png" alt="logo"/>
 
-Clone the repository using git clone https://github.com/username/hathibrand.git.
-Install the required dependencies using npm install.
-Create a .env file and add the necessary environment variables. You can refer to the .env.example file for the required variables.
-Run the application using npm start.
-Features
-The project includes the following features:
+<p>
+About
+Hathibrand is an online shop for premium quality incense sticks and cosmetics
+</p>
 
-User authentication and authorization
-Product browsing and filtering
-Shopping cart functionality
-Order placement and management
-Payment integration
-Admin dashboard for managing products, orders, and users
-Technologies Used
-The following technologies were used in building this project:
 
-Redux
-Node.js
-MySQL
-Express
-React.js
-Tailwind CSS
-Hostinger
-Chakra UI
-Contributing
-Contributions are always welcome! If you want to contribute to this project, please follow the steps below:
+### Tech-Stack
+___
 
-Fork the repository.
-Create a new branch with your changes.
-Submit a pull request.
-License
-This project is licensed under the MIT License. See the LICENSE file for more information.
+* Reactjs
+* Chakra UI
+* Tailwind css
+* javascript
+* Mysql
+* redux
+* Nodejs
+* Hostinger
+* Express
 
-Contact
-If you have any questions or feedback, you can reach out to us at info@hathibrand.in.
+### Features
+___
+* User Authentication
+* User Details Management 
+* Show Details.
+* Sorting, Filtering, and 
+* Admin Panel
+* Backend Api
+* Cart
+* Seach
+* Resposive
+* Checkout
+* Invoice
+
+
+### Fuctionality worked on-
+
+| Team members | Functionality |
+| ------ | ------ |
+| Aniket Parmar | Admin Panle, Redux, Backend, Cart, Checkout, Authetecation  |
+| Krishna Kevadiya | Ui , Search  |
+
+
+### Screenshots
+___
+
+<h2>Home Page</h2>
+
+<img width="682" alt="Home" src="./ss/home.png">
+
+<h2>Login Page</h2>
+
+<img width="646" alt="login" src="./ss/Login.png">
+
+<h2>Product Page</h2>
+
+<img width="669" alt="product" src="./ss/products.png">
+
+<h2>Single Product Page</h2>
+
+<img width="681" alt="singelproduct" src="./ss/singleproduct.png">
+
+
+<h2>footer part</h2>
+
+<img width="677" alt="footer" src="./ss/Footer.png">
+
+<h2>Cart Page</h2>
+
+<img width="682" alt="Home" src="./ss/Cart.png">
+
+<h2>Checkout Page</h2>
+
+<img width="646" alt="login" src="./ss/checkout.png">
+
+<h2>Resposive</h2>
+
+<img width="669" alt="product" src="./ss/Resposive-mobile.png">
+
+<h2>Search</h2>
+
+<img width="681" alt="singelproduct" src="./ss/search.png">
+
+
+<h2>Admin Page</h2>
+
+<img width="677" alt="footer" src="./ss/Admin.png">
+
+

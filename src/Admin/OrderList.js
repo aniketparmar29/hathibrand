@@ -1,7 +1,7 @@
+import { Document, Page, Text,pdf} from '@react-pdf/renderer';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { getAllOrders } from "../Redux/AdminReducer/actions";
-import jsPDF from 'jspdf';
 const OrderList = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.AdminReducer.orders);
@@ -20,88 +20,55 @@ const OrderList = () => {
 
   const filteredOrders = orders.filter(order => order.trx_date.includes(filterBy));
 
-  const downloadInvoice = (order) => {
+
+  const downloadInvoice = async (order) => {
     console.log(order);
+  
     // Parse the JSON strings into objects
     const billingAddress = JSON.parse(order.addressop);
     const products = JSON.parse(order.product);
-
-    // Create a new jsPDF instance
-    const doc = new jsPDF();
   
-    // Set font styles
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(18);
+    // Create a new PDF document
+    const pdfDoc = (
+      <Document>
+        <Page>
+          <Text>INVOICE</Text>
+          <Text>Order ID: {order.order_id}</Text>
+          <Text>Date: {order.trx_date}</Text>
+          <Text>SHIP TO</Text>
+          <Text>{billingAddress.name}</Text>
+          <Text>{billingAddress.Address}</Text>
+          <Text>{billingAddress.village}, {billingAddress.taluka}, {billingAddress.pincode}</Text>
+          <Text>{billingAddress.state}</Text>
+          <Text>Product Name Price Quantity Total</Text>
+          {products.map((product) => (
+            <Text key={product.pr_id}>
+              {product.pr_name} ${product.pr_price} {product.pr_que.toString()} ${product.pr_price * product.pr_que}
+            </Text>
+          ))}
+          {/* <Text>Subtotal: ${subtotal.toFixed(2)}</Text> */}
+          {/* <Text>Total: ${total.toFixed(2)}</Text> */}
+        </Page>
+      </Document>
+    );
   
-    // Add title
-    doc.text('INVOICE', 105, 25, { align: 'center' });
+    // Generate a blob from the PDF document
+    const blob = await pdf(pdfDoc).toBlob();
   
-    // Set font styles
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(12);
+    // Create a URL from the blob
+    const url = URL.createObjectURL(blob);
   
-    // Add order ID and date
-    doc.text(`Order ID: ${order.order_id}`, 10, 40);
-    doc.text(`Date: ${order.trx_date}`, 10, 50);
+    // Create a link and click it to trigger the download
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `invoice_${order.order_id}.pdf`;
+    link.click();
   
-    // Add shipping address (assuming it's the same as billing address)
-    doc.text('SHIP TO', 150, 70);
-    doc.text(billingAddress.name, 150, 80);
-    doc.text(billingAddress.Address, 150, 90);
-    doc.text(`${billingAddress.village}, ${billingAddress.taluka}, ${billingAddress.pincode}`, 150, 100);
-    doc.text(billingAddress.state, 150, 110);
+    // Clean up the URL and link
+    URL.revokeObjectURL(url);
+    link.remove();
+  };
   
-    // Add table headers
-    doc.text('Product Name', 10, 140);
-    doc.text('Price', 100, 140);
-    doc.text('Quantity', 130, 140);
-    doc.text('Total', 170, 140);
-  
-    // Add table rows
-    // Add table rows
-let yPos = 150;
-let subtotal = 0;
-console.log(products)
-products.forEach((product) => {
-  doc.text(product.pr_name, 10, yPos);
-  doc.text(`$${product.pr_price}`, 100, yPos);
-  doc.text(product.pr_que.toString(), 130, yPos); // Convert to string
-  const total = product.pr_price * product.pr_que;
-  doc.text(`$${total}`, 170, yPos);
-  yPos += 10;
-  subtotal += total;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-});
-
-  
-    // Add subtotal, tax and total
-    const total = subtotal;
-    doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 100, yPos + 20);
-    doc.text(`Total: $${total.toFixed(2)}`, 100, yPos + 40);
-  
-    // Save the PDF
-    doc.save(`invoice_${order.order_id}.pdf`);
-}
 
 
   return (

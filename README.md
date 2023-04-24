@@ -27,7 +27,7 @@ ___
 * User Authentication
 * User Details Management 
 * Show Details.
-* Sorting, Filtering, and 
+* Sorting, Filtering
 * Admin Panel
 * Backend Api
 * Cart

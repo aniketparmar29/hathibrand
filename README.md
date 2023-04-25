@@ -27,7 +27,7 @@ ___
 * User Authentication
 * User Details Management 
 * Show Details.
-* Sorting, Filtering, and 
+* Sorting, Filtering
 * Admin Panel
 * Backend Api
 * Cart
@@ -41,7 +41,7 @@ ___
 
 | Team members | Functionality |
 | ------ | ------ |
-| Aniket Parmar | Admin Panle, Redux, Backend, Cart, Checkout, Authetecation  |
+| Aniket Parmar | Admin Panel, Redux, Backend, Cart, Checkout, Authentication  |
 | Krishna Kevadiya | Ui , Search  |
 
 

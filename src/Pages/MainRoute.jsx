@@ -9,7 +9,6 @@ import Login from './Login'
 import ProudctPage from './ProudctPage'
 import AboutUs from './AboutUs'
 import ContactUs from './ContactUs'
-import MoreWebsite from './MoreWebsite'
 import Dashboard from '../Admin/Dashboard'
 import Products from '../Admin/Products'
 import Users from '../Admin/Users'
@@ -35,7 +34,6 @@ function MainRoute() {
             <Route path='*' element={<PageNotFound/>}></Route>
             <Route path='/about' element={<AboutUs/>}></Route>
             <Route path='/contact' element={<ContactUs/>}></Route>
-            <Route path='/website' element={<MoreWebsite/>}></Route>
             <Route path="/admin/products" element={<Products/>}></Route>
             <Route path="/admin/users" element={<Users/>}></Route>
             <Route path="/admin/sliders" element={<Sliders/>}></Route>

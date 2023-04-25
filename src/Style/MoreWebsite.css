@@ -1,0 +1,63 @@
+.more-website {
+    background-image: url(../Enhance/fristimg.jpeg);
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .hero-section h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-section p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-section a {
+    display: inline-block;
+    margin: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    background-color: #fff;
+    color: #333;
+    font-size: 1.2rem;
+    text-decoration: none;
+  }
+  
+  .services-section {
+    margin: 5rem 0;
+  }
+  
+  .services-section h2 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+  }
+  
+  .service {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  

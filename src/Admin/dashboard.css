@@ -3,6 +3,14 @@
   max-width: 100%;
   position: absolute;
 }
+.big_boxx2{
+  background-image: url("../Enhance/fristimg.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+  background-position: center;
+  cursor: pointer;
+}
 
 .dashboardContainer {
   border-left: 1px solid rgba(0, 0, 0, 0.13);

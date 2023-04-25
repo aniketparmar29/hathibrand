@@ -51,7 +51,7 @@ const MyOrders = () => {
            >
              {/* Display order information */}
              <div className="flex-col items-center justify-center  text-left gap-y-3 ">
-               <p>Status: {order.status}</p>
+               <p className={`${order.status}=="pending"?text-red-500:text-green-500`}>Status: {order.status}</p>
                <p>Transaction ID: {order.trx_id}</p>
                <p>Date: {order.trx_date}</p>
                <p>Amount: {order.amount}</p>

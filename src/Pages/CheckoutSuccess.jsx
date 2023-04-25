@@ -3,13 +3,14 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import { Link, useParams } from 'react-router-dom'; // Importing useParams from react-router-dom
 import Spinner from '../Components/Spinner';
-
+import { useDispatch } from 'react-redux';
+import { removeallcart } from '../Redux/CartReducer/action';
 const CheckoutSuccess = () => {
   const urlSearchParams = new URLSearchParams(window.location.search);
 const client_txn_id = urlSearchParams.get('client_txn_id');
   const [paymentStatus, setPaymentStatus] = useState(null);
   const [loading, setLoading] = useState(false);
-
+const dispatch = useDispatch();
   const today = new Date();
   const day = String(today.getDate()).padStart(2, '0');
   const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
@@ -19,7 +20,17 @@ const client_txn_id = urlSearchParams.get('client_txn_id');
     "client_txn_id": client_txn_id,
     "txn_date": formattedDate
   }
-
+  let user = window.localStorage.getItem("user");
+  if (user) {
+    try {
+      user = JSON.parse(user);
+    } catch (error) {
+      console.error("Error parsing user from local storage", error);
+      user = { role: "hello" };
+    }
+  } else {
+    user = { role: "hello" };
+  }
   useEffect(() => {
     const checkPaymentStatus = async () => {
       setLoading(true);
@@ -51,7 +62,9 @@ const client_txn_id = urlSearchParams.get('client_txn_id');
               console.log(error.message);
             }
           };
+          
           updatePaymentStatus();
+          dispatch(removeallcart(user.id))
         }
         setPaymentStatus(status);
         setLoading(false);

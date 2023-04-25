@@ -65,7 +65,7 @@ function Home() {
         <Box  pl={7}  pt={"250"} w={"59%"}><Text color={"white"} fontSize='3xl' data-aos="fade-up">  મહેક જે ઘરને રાખે પવિત્ર અને વાતાવરણને બનાવે શુદ્ધ...</Text></Box>
         </Box>
 
-        <Box><Offer/></Box>
+        <Box className='mt-5'><Offer/></Box>
        
 
       <Box className='big_boxx5'>

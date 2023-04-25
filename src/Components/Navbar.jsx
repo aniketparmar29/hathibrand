@@ -95,7 +95,7 @@ useEffect(()=>{
 
     <Box   width={"60%"} pt={"25px"} display={"flex"} gap={["3","5"]} >
     <Text fontSize='xl' ><Link to="/">Home</Link></Text>
-      <Text fontSize='xl' ><Link to="/products">Categories</Link></Text>
+      <Text fontSize='xl' ><Link to="/products">All  Products</Link></Text>
       <Text display={"flex"} fontSize='xl' >
   <Link to="/cart">Cart
   <li className="font-sans block  lg:inline-block align-middle  hover:text-gray-700">
@@ -198,7 +198,7 @@ useEffect(()=>{
     </Link>
     <Link to="/products" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 ">
       <RiMenu3Fill className="h-6 w-6 inline-block mb-1" />
-      <span className="tab block text-xs font-extrabold">Categories</span>
+      <span className="tab block text-xs font-extrabold">All  Products</span>
     </Link>
     <Link to="/cart" className="w-full focus:text-royal hover:text-royal justify-center inline-block text-center pt-2 pb-1 ">
       <FaShoppingCart className="h-6 w-6 inline-block mb-1" />

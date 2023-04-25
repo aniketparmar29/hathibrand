@@ -32,7 +32,7 @@ function Footer() {
                   
               </div>
               <div>
-                  <Link to="/website" className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">More</Link>
+                  <a href='https://aniketparmar29.github.io/' target='_blank' rel='noreferrer' className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">More</a>
                   
               </div>
           </div>

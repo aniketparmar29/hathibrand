@@ -1,7 +1,8 @@
-import { Document, Page, Text,pdf} from '@react-pdf/renderer';
+import { Document, Page, Text,pdf,View,Image} from '@react-pdf/renderer';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { getAllOrders } from "../Redux/AdminReducer/actions";
+import imgop from '../assets/logo.png'
 const OrderList = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.AdminReducer.orders);
@@ -20,36 +21,74 @@ const OrderList = () => {
 
   const filteredOrders = orders.filter(order => order.trx_date.includes(filterBy));
 
+  
+  
 
-  const downloadInvoice = async (order) => {
+  const downloadorder = async (order) => {
     console.log(order);
   
     // Parse the JSON strings into objects
     const billingAddress = JSON.parse(order.addressop);
     const products = JSON.parse(order.product);
-  
+
+    
     // Create a new PDF document
     const pdfDoc = (
       <Document>
-        <Page>
-          <Text>INVOICE</Text>
-          <Text>Order ID: {order.order_id}</Text>
-          <Text>Date: {order.trx_date}</Text>
-          <Text>SHIP TO</Text>
-          <Text>{billingAddress.name}</Text>
-          <Text>{billingAddress.Address}</Text>
-          <Text>{billingAddress.village}, {billingAddress.taluka}, {billingAddress.pincode}</Text>
-          <Text>{billingAddress.state}</Text>
-          <Text>Product Name Price Quantity Total</Text>
-          {products.map((product) => (
-            <Text key={product.pr_id}>
-              {product.pr_name} ${product.pr_price} {product.pr_que.toString()} ${product.pr_price * product.pr_que}
-            </Text>
-          ))}
-          {/* <Text>Subtotal: ${subtotal.toFixed(2)}</Text> */}
-          {/* <Text>Total: ${total.toFixed(2)}</Text> */}
-        </Page>
-      </Document>
+  <Page >
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
+
+    <View style={{ width: '45%', fontFamily: 'Helvetica', fontSize: 18, fontWeight: 'bold',marginLeft:"25px",display:'flex',flexDirection:'column','gap':'20px',borderRight:'1px solid grey' }}>
+      <View>
+        <Text>To:</Text>
+        <Text>Name:{billingAddress.name}</Text>
+        <Text>Address:{billingAddress.Address}</Text>
+        <Text>Village:{billingAddress.village}</Text>
+        <Text>Taluka:{billingAddress.taluka} </Text>
+        <Text>Disctict:{billingAddress.district} </Text>
+        <Text>State:{billingAddress.state}</Text>
+        <Text>Pincode:{billingAddress.pincode}</Text>
+        <Text>Mobile:{billingAddress.phone}</Text>
+      </View>
+    </View>
+    <View style={{ width: '45%', fontFamily: 'Helvetica', fontSize: 12, fontWeight: 'extrabold',marginRight:'25px' }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', height: 24 }}>
+        <Text style={{ width: '60%', fontWeight: 'bold', paddingLeft: 5 }}>Product</Text>
+        <Text style={{ width: '40%', fontWeight: 'bold', textAlign: 'center', paddingRight: 5 }}>Que</Text>
+        <Text style={{ width: '40%', fontWeight: 'bold', textAlign: 'right', paddingRight: 5 }}>Weight</Text>
+      </View>
+      {products.map((item) => (
+        <View style={{ flexDirection: 'row', alignItems: 'center', height: 24 }} key={item.cart_id}>
+          <Text style={{ width: '60%', paddingLeft: 5 }}>{item.pr_name}</Text>
+          <Text style={{ width: '40%', textAlign: 'center', paddingRight: 5 }}>{item.pr_que}</Text>
+          <Text style={{ width: '40%', textAlign: 'right', paddingRight: 5 }}>{item.pr_weight}</Text>
+        </View>
+      ))}
+      <View style={{ flexDirection: 'row', marginTop: 20 }}>
+        <Text style={{ width: '60%', fontWeight: 'bold', textAlign: 'right', paddingRight: 5 }}>Total:</Text>
+        <Text style={{ width: '40%', textAlign: 'right' }}>₹{order.amount}</Text>
+      </View>
+    </View>
+    </View>
+    <View style={{display:'flex',marginLeft:'25px',marginTop:'10px',borderTop:'1px solid grey'}}>
+      <View style={{display:'flex',justifyContent:'space-between'}}>
+      <View>
+        <Text>FROM:</Text>
+        <Text>HATHIBRAND AGARBATTI</Text>
+        <Text>LATHIDAD,</Text>
+        <Text>BOTAD:364710</Text>
+        <Text>BOTAD (GUJARAT)</Text>
+        <Text>MO-9638857089</Text>
+      </View>
+      <View>
+      </View>
+      <Image style={{width:'200px',marginTop:'10px',position:'absolute',right:"10px"}} src={imgop}/>
+      </View>
+    </View>
+  </Page>
+</Document>
+
+    
     );
   
     // Generate a blob from the PDF document
@@ -61,7 +100,7 @@ const OrderList = () => {
     // Create a link and click it to trigger the download
     const link = document.createElement('a');
     link.href = url;
-    link.download = `invoice_${order.order_id}.pdf`;
+    link.download = `order_${order.order_id}.pdf`;
     link.click();
   
     // Clean up the URL and link
@@ -102,9 +141,9 @@ const OrderList = () => {
             <p >Payment: {order.payment === '1' ? <span className='text-green-500'>success</span> : <span className='text-red-500'>failed</span>}</p>
             <button
               className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-600"
-              onClick={() => downloadInvoice(order)}
+              onClick={() => downloadorder(order)}
             >
-              Download Invoice
+              Download order
             </button>
           </div>
         ))}

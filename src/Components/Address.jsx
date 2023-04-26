@@ -78,6 +78,10 @@ const Address = () => {
     <input className="mt-1 block w-full rounded-md p-2 shadow-lg  focus:border-indigo-500 focus:ring-indigo-500" type="tel" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Enter your phone number" pattern="[0-9]{10}" required />
   </div>
   <div>
+    <label className="text-gray-700 text-md font-bold mb-2 block" htmlFor="phone">2ndPhone:</label>
+    <input className="mt-1 block w-full rounded-md p-2 shadow-lg  focus:border-indigo-500 focus:ring-indigo-500" type="tel" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Enter your phone number" pattern="[0-9]{10}" required />
+  </div>
+  <div>
     <label className="text-gray-700 text-md font-bold mb-2 block" htmlFor="village">Village:</label>
     <input className="mt-1 block w-full rounded-md p-2 shadow-lg  focus:border-indigo-500 focus:ring-indigo-500" type="text" id="village" value={village} onChange={(e) => setVillage(e.target.value)} placeholder="Enter your village" required />
   </div>

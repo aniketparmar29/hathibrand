@@ -44,7 +44,16 @@ function Home() {
     }
     Aos.init({ duration: 1000});
   }, [alert,showalert]);
-
+  useEffect(()=>{
+    updateVisitCount();
+  },[])
+  
+  function updateVisitCount() {
+    fetch('https://api.countapi.xyz/update/hathibrand.in/hathibrand/?amount=1')
+    .then(res => res.json())
+    .then(res => {
+    })
+  }
   return (
     < >
      <Navbar/>

@@ -88,7 +88,7 @@ useEffect(()=>{
       pointerEvents='none'
       children={<SearchIcon color='gray.300' />}
     />
-    <Input onChange={sugg} width="100%" value={query} placeholder='Search...'  borderRadius={"20"}  className={`${color}?"text-white":"text-red"`}/>
+    <Input onChange={sugg} width="100%" value={query} placeholder='Search...'  borderRadius={"20"}  className={`${color}?"text-white":"text-red" border-2 border-amber-700 active:border-amber-700 focus:border-amber-700` }/>
 
   </InputGroup>
   

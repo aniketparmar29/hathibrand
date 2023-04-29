@@ -62,7 +62,7 @@ import Aos from "aos"
           borderRadius="lg"
           overflow="hidden"
           p="3"
-          className="shadow-lg hover:scale-105 shadow-[#5E0E42]  duration-300"
+          className="shadow-lg hover:scale-105 shadow-yellow-600  duration-300"
         >
           <Image
             src={el.image}
@@ -157,7 +157,7 @@ import Aos from "aos"
             <Button
               borderRadius={0}
               width={"100%"}
-              bgColor="#5E0E42"
+              className="bg-red-700"
               colorScheme="#440430"
               color={"white"}
               onClick={addcart}

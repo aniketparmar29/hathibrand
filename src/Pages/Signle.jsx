@@ -172,22 +172,22 @@ const Signle = () => {
       <Box mt={"4"} className="flex  space-x-4">
       <Button
         size={'xs'}
-        bgColor="#440430"
         type="button"
+        bgColor={"red"}
         color='white'
         onClick={handleDecrease}
-        className="bg-gray-100 text-gray-500 rounded-md p-2 hover:bg-gray-200 focus:outline-none"
+        className="bg-red-700 text-gray-500 rounded-md p-2 focus:outline-none"
       >
         <FaMinus/>
       </Button>
       <span className="font-medium">{quantity}</span>
       <Button
        size={'xs'}
-        bgColor="#440430"
         color='white'
+        bgColor={"red"}
         type="button"
         onClick={handleIncrease}
-        className="bg-gray-100 text-gray-500 rounded-md p-2 hover:bg-gray-200 focus:outline-none"
+        className="bg-red-700 text-gray-500 rounded-md p-2  focus:outline-none"
       >
        <FaPlus/>
       </Button>
@@ -204,7 +204,7 @@ const Signle = () => {
         <Button
           borderRadius={0}
           width={"100%"}
-          bgColor="#5E0E42"
+          bgColor="red"
           colorScheme="#440430"
           color={"white"}
           onClick={addcart}

@@ -30,6 +30,7 @@ function Checkout() {
     user = { role: "hello" };
   }
   const[Total,setTotal]= useState(0)
+  const[Totalweight,setTotalweight]= useState(0)
   function getRandomNumber(digit) {
     return Math.random().toFixed(digit).split('.')[1];
   }
@@ -38,7 +39,7 @@ function Checkout() {
     amount: Total.toString(),
     products: JSON.stringify(cart),
     customer_name: user.name,
-    customer_email: user.email,
+    customer_email: user.email, 
     customer_mobile: addressop.phone,
     user_id:user.id,
     addressop:JSON.stringify(addressop),
@@ -69,8 +70,18 @@ function Checkout() {
     
     setTotal(sum);
   };
+  const calculatewaieghtTotal = () => {
+    let sum = cart.reduce(
+      (acc, item) => acc + item.pr_weight,
+      0
+    )
+    
+    setTotalweight(sum);
+    
+  };
   useEffect(() => {
     calculateTotal();
+    calculatewaieghtTotal();
   }, [cart,addressop]);
 
   return (
@@ -84,11 +95,10 @@ function Checkout() {
         Payment Method:
         <select className='shadow-lg bg-black text-white rounded-lg ml-2 p-1' value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
           <option defaultChecked value="Online Payment">Online Payment</option>
+          <option defaultChecked value="cod">Cash on Delivery</option>
         </select>
       </label>
-      {paymentMethod === 'Online Payment' && (
-        <p>You will be redirected to the payment page after submitting the order.</p>
-        )}
+    
       <button onClick={()=>handleSubmit()} className="bg-[#440430] p-2 mt-5 text-white rounded-lg " type="submit">Submit Order</button>
         </div>
     
@@ -115,6 +125,7 @@ function Checkout() {
     ADD ITEMS IN CART
   </div>
 )}
+      <p> {Totalweight} </p>
       <p className='flex justify-between font-bold border-t-2 border-black text-lg' key={"1"}>Total: <span>{Total}</span></p>
           </Box>
     </Flex>

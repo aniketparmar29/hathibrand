@@ -32,6 +32,19 @@ function ProductList({ setshowalert, showalert }) {
   
   const handleWeightChange = (event) => {
     const value = event.target.value;
+    if (value === 'ag') {
+      // sort products from high to low
+      setFilterProducts([...product].filter((a, b) => b.weight - a.weight));
+    } else if (value === 'cm') {
+      // sort products from low to high
+      setFilterProducts([...product].sort((a, b) => a.weight - b.weight));
+    } else {
+      // default case, no sorting
+      setFilterProducts([...product]);
+    }
+  };
+  const handleCategoryChange = (event) => {
+    const value = event.target.value;
     if (value === 'htl') {
       // sort products from high to low
       setFilterProducts([...product].sort((a, b) => b.weight - a.weight));
@@ -64,7 +77,7 @@ React.useEffect(() => {
   return (
     <>
     <div>
-      <div class="flex justify-between items-center">
+      <div class="lg:flex md:flex  justify-between items-center p-5">
   <div class="relative">
     <select 
       onChange={handleWeightChange} 
@@ -73,6 +86,19 @@ React.useEffect(() => {
       <option value="">Sort by weight</option>
       <option value="htl">High to low</option>
       <option value="lth">Low to high</option>
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+      <svg class="fill-current h-4 w-4" viewBox="0 0 20 20"><path d="M10 12l-5-5 1.41-1.41L10 9.17l3.59-3.58L15 7l-5 5z"/></svg>
+    </div>
+  </div>
+  <div class="relative">
+    <select 
+      onChange={handleCategoryChange} 
+      class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+    >
+      <option value="">Filter by Category</option>
+      <option value="ag">Aggarbatti</option>
+      <option value="cm">Cosmetic</option>
     </select>
     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
       <svg class="fill-current h-4 w-4" viewBox="0 0 20 20"><path d="M10 12l-5-5 1.41-1.41L10 9.17l3.59-3.58L15 7l-5 5z"/></svg>
@@ -105,7 +131,7 @@ React.useEffect(() => {
               </div>
             ))}
           </div>
-        ):<SimpleGrid data-aos="fade-up" columns={[1, 2, 4]} gap="3">
+        ):<SimpleGrid data-aos="fade-up" columns={[2, 2, 4]} gap="3">
         {filterProducts &&
           filterProducts.map((el) => (
             <ProductCard

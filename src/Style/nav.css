@@ -1,44 +1,12 @@
-.big_boxx2{
-    background-image: url("../Enhance/navbar.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-   
-    height: 100px;
-   
-    z-index: 1;
-    background-position: center;
-    cursor: pointer;
-}
-.big_boxx3{
-    background-image: url("../Enhance/img2.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-   
-    height: 900px;
-   
-    z-index: 1;
-    background-position: center;
-    cursor: pointer;
-}
+
 .header{
     z-index: 10;
-    color: rgb(224, 73, 46);
+    color: rgb(242, 65, 21);
 }
 .header-bg{
     color: white;
     background-color: rgba(0,0,0,0.30);
     transition: 0.5s;
-}
-.big_boxx4{
-    background-image: url("../Enhance/mandir.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-   
-    height: 800px;
-   
-    z-index: 1;
-    background-position: center;
-    cursor: pointer;
 }
 .big_boxx5{
 

@@ -25,7 +25,7 @@ function Login() {
   if (isAuth === true) {
     setTimeout(() => {
       navigate("/");
-    }, 1000);
+    }, 1);
   }
 useEffect(() => {
   if(isAuth){

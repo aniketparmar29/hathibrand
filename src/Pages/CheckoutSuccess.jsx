@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
-import { Link, useParams } from 'react-router-dom'; // Importing useParams from react-router-dom
+import { Link } from 'react-router-dom'; // Importing useParams from react-router-dom
 import Spinner from '../Components/Spinner';
 import { useDispatch } from 'react-redux';
 import { removeallcart } from '../Redux/CartReducer/action';
@@ -75,8 +75,10 @@ const dispatch = useDispatch();
           setLoading(false);
         }
       };
-      if(method===undefined){
+      if(method===null){
         checkPaymentStatus();
+      }else{
+        setPaymentStatus("success");
       }
   }, [client_txn_id]);
   

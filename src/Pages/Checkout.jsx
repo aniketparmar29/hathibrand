@@ -14,7 +14,7 @@ function Checkout() {
   const [loading, setloading] = useState(false)
   const isAuth= useSelector((state)=>state.userAuth.isAuth);
   window.document.title="Checkout-Hathibrand";
-  const [paymentMethod, setPaymentMethod] = useState('COD');
+  const [paymentMethod, setPaymentMethod] = useState('Online');
   let addressop = window.localStorage.getItem("addressop");
   addressop = addressop ? JSON.parse(addressop) : {};
 
@@ -38,7 +38,7 @@ function Checkout() {
   const order_body = {
     method:paymentMethod,
     client_txn_id: getRandomNumber(12),
-    amount: paymentMethod==="cod"?(Total+dlcharge).toString():{Total}.toString(),
+    amount: paymentMethod==="cod"?(Total+dlcharge).toString():(Total).toString(),
     products: JSON.stringify(cart),
     customer_name: user.name,
     customer_email: user.email, 

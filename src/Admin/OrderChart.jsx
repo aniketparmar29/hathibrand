@@ -6,7 +6,7 @@ const OrdersChart = ({ orders }) => {
 
   useEffect(() => {
     if (chartRef.current && orders) {
-      const filteredOrders = orders.filter((order) => order.payment === "1");
+      const filteredOrders = orders.filter((order) => order.payment === "1" || order.method==="cod");
       const groupedOrders = filteredOrders.reduce((acc, curr) => {
         const date = curr.trx_date;
         const amount = parseInt(curr.amount);

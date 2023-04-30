@@ -17,7 +17,7 @@ const Dashboard = () => {
   const users = useSelector((state) => state.AdminReducer.users);
   const isAuth = useSelector((state) => state.userAuth.isAuth);
   const totalAmount = orders
-  .filter(order => order.payment === "1")
+  .filter(order => order.payment === "1" || order.method==="cod")
   .reduce((acc, order) => acc + parseInt(order.amount), 0) || 0;
   let user = window.localStorage.getItem("user");
   if (user) {

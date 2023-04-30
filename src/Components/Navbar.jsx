@@ -81,7 +81,7 @@ useEffect(()=>{
     { navMid &&
     <Box zIndex={"100"} justifyContent={"space-between"} width="100%" className={color?"header header-bg backdrop-blur-lg ":"header backdrop-blur-lg "} display={"flex"}  gap="10%" position={"sticky"} top={"0"} pb="2">
       
-    <Box width={"20%"}> <Link to={"/"}><Image className='lg:w-[60%] md:w-[150%]' src={logo}/></Link></Box>
+    <Box width={"20%"}> <Link to={"/"}><Image className='lg:w-[40%] md:w-[150%]' src={logo}/></Link></Box>
     
       <InputGroup width={"20%"}   mt={"20px"}>
     <InputRightElement
@@ -179,9 +179,9 @@ useEffect(()=>{
 }
 { 
             !navMid && 
-            <Box zIndex={"100"} pb={"5"}  display={"flex"}  gap="70px" className={color?"header header-bg":"header" }  position={"sticky"} top={"0"} >
+            <Box zIndex={"100"} pb={"2"}  display={"flex"}  gap="10px" className={color?"header header-bg":"header" }  position={"sticky"} top={"0"} >
              <Box width={"40%"}><Link to="/"><Image width={"100px"} src={logo}/></Link></Box>
-             <InputGroup mt={"20px"}  width="60%" mr="2%">
+             <InputGroup mt={"30px"}  width="60%" mr="2%">
     <InputRightElement
       pointerEvents='none'
       children={<SearchIcon color='gray.300' />}

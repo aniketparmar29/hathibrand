@@ -25,8 +25,7 @@ const OrderList = () => {
   
 
   const downloadorder = async (order) => {
-    console.log(order);
-  
+  console.log(order)
     // Parse the JSON strings into objects
     const billingAddress = JSON.parse(order.addressop);
     const products = JSON.parse(order.product);
@@ -36,7 +35,7 @@ const OrderList = () => {
     const pdfDoc = (
       <Document>
       <Page>
-        <Text style={{marginTop:'-30px',textAlign:"center"}}>Hathibrand Agarbatti</Text>
+        <Text style={{fontSize:20, textAlign:"center"}}>Hathibrand Agarbatti</Text>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
     
           <View style={{ width: '45%',padding:"10px", fontFamily: 'Helvetica', fontSize: 15, fontWeight: 'bold', marginLeft: 25, display: 'flex', flexDirection: 'column', gap: 20, borderRight: '1px solid grey' }}>
@@ -87,32 +86,42 @@ const OrderList = () => {
               <View style={{ flexDirection: 'row', alignItems: 'center', height: 24 }} key={item.cart_id}>
                 <Text style={{ width: '40%', paddingLeft: 3 }}>{item.pr_name}</Text>
                 <Text style={{ width: '20%', textAlign: 'center', paddingRight: 2 }}>{item.pr_que}</Text>
-                <Text style={{ width: '40%', textAlign: 'right' }}>{item.pr_Category === "Agarbatti" ? (
+                <Text style={{ width: '40%', textAlign: 'right' }}>{item.pr_category === "Agarbatti" ? (
                 <Text      
                 >
-                  {item.pr_weight >= 1000 ? item.pr_weight / 1000 : item.pr_weight}
+                  {item.pr_weight >= 1000 ? item.pr_weight*item.pr_que / 1000 : item.pr_weight*item.pr_que }
                   {item.pr_weight >= 1000 ? "kg" : "gm"}
                 </Text>
               ) : (
                 <Text
                  
                 >
-                  {item.pr_weight >= 1000 ? item.pr_weight / 1000 : item.pr_weight}
+                  {item.pr_weight >= 1000 ? item.pr_weight*item.pr_que  / 1000 : item.pr_weight*item.pr_que }
                   {item.pr_weight >= 1000 ? "l" : "ml"}
                 </Text>
               )}</Text>
+              
               </View>
             ))}
-            <View style={{ flexDirection: 'row', marginTop: 20 }}>
+           <View style={{ flexDirection: 'row', marginTop: 20 }}>
               <Text style={{ width: '60%', fontWeight: 'bold', textAlign: 'right', paddingRight: 5 }}>Total:</Text>
               <Text style={{ width: '40%', textAlign: 'right' }}>₹{order.amount}</Text>
             </View>
           </View>
-    
+          
         </View>
     
         <View style={{ display: 'flex', marginLeft: 25, marginTop: 10, borderTop: '1px solid grey' }}>
           <View style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row', marginTop: 20 }}>
+              {order.method==="cod" &&
+              <View>
+              <Text>Cash On Delivery Total:{order.amount}</Text>
+              <Text>Speed Post Parcel</Text>
+              <Text>Payment of Office: BOTADMDG 364710</Text>
+              <Text>customer Id- 0000054128</Text>
+              </View>}
+            </View>
             <View>
               <Text>FROM:</Text>
               <Text>HATHIBRAND AGARBATTI</Text>
@@ -121,9 +130,6 @@ const OrderList = () => {
               <Text>BOTAD (GUJARAT)</Text>
               <Text>MO-9638857089</Text>
             </View>
-            <View>
-            </View>
-            <Image style={{ width: '200px', marginTop: 10, position: 'absolute', right: '10px' }} src={imgop} />
           </View>
     </View>
   </Page>
@@ -179,7 +185,9 @@ const OrderList = () => {
             <p className="text-gray-600 mb-2">Amount: {order.amount}</p>
             <p className="text-gray-600 mb-2">Status: {order.status}</p>
             <p className="text-gray-600 mb-2">Transaction Date: {order.trx_date}</p>
-            <p >Payment: {order.payment === '1' ? <span className='text-green-500'>success</span> : <span className='text-red-500'>failed</span>}</p>
+            <p className="text-green-600 mb-2">Method:{order.method}</p>
+            {order.method!=="cod" &&
+            <p >Payment: {order.payment === '1' ? <span className='text-green-500'>success</span> : <span className='text-red-500'>failed</span>}</p>}
             <button
               className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-600"
               onClick={() => downloadorder(order)}

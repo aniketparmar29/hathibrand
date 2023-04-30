@@ -42,7 +42,7 @@ const MyOrders = () => {
        <div className="flex flex-col gap-4">
        {/* Map through the orders and display each one */}
        {userorders.map((order) => (
-         order.payment==="1" && (
+         (
            <Flex
              direction={["column", "column", "row"]}
              justifyContent={"space-around"}
@@ -56,6 +56,7 @@ const MyOrders = () => {
                <p>Date: {order.trx_date}</p>
                <p>Amount: {order.amount}</p>
                {/* Display payment status */}
+               <p>Method: {order.method}</p>
                <p className='text-green-500'>Payment: {order.payment === '1' ? "success" : "failed"}</p>
              </div>
              {/* Display product information */}

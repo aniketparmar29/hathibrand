@@ -129,26 +129,28 @@ import Aos from "aos"
 
             <Box>
               <Box as="span" color="gray.600" fontSize="sm">
-                MRP:
+                Price:
               </Box>
+              <div >
               <Box
                 as="span"
                 color="gray.700"
                 fontSize="sm"
                 className="line-through"
                 ml="2"
-              >
+                >
                 ₹ {el.price + 100}
               </Box>
               <Box
                 as="span"
-                color="gray.700"
-                fontSize="sm"
-                fontWeight="bold"
+                color="gray.900"
+                fontSize="lg"
+                className="font-extrabold"
                 ml="2"
-              >
+                >
                 ₹ {el.price}
               </Box>
+                </div>
             </Box>
 
            

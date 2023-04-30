@@ -179,7 +179,9 @@ const OrderList = () => {
             <p className="text-gray-600 mb-2">Amount: {order.amount}</p>
             <p className="text-gray-600 mb-2">Status: {order.status}</p>
             <p className="text-gray-600 mb-2">Transaction Date: {order.trx_date}</p>
-            <p >Payment: {order.payment === '1' ? <span className='text-green-500'>success</span> : <span className='text-red-500'>failed</span>}</p>
+            <p className="text-green-600 mb-2">Method:{order.method}</p>
+            {order.method!=="cod" &&
+            <p >Payment: {order.payment === '1' ? <span className='text-green-500'>success</span> : <span className='text-red-500'>failed</span>}</p>}
             <button
               className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-600"
               onClick={() => downloadorder(order)}

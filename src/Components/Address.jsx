@@ -115,8 +115,8 @@ const Address = () => {
 {
   addressop.name!=="op" && 
   <div data-aos="fade-up" className="shadow-lg shadow-amber-600 hover:shadow-amber-800 p-4 my-4 flex-col justify-center items-center">
-  <h1 className='font-bold text-center'>Address</h1>
-  <h1 className="text-lg mb-2">Name: {addressop.name}</h1>
+  <h1 className='font-bold text-xl text-center'>Address</h1>
+  <h1 className="mb-2">Name: {addressop.name}</h1>
   <h1 className="mr-2">Mobile: {addressop.phone}</h1> 
   <h1 className="mb-2">Village: {addressop.village}</h1>
   <h1 className="mb-2">Taluka: {addressop.taluka}</h1>

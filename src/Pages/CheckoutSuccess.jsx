@@ -8,6 +8,7 @@ import { removeallcart } from '../Redux/CartReducer/action';
 const CheckoutSuccess = () => {
   const urlSearchParams = new URLSearchParams(window.location.search);
 const client_txn_id = urlSearchParams.get('client_txn_id');
+const method = urlSearchParams.get('method');
   const [paymentStatus, setPaymentStatus] = useState(null);
   const [loading, setLoading] = useState(false);
 const dispatch = useDispatch();
@@ -32,48 +33,51 @@ const dispatch = useDispatch();
     user = { role: "hello" };
   }
   useEffect(() => {
-    const checkPaymentStatus = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(`https://real-cyan-swallow-boot.cyclic.app/check_order`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(bodyop)
-        });
-        const data = await response.json();
-        const { status } = data.data;
-        if (status === 'success') {
-          const updatePaymentStatus = async () => {
-            try {
-              const response = await fetch(`https://real-cyan-swallow-boot.cyclic.app/orders/payment/${client_txn_id}`, {
-                method: 'PUT',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  payment: true
-                })
-              });
-              const data = await response.json();
-              console.log(data);
-            } catch (error) {
-              console.log(error.message);
-            }
-          };
-          
-          updatePaymentStatus();
-          dispatch(removeallcart(user.id))
+
+      const checkPaymentStatus = async () => {
+        setLoading(true);
+        try {
+          const response = await fetch(`https://real-cyan-swallow-boot.cyclic.app/check_order`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyop)
+          });
+          const data = await response.json();
+          const { status } = data.data;
+          if (status === 'success') {
+            const updatePaymentStatus = async () => {
+              try {
+                const response = await fetch(`https://real-cyan-swallow-boot.cyclic.app/orders/payment/${client_txn_id}`, {
+                  method: 'PUT',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    payment: true
+                  })
+                });
+                const data = await response.json();
+                console.log(data);
+              } catch (error) {
+                console.log(error.message);
+              }
+            };
+            
+            updatePaymentStatus();
+            dispatch(removeallcart(user.id))
+          }
+          setPaymentStatus(status);
+          setLoading(false);
+        } catch (error) {
+          console.log(error.message);
+          setLoading(false);
         }
-        setPaymentStatus(status);
-        setLoading(false);
-      } catch (error) {
-        console.log(error.message);
-        setLoading(false);
+      };
+      if(method===undefined){
+        checkPaymentStatus();
       }
-    };
-    checkPaymentStatus();
   }, [client_txn_id]);
   
 

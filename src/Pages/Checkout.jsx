@@ -10,6 +10,7 @@ import axios from 'axios';
 function Checkout() {
   const alert = useAlert();
   const cart= useSelector((state)=>state.cartReducer.cart);
+  const [dlcharge, setdlcharge] = useState(0)
   const [loading, setloading] = useState(false)
   const isAuth= useSelector((state)=>state.userAuth.isAuth);
   window.document.title="Checkout-Hathibrand";
@@ -35,8 +36,9 @@ function Checkout() {
     return Math.random().toFixed(digit).split('.')[1];
   }
   const order_body = {
+    method:paymentMethod,
     client_txn_id: getRandomNumber(12),
-    amount: Total.toString(),
+    amount: paymentMethod==="cod"?(Total+dlcharge).toString():{Total}.toString(),
     products: JSON.stringify(cart),
     customer_name: user.name,
     customer_email: user.email, 
@@ -72,34 +74,46 @@ function Checkout() {
   };
   const calculatewaieghtTotal = () => {
     let sum = cart.reduce(
-      (acc, item) => acc + item.pr_weight,
+      (acc, item) => acc + item.pr_weight * item.pr_que,
       0
     )
     
-    setTotalweight(sum);
+    setTotalweight(sum+150);
     
   };
   useEffect(() => {
     calculateTotal();
     calculatewaieghtTotal();
+    if(Totalweight<=500){
+      setdlcharge(60);
+    }else if(Totalweight<=1000){
+      setdlcharge(95)
+    }else{
+      let opji=Math.ceil(Totalweight/1000)-1;
+      setdlcharge(95+(opji*36))
+    }
+    if(paymentMethod==="cod"){
+      alert.info("COD में आपको डेल्वेरी चार्ज पे करना होगा")
+    }
   }, [cart,addressop]);
 
   return (
     <>
     <Navbar/>
-    <Flex padding={"10"} justifyContent={"space-around"} direction={["column","column","row"]}>
+    <Flex padding={"10"} justifyContent={"space-around"} direction={["column-reverse","column","row"]}>
 
-    <div className=''>
+    <div className='flex-col justify-center items-center'>
       <Address/>
       <label className="block text-gray-700 text-md font-bold mb-2 p-3 shadow-lg mt-5">
         Payment Method:
         <select className='shadow-lg bg-black text-white rounded-lg ml-2 p-1' value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
-          <option defaultChecked value="Online Payment">Online Payment</option>
+          <option defaultChecked value="Online">Online Payment</option>
           <option defaultChecked value="cod">Cash on Delivery</option>
         </select>
       </label>
-    
-      <button onClick={()=>handleSubmit()} className="bg-[#440430] p-2 mt-5 text-white rounded-lg " type="submit">Submit Order</button>
+    <div className='flex justify-center items-center'>
+      <button onClick={()=>cart.length>0?handleSubmit():alert.error("Add items in Cart")} className="bg-red-700 p-2 mt-5 text-white rounded-lg w-40  text-center" type="submit">Submit Order</button>
+    </div>
         </div>
     
     {!isAuth && <div className="flex justify-center items-center text-3xl w-[100%] m-auto text-center font-extrabold my-28">LOGIN THEN YOU CAN ACCESS YOUR CART</div>}
@@ -125,8 +139,8 @@ function Checkout() {
     ADD ITEMS IN CART
   </div>
 )}
-      <p> {Totalweight} </p>
-      <p className='flex justify-between font-bold border-t-2 border-black text-lg' key={"1"}>Total: <span>{Total}</span></p>
+      {paymentMethod==="cod" && <p className='flex justify-between text-lg'><span>Delivery Charge:</span> <span>{dlcharge}</span> </p>}
+      <p className='flex justify-between font-bold border-t-2 border-black text-lg' key={"1"}>Total: <span>{paymentMethod==="cod"?(Total+dlcharge):(Total)}</span></p>
           </Box>
     </Flex>
 }

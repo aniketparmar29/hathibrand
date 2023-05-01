@@ -140,18 +140,7 @@ for(let i=0;i<products.length;i++){
     }
   }, [chartRef2,aggarbati,cosmetic,products]);
 
-const [Visit, setVisit] = useState(0)  
-useEffect(()=>{
-  updateVisitCount();
-},[Visit])
 
-function updateVisitCount() {
-	fetch('https://api.countapi.xyz/get/hathibrand.in/hathibrand/')
-	.then(res => res.json())
-	.then(res => {
-		setVisit(res.value);
-	})
-}
   return (
     <>
       {isAuth && user.role === "admin" && (
@@ -183,10 +172,7 @@ function updateVisitCount() {
                    <span className="text-gray-600 font-bold text-lg mb-2">Users=</span>
                    <span className="text-gray-900 font-bold text-2xl">{users && users.length}</span>
                  </Link>
-                 <div  className="bg-white shadow-md p-4 md:p-8 mb-4 md:mb-0">
-                   <span className="text-gray-600 font-bold text-lg mb-2">Visiters=</span>
-                   <span className="text-gray-900 font-bold text-2xl">{Visit}</span>
-                 </div>
+                
                </div>
              </div>
              <div className="mt-8">

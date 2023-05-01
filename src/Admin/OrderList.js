@@ -33,53 +33,52 @@ const OrderList = () => {
     
     // Create a new PDF document
     const pdfDoc = (
-      <Document>
-      <Page>
-        <Text style={{fontSize:20, textAlign:"center"}}>Hathibrand Agarbatti</Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
-    
-          <View style={{ width: '45%',padding:"10px", fontFamily: 'Helvetica', fontSize: 15, fontWeight: 'bold', marginLeft: 25, display: 'flex', flexDirection: 'column', gap: 20, borderRight: '1px solid grey' }}>
-          <View>
-  <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
-    <Text>Name:</Text>
-    <Text>{billingAddress.name}</Text>
-  </View>
-  <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginBottom: 5 }}>
-    <Text>Address:</Text>
-    <Text>{billingAddress.Address}</Text>
-  </View>
-  <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
-    <Text>Village:</Text>
-    <Text>{billingAddress.village}</Text>
-  </View>
-  <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
-    <Text>Taluka:</Text>
-    <Text>{billingAddress.taluka}</Text>
-  </View>
-  <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
-    <Text>District:</Text>
-    <Text>{billingAddress.district}</Text>
-  </View>
-  <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
-    <Text>State:</Text>
-    <Text>{billingAddress.state}</Text>
-  </View>
-  <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
-    <Text>Pincode:</Text>
-    <Text>{billingAddress.pincode}</Text>
-  </View>
-  <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
-    <Text>Mobile:</Text>
-    <Text>{billingAddress.phone}</Text>
-  </View>
-</View>
-
+     <Document>
+  <Page>
+    <Text style={{fontSize:20, textAlign:"center", marginBottom: 20, fontFamily: 'Helvetica', color: 'blue'}}>Hathibrand Agarbatti</Text>
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
+        
+          <View style={{ width: '45%', padding: 10, fontFamily: 'Helvetica', fontSize: 15, fontWeight: 'bold', marginLeft: 25, display: 'flex', flexDirection: 'column', gap: 20, borderRight: '1px solid grey' }}>
+            <View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
+                <Text style={{fontWeight: 'bold'}}>Name:</Text>
+                <Text>{billingAddress.name}</Text>
+              </View>
+              <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginBottom: 5 }}>
+                <Text style={{fontWeight: 'bold'}}>Address:</Text>
+                <Text>{billingAddress.Address}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
+                <Text style={{fontWeight: 'bold'}}>Village:</Text>
+                <Text>{billingAddress.village}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
+                <Text style={{fontWeight: 'bold'}}>Taluka:</Text>
+                <Text>{billingAddress.taluka}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
+                <Text style={{fontWeight: 'bold'}}>District:</Text>
+                <Text>{billingAddress.district}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
+                <Text style={{fontWeight: 'bold'}}>State:</Text>
+                <Text>{billingAddress.state}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
+                <Text style={{fontWeight: 'bold'}}>Pincode:</Text>
+                <Text>{billingAddress.pincode}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
+                <Text style={{fontWeight: 'bold'}}>Mobile:</Text>
+                <Text>{billingAddress.phone}</Text>
+              </View>
+            </View>
           </View>
-    
+        
           <View style={{ width: '45%', fontFamily: 'Helvetica', fontSize: 12, fontWeight: 'extrabold', marginRight: 25 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', height: 24 }}>
               <Text style={{ width: '60%', fontWeight: 'bold', paddingLeft: 5 }}>Product</Text>
-              <Text style={{ width: '40%', fontWeight: 'bold', textAlign: 'center', paddingRight: 5 }}>Que</Text>
+              <Text style={{ width: '40%', fontWeight: 'bold', textAlign: 'center', paddingRight: 5 }}>Qty</Text>
               <Text style={{ width: '40%', fontWeight: 'bold', textAlign: 'right', paddingRight: 5 }}>Weight</Text>
             </View>
             {products.map((item) => (

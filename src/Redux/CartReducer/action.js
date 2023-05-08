@@ -188,7 +188,7 @@ export const postoder = (product) => {
     dispatch(postorderrequestAction());
 
     axios
-      .post(`https://real-cyan-swallow-boot.cyclic.app/create_order`, product)
+      .post(`https://newpleaseop.onrender.com/create_order`, product)
       .then((res) => {
         dispatch(postordersuccessAction(res.data));
       })
@@ -203,7 +203,7 @@ export const getorders = (id) => {
     dispatch(getorderrequestAction());
 
     axios
-      .get(`https://real-cyan-swallow-boot.cyclic.app/orders/${id}`)
+      .get(`https://newpleaseop.onrender.com/orders/${id}`)
       .then((res) => {
         dispatch(getordersuccessAction(res.data));
       })

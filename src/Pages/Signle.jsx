@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch ,useSelector} from 'react-redux'
 import {Link, useParams} from "react-router-dom"
 import Footer from '../Components/Footer'
+import ShareButtons from '../Components/ShareButtons'
 import Navbar from '../Components/Navbar'
 import { getsingle } from '../Redux/ProductReducer/action'
 import {postcart} from "../Redux/CartReducer/action"
@@ -76,6 +77,7 @@ const Signle = () => {
   return (
     <>
     <Navbar />
+<ShareButtons url={`https://hathibrand.in/singlepage/${single.id}`}/>
 {single && (
   <Box
     display={"flex"}

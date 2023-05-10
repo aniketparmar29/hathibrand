@@ -77,12 +77,14 @@ function Checkout() {
       (acc, item) => acc + item.pr_weight * item.pr_que,
       0
     )
-    
-    setTotalweight(sum+150);
+  setTotalweight(sum)
     
   };
   useEffect(() => {
     calculateTotal();
+    if(Totalweight<1000){
+      setTotalweight(Totalweight+150);
+    }
     calculatewaieghtTotal();
     if(Totalweight<=500){
       setdlcharge(60);

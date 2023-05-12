@@ -64,8 +64,10 @@ function Checkout() {
           window.location.href = response.data.data.payment_url;
         }
       })
-      .catch((err) => 
-      alert.error("something went wrong please refresh and try again")
+      .catch((err) => {
+        setloading(false);
+        alert.error("something went wrong please refresh and try again")
+      }
       );
   }
   const calculateTotal = () => {

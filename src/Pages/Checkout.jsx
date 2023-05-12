@@ -15,8 +15,8 @@ function Checkout() {
   const isAuth= useSelector((state)=>state.userAuth.isAuth);
   window.document.title="Checkout-Hathibrand";
   const [paymentMethod, setPaymentMethod] = useState('Online');
-  let addressop = window.localStorage.getItem("addressop");
-  addressop = addressop ? JSON.parse(addressop) : {};
+
+  
 
 
   let user = window.localStorage.getItem("user");
@@ -35,22 +35,24 @@ function Checkout() {
   function getRandomNumber(digit) {
     return Math.random().toFixed(digit).split('.')[1];
   }
-  const order_body = {
-    method:paymentMethod,
-    client_txn_id: getRandomNumber(12),
-    amount: paymentMethod==="cod"?(Total+dlcharge).toString():(Total).toString(),
-    products: JSON.stringify(cart),
-    customer_name: user.name,
-    customer_email: user.email, 
-    customer_mobile: addressop.phone,
-    user_id:user.id,
-    addressop:JSON.stringify(addressop),
-  }
-
   function handleSubmit() {
-    if(addressop==={}){
+    let addressop = window.localStorage.getItem("addressop");
+    addressop = addressop ? JSON.parse(addressop) : "";
+  console.log(addressop)
+    if(addressop===""){
       alert.error("please Enter Your Address")
       return;
+    }
+    const order_body = {
+      method:paymentMethod,
+      client_txn_id: getRandomNumber(12),
+      amount: paymentMethod==="cod"?(Total+dlcharge).toString():(Total).toString(),
+      products: JSON.stringify(cart),
+      customer_name: user.name,
+      customer_email: user.email, 
+      customer_mobile: addressop.phone,
+      user_id:user.id,
+      addressop:JSON.stringify(addressop),
     }
    
     setloading(true)
@@ -62,7 +64,9 @@ function Checkout() {
           window.location.href = response.data.data.payment_url;
         }
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => 
+      alert.error("something went wrong please refresh and try again")
+      );
   }
   const calculateTotal = () => {
     let sum = cart.reduce(
@@ -97,7 +101,7 @@ function Checkout() {
     if(paymentMethod==="cod"){
       alert.info("COD में आपको डेल्वेरी चार्ज पे करना होगा")
     }
-  }, [cart,addressop]);
+  }, [cart,alert]);
 
   return (
     <>

@@ -7,6 +7,7 @@ import {usersignup} from  '../Redux/AuthReducer/user.actions'
 import { useNavigate } from "react-router-dom";
 import Spinner from '../Components/Spinner'
 import { useAlert } from "react-alert";
+import Footer from '../Components/Footer'
 
 function Signup() {
   const alert = useAlert();
@@ -50,7 +51,7 @@ function Signup() {
     <Navbar/>
    
     <div
-      className="h-screen w-full bg-cover bg-no-repeat bg-center pt-32 -mt-20"
+      className="h-screen w-full bg-cover bg-no-repeat bg-center pt-32 -mt-32"
       style={{ backgroundImage: `url(${img})` }}
       >
         {register_laoding && (
@@ -59,47 +60,125 @@ function Signup() {
         </div>
       )}
       <form onSubmit={handleSubmit} className="w-[70%] lg:w-[30%] md:w-[40%] sm:w-[50%] m-auto">
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
-          Name
-        </label>
+      <div className="my-4 relative">
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="block
+          rounded-md
+          px-6
+          pt-6
+          pb-1
+          w-full
+          text-md
+        text-white
+        bg-neutral-700
+          appearance-none
+          focus:outline-none
+          focus:ring-0
+          peer
+          invalid:border-b-1"
           id="name"
           type="text"
           name='name'
-          placeholder="Name"
           value={loginData.name}
           onChange={handleOnchange}
         />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-          Email
+         <label className="absolute 
+        text-md
+      text-zinc-200
+        duration-150 
+        transform 
+        -translate-y-3 
+        scale-75 
+        top-4 
+        z-10 
+        origin-[0] 
+        left-6
+        peer-placeholder-shown:scale-100 
+        peer-placeholder-shown:translate-y-0 
+        peer-focus:scale-75
+        peer-focus:-translate-y-3" htmlFor="name">
+          Name
         </label>
+      </div>
+      <div className=" mb-4 relative">
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="block
+          rounded-md
+          px-6
+          pt-6
+          pb-1
+          w-full
+          text-md
+        text-white
+        bg-neutral-700
+          appearance-none
+          focus:outline-none
+          focus:ring-0
+          peer
+          invalid:border-b-1"
           id="email"
           type="email"
           name='email'
-          placeholder="Email"
           value={loginData.email}
           onChange={handleOnchange}
           />
-      </div>
-      <div className="mb-6">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
-          Password
+        <label className="absolute 
+        text-md
+      text-zinc-200
+        duration-150 
+        transform 
+        -translate-y-3 
+        scale-75 
+        top-4 
+        z-10 
+        origin-[0] 
+        left-6
+        peer-placeholder-shown:scale-100 
+        peer-placeholder-shown:translate-y-0 
+        peer-focus:scale-75
+        peer-focus:-translate-y-3" htmlFor="email">
+          Email
         </label>
+      </div>
+      <div className="mb-6 relative">
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="block
+          rounded-md
+          px-6
+          pt-6
+          pb-1
+          w-full
+          text-md
+        text-white
+        bg-neutral-700
+          appearance-none
+          focus:outline-none
+          focus:ring-0
+          peer
+          invalid:border-b-1"
           id="password"
           type="password"
           name='password'
-          placeholder="Password"
           value={loginData.password}
           onChange={handleOnchange}
         />
+        <label className="absolute 
+        text-md
+      text-zinc-200
+        duration-150 
+        transform 
+        -translate-y-3 
+        scale-75 
+        top-4 
+        z-10 
+        origin-[0] 
+        left-6
+        peer-placeholder-shown:scale-100 
+        peer-placeholder-shown:translate-y-0 
+        peer-focus:scale-75
+        peer-focus:-translate-y-3" htmlFor="password">
+          Password
+        </label>
       </div>
       <div className="flex items-center justify-between">
         <button
@@ -112,6 +191,7 @@ function Signup() {
     </form>
     
     </div>
+    <Footer/>
       </>
   )
 }

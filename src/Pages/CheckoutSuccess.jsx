@@ -79,6 +79,7 @@ const dispatch = useDispatch();
         checkPaymentStatus();
       }else{
         setPaymentStatus("success");
+        dispatch(removeallcart(user.id))
       }
   }, [client_txn_id]);
   

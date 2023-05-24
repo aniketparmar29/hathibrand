@@ -390,7 +390,7 @@ export const EditProduct = (id,product) => {
       dispatch(getOrdersRequestAction());
   
       axios
-        .get(`https://newpleaseop.onrender.com/orders`)
+        .get(`https://real-cyan-swallow-boot.cyclic.app/orders`)
         .then((res) => {
           dispatch(getOrdersSuccesAction(res.data));
         })

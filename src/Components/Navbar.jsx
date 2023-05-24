@@ -79,7 +79,7 @@ useEffect(()=>{
   return (
     <>
     { navMid &&
-    <Box zIndex={"100"} justifyContent={"space-between"} width="100%" className={color?"header header-bg backdrop-blur-lg ":"header backdrop-blur-lg "} display={"flex"}  gap="10%" position={"sticky"} top={"0"} pb="2">
+    <Box zIndex={"100"} justifyContent={"space-between"} width="100%" className={color?"header header-bg backdrop-blur-lg ":"header backdrop-blur-lg "} display={"flex"}  gap="10%" position={"sticky"} top={"0"} >
       
     <Box width={"20%"}> <Link to={"/"}><Image className='lg:w-[40%] md:w-[150%]' src={logo}/></Link></Box>
     
@@ -164,7 +164,7 @@ useEffect(()=>{
 }
 
 {serch&&
-  <Box  className='shadow-lg shadow-slate-600' bgColor={"white"} width={["180px","400px"]} position={"fixed"} zIndex={"10"} left={["215","160"]} top={["80px","70px"]}>
+  <Box  className='shadow-lg shadow-slate-600' bgColor={"white"} width={["180px","400px"]} position={"fixed"} zIndex={"10"} left={["215","160"]} top={["110px","100px"]}>
   {
     product.filter(product => product.name.toLowerCase().includes(query.toLowerCase())
     ).map((product)=>(
